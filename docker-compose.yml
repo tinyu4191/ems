@@ -27,7 +27,7 @@ services:
       GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
       # 讓 Grafana 知道自己被 proxy 到 /grafana/ 這個子路徑下
       # （React iframe 目前是直連 Grafana port，若之後改走 Nginx，這兩個設定是必要的）
-      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:${WEB_PORT}/grafana/"
       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
     ports:
       - "${GRAFANA_PORT}:3000"
@@ -51,6 +51,8 @@ services:
       # 不是 host 對外映射的 5433
       DB_HOST: timescaledb
       DB_PORT: 5432
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./collector/logs:/app/logs
     depends_on:
