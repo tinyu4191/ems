@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - name: TimescaleDB
+    type: postgres
+    access: proxy
+    url: timescaledb:5432
+    database: ems
+    user: admin
+    isDefault: true
+    editable: true
+    secureJsonData:
+      password: ems123456
+    jsonData:
+      sslmode: disable
+      postgresVersion: 1600
+      timescaledb: true

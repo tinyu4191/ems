@@ -1,0 +1,81 @@
+name: ems-v2
+
+services:
+  timescaledb:
+    image: timescale/timescaledb:2.26.3-pg16
+    container_name: ems-v2-timescaledb
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/timescaledb/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - ems-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ems-v2-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      # 讓 Grafana 知道自己被 proxy 到 /grafana/ 這個子路徑下
+      # （React iframe 目前是直連 Grafana port，若之後改走 Nginx，這兩個設定是必要的）
+      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+    ports:
+      - "${GRAFANA_PORT}:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - timescaledb
+    networks:
+      - ems-net
+
+  collector:
+    build: ./collector
+    container_name: ems-v2-collector
+    restart: unless-stopped
+    env_file:
+      - ./collector/.env
+    environment:
+      # 覆蓋 .env 裡的 DB_HOST/DB_PORT：容器對容器要用 service name + 內部 port，
+      # 不是 host 對外映射的 5433
+      DB_HOST: timescaledb
+      DB_PORT: 5432
+    volumes:
+      - ./collector/logs:/app/logs
+    depends_on:
+      - timescaledb
+    networks:
+      - ems-net
+
+  nginx:
+    image: nginx:alpine
+    container_name: ems-v2-nginx
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./web/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - grafana
+    networks:
+      - ems-net
+
+networks:
+  ems-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+  grafana-data:

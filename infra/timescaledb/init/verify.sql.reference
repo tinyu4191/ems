@@ -1,0 +1,38 @@
+-- ===== EMS schema 測試驗證 =====
+-- 用法（在 docker compose up 起來後）：
+--   docker exec -i ems-test-db psql -U admin -d ems < verify.sql
+
+\echo '===== 1. 所有表 ====='
+SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename;
+
+\echo '===== 2. meters 筆數（應 33：電26/水4/蒸氣3）====='
+SELECT meter_type, COUNT(*) FROM meters GROUP BY meter_type ORDER BY meter_type;
+
+\echo '===== 3. is_main 錶（應 4：E-ATS1/E-ATS2/W-IN1/W-IN2）====='
+SELECT meter_id, meter_type, gateway, zone FROM meters WHERE is_main ORDER BY meter_id;
+
+\echo '===== 4. building 應全為 NULL（待業主回填）====='
+SELECT COUNT(*) AS total, COUNT(building) AS building_filled FROM meters;
+
+\echo '===== 5. accumulator 欄位（確認 delta 已移除）====='
+SELECT column_name FROM information_schema.columns
+WHERE table_name='accumulator_electricity' ORDER BY ordinal_position;
+
+\echo '===== 6. hypertable 清單（應 5 張）====='
+SELECT hypertable_name FROM timescaledb_information.hypertables ORDER BY hypertable_name;
+
+\echo '===== 7. continuous aggregate 清單（應 5 個）====='
+SELECT view_name FROM timescaledb_information.continuous_aggregates ORDER BY view_name;
+
+\echo '===== 8. zone 分布（功能分區）====='
+SELECT zone, COUNT(*) FROM meters GROUP BY zone ORDER BY COUNT(*) DESC;
+
+\echo '===== 9. 寫入測試：塞一筆即時電力，確認外鍵與 aggregate 通 ====='
+INSERT INTO realtime_electricity (time, meter_id, power_kw, voltage, current_a, power_factor)
+VALUES (NOW(), 'E-ATS1', 123.45, 380.1, 200.5, 0.95);
+SELECT meter_id, power_kw FROM realtime_electricity WHERE meter_id='E-ATS1';
+
+\echo '===== 10. 外鍵防呆測試：塞不存在的 meter_id 應失敗 ====='
+\echo '（下一行預期報 foreign key violation，這是正確行為）'
+INSERT INTO realtime_electricity (time, meter_id, power_kw, voltage, current_a, power_factor)
+VALUES (NOW(), 'E-NOT-EXIST', 1, 1, 1, 1);
