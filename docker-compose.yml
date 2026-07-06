@@ -18,7 +18,7 @@ services:
       - ems-net
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:12.4.5
     container_name: ems-v2-grafana
     restart: unless-stopped
     environment:
@@ -26,9 +26,12 @@ services:
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
       # 讓 Grafana 知道自己被 proxy 到 /grafana/ 這個子路徑下
-      # （React iframe 目前是直連 Grafana port，若之後改走 Nginx，這兩個設定是必要的）
       GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:${WEB_PORT}/grafana/"
       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASS}
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: "volkovlabs-echarts-panel,gapit-htmlgraphics-panel"
+      GF_PLUGINS_PREINSTALL_SYNC: "volkovlabs-echarts-panel@7.2.5,gapit-htmlgraphics-panel@2.2.0"
     ports:
       - "${GRAFANA_PORT}:3000"
     volumes:
