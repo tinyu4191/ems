@@ -31,7 +31,7 @@ services:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASS}
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: "volkovlabs-echarts-panel,gapit-htmlgraphics-panel"
-      GF_PLUGINS_PREINSTALL_SYNC: "volkovlabs-echarts-panel@7.2.5,gapit-htmlgraphics-panel@2.2.0"
+      GF_PLUGINS_PREINSTALL_SYNC: "volkovlabs-echarts-panel@7.2.5,gapit-htmlgraphics-panel@2.2.3"
     ports:
       - "${GRAFANA_PORT}:3000"
     volumes:
