@@ -3,4 +3,3 @@ collector/.env
 collector/node_modules/
 collector/logs/
 web/dist/
-infra/grafana/dashboards/*.json
