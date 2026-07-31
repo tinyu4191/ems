@@ -5,3 +5,7 @@ collector/.env
 collector/node_modules/
 collector/logs/
 web/dist/
+
+# 本機生成的 Grafana dashboards（含實際 host，不進版控）
+infra/grafana/dashboards/
+.dev-host

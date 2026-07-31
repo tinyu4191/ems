@@ -1,0 +1,1295 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/kgh/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kg/h"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-red"
+                    },
+                    {
+                      "color": "#747474",
+                      "value": 0
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.001
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/_bar/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bar"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "#747474",
+                      "value": 0
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.001
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/_c/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "#747474",
+                      "value": 0
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.001
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 31,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "infinitePan": false,
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "#011223"
+            },
+            "image": {
+              "fixed": "__GRAFANA_HOST__/grafana/public/img/custom/ECI_layout_steam.png",
+              "mode": "fixed"
+            },
+            "size": "fill"
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            },
+            "radius": 0,
+            "width": 0
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "連染區"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 2093,
+                    "y": 213
+                  },
+                  "target": {
+                    "x": 0.8518518518518519,
+                    "y": -1
+                  },
+                  "targetName": "Element 8",
+                  "targetOriginal": {
+                    "x": 1947,
+                    "y": 112
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Title",
+              "placement": {
+                "bottom": 81.42123287671232,
+                "left": 81.07680126682502,
+                "right": 12.707838479809977,
+                "top": 15.496575342465754
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 8",
+              "placement": {
+                "bottom": 92.2945205479452,
+                "left": 65.20190023752969,
+                "right": 33.729216152019006,
+                "top": 5.821917808219178
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 14",
+              "placement": {
+                "bottom": 91.3527397260274,
+                "left": 54.9089469517023,
+                "right": 44.06175771971497,
+                "top": 6.763698630136987
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 15",
+              "placement": {
+                "bottom": 90.41095890410958,
+                "left": 57.83847980997625,
+                "right": 41.09263657957244,
+                "top": 7.705479452054795
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "BOIL_kgh",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "BOIL_kgh",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 16",
+              "placement": {
+                "bottom": 86.72945205479452,
+                "left": 41.36975455265242,
+                "right": 54.6714172604909,
+                "rotation": 0,
+                "top": 10.873287671232877
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 17",
+              "placement": {
+                "bottom": 86.72945205479452,
+                "left": 39.15281076801267,
+                "right": 58.63024544734758,
+                "top": 10.873287671232877
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "鍋爐"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 1395,
+                    "y": 155
+                  },
+                  "target": {
+                    "x": -1.2962962962962963,
+                    "y": 0.09090909090909091
+                  },
+                  "targetName": "Element 14",
+                  "targetOriginal": {
+                    "x": 1531,
+                    "y": 122
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 20",
+              "placement": {
+                "bottom": 89.21232876712328,
+                "left": 39.1132224861441,
+                "right": 54.6714172604909,
+                "top": 7.705479452054795
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "浸染區"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": -1
+                  },
+                  "sourceOriginal": {
+                    "x": 1196,
+                    "y": 319
+                  },
+                  "target": {
+                    "x": -0.25925925925925924,
+                    "y": -0.8181818181818182
+                  },
+                  "targetName": "Element 15",
+                  "targetOriginal": {
+                    "x": 1471,
+                    "y": 110
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 25",
+              "placement": {
+                "bottom": 73.45890410958904,
+                "left": 43.34916864608076,
+                "right": 50.43547110055424,
+                "top": 23.458904109589042
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "BOIL_bar",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "BOIL_bar",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 13",
+              "placement": {
+                "bottom": 84.24657534246576,
+                "left": 41.36975455265242,
+                "right": 54.6714172604909,
+                "rotation": 0,
+                "top": 13.270547945205479
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Pres."
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 18",
+              "placement": {
+                "bottom": 84.33219178082192,
+                "left": 39.15281076801267,
+                "right": 58.63024544734758,
+                "top": 13.184931506849315
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "BOIL_c",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "BOIL_c",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 19",
+              "placement": {
+                "bottom": 81.93493150684932,
+                "left": 41.36975455265242,
+                "right": 54.6714172604909,
+                "rotation": 0,
+                "top": 15.667808219178081
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Temp."
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 23",
+              "placement": {
+                "bottom": 81.93493150684932,
+                "left": 39.15281076801267,
+                "right": 58.63024544734758,
+                "top": 15.667808219178081
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE1_kgh",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_kgh",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 21",
+              "placement": {
+                "bottom": 71.06164383561644,
+                "left": 45.56611243072051,
+                "right": 50.475059382422806,
+                "rotation": 0,
+                "top": 26.541095890410958
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 22",
+              "placement": {
+                "bottom": 71.06164383561644,
+                "left": 43.34916864608076,
+                "right": 54.43388756927949,
+                "top": 26.541095890410958
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE1_bar",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_bar",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 24",
+              "placement": {
+                "bottom": 68.57876712328768,
+                "left": 45.56611243072051,
+                "right": 50.475059382422806,
+                "rotation": 0,
+                "top": 28.93835616438356
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Pres."
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 26",
+              "placement": {
+                "bottom": 68.57876712328768,
+                "left": 43.34916864608076,
+                "right": 54.43388756927949,
+                "top": 28.93835616438356
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE1_c",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_c",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 27",
+              "placement": {
+                "bottom": 66.26712328767124,
+                "left": 45.56611243072051,
+                "right": 50.475059382422806,
+                "rotation": 0,
+                "top": 31.335616438356162
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Temp."
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 28",
+              "placement": {
+                "bottom": 66.26712328767124,
+                "left": 43.34916864608076,
+                "right": 54.43388756927949,
+                "top": 31.335616438356162
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE2_kgh",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE2_kgh",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 29",
+              "placement": {
+                "bottom": 79.02397260273972,
+                "left": 83.33333333333334,
+                "right": 12.707838479809977,
+                "rotation": 0,
+                "top": 18.57876712328767
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 30",
+              "placement": {
+                "bottom": 79.02397260273972,
+                "left": 81.11638954869359,
+                "right": 16.666666666666664,
+                "top": 18.57876712328767
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE2_bar",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE2_bar",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 31",
+              "placement": {
+                "bottom": 76.54109589041096,
+                "left": 83.33333333333334,
+                "right": 12.707838479809977,
+                "rotation": 0,
+                "top": 20.976027397260275
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Pres."
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 32",
+              "placement": {
+                "bottom": 76.54109589041096,
+                "left": 81.11638954869359,
+                "right": 16.666666666666664,
+                "top": 20.976027397260275
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE2_c",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE2_c",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 33",
+              "placement": {
+                "bottom": 74.22945205479452,
+                "left": 83.33333333333334,
+                "right": 12.707838479809977,
+                "rotation": 0,
+                "top": 23.373287671232877
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Temp."
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 34",
+              "placement": {
+                "bottom": 74.22945205479452,
+                "left": 81.11638954869359,
+                "right": 16.666666666666664,
+                "top": 23.373287671232877
+              },
+              "type": "text"
+            }
+          ],
+          "name": "Element 1784882730529",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "rotation": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\r\n  SELECT\r\n    DISTINCT ON (meter_id) meter_id,\r\n    flow_rate_kgh,\r\n    pressure_bar,\r\n    temperature_c\r\n  FROM\r\n    realtime_steam\r\n  WHERE\r\n    meter_id IN (\r\n      'S-DYE1',\r\n      'S-BOIL',\r\n      'S-DYE2'\r\n    )\r\n  ORDER BY\r\n    meter_id,\r\n    time DESC\r\n)\r\nSELECT\r\n  MAX(flow_rate_kgh) FILTER (\r\n    WHERE\r\n      meter_id = 'S-DYE1'\r\n  ) AS \"DYE1_kgh\",\r\n  MAX(pressure_bar) FILTER (\r\n    WHERE\r\n      meter_id = 'S-DYE1'\r\n  ) AS \"DYE1_bar\",\r\n  MAX(temperature_c) FILTER (\r\n    WHERE\r\n      meter_id = 'S-DYE1'\r\n  ) AS \"DYE1_c\",\r\n  MAX(flow_rate_kgh) FILTER (\r\n    WHERE\r\n      meter_id = 'S-BOIL'\r\n  ) AS \"BOIL_kgh\",\r\n  MAX(pressure_bar) FILTER (\r\n    WHERE\r\n      meter_id = 'S-BOIL'\r\n  ) AS \"BOIL_bar\",\r\n  MAX(temperature_c) FILTER (\r\n    WHERE\r\n      meter_id = 'S-BOIL'\r\n  ) AS \"BOIL_c\",MAX(flow_rate_kgh) FILTER (\r\n    WHERE\r\n      meter_id = 'S-DYE2'\r\n  ) AS \"DYE2_kgh\",\r\n  MAX(pressure_bar) FILTER (\r\n    WHERE\r\n      meter_id = 'S-DYE2'\r\n  ) AS \"DYE2_bar\",\r\n  MAX(temperature_c) FILTER (\r\n    WHERE\r\n      meter_id = 'S-DYE2'\r\n  ) AS \"DYE2_c\"\r\nFROM\r\n  latest;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "",
+      "type": "canvas"
+    }
+  ],
+  "preload": false,
+  "refresh": "10s",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1m",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "browser",
+  "title": "ECI_Layout_Steam",
+  "uid": "eci-layout-steam",
+  "version": 6
+}
