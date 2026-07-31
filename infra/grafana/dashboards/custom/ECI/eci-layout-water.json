@@ -1,0 +1,920 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/m3h/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m³/h"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-red"
+                    },
+                    {
+                      "color": "#747474",
+                      "value": 0
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.001
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 31,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "infinitePan": false,
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "#011223"
+            },
+            "image": {
+              "fixed": "__GRAFANA_HOST__/grafana/public/img/custom/ECI_layout_water.png",
+              "mode": "fixed"
+            },
+            "size": "fill"
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            },
+            "radius": 0,
+            "width": 0
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE2_m3h",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE2_m3h",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Power",
+              "placement": {
+                "bottom": 77.73972602739725,
+                "left": 85.11480601741884,
+                "right": 10.926365795724466,
+                "rotation": 0,
+                "top": 19.777397260273975
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Power-Title",
+              "placement": {
+                "bottom": 77.73972602739725,
+                "left": 82.89786223277909,
+                "right": 14.885193982581155,
+                "top": 19.777397260273975
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "連染區"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 2093,
+                    "y": 213
+                  },
+                  "target": {
+                    "x": 0.8518518518518519,
+                    "y": -1
+                  },
+                  "targetName": "Element 8",
+                  "targetOriginal": {
+                    "x": 1947,
+                    "y": 112
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Title",
+              "placement": {
+                "bottom": 80.22260273972603,
+                "left": 82.85827395091053,
+                "right": 10.926365795724466,
+                "top": 16.695205479452056
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 8",
+              "placement": {
+                "bottom": 90.41095890410958,
+                "left": 76.08867775138559,
+                "right": 22.842438638163102,
+                "rotation": 0,
+                "top": 7.705479452054795
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "IN1_m3h",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "IN1_m3h",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 7",
+              "placement": {
+                "bottom": 14.126712328767125,
+                "left": 70.22961203483769,
+                "right": 25.81155977830562,
+                "rotation": 0,
+                "top": 83.3904109589041
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 9",
+              "placement": {
+                "bottom": 14.126712328767125,
+                "left": 68.01266825019793,
+                "right": 29.77038796516231,
+                "top": 83.3904109589041
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "進水口(小)"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": -1
+                  },
+                  "sourceOriginal": {
+                    "x": 1856,
+                    "y": 974
+                  },
+                  "target": {
+                    "x": -0.6296296296296297,
+                    "y": -0.09090909090909091
+                  },
+                  "targetName": "Element 13",
+                  "targetOriginal": {
+                    "x": 2114,
+                    "y": 1015
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 10",
+              "placement": {
+                "bottom": 16.60958904109589,
+                "left": 67.97307996832937,
+                "right": 25.81155977830562,
+                "top": 80.3082191780822
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 13",
+              "placement": {
+                "bottom": 12.243150684931507,
+                "left": 83.4916864608076,
+                "right": 15.439429928741092,
+                "rotation": 0,
+                "top": 85.87328767123287
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 14",
+              "placement": {
+                "bottom": 88.52739726027397,
+                "left": 60.84718923198733,
+                "right": 38.08392715756136,
+                "rotation": 0,
+                "top": 9.58904109589041
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 15",
+              "placement": {
+                "bottom": 26.1986301369863,
+                "left": 10.134600158353127,
+                "right": 88.79651623119557,
+                "rotation": 0,
+                "top": 71.91780821917808
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE1_m3h",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_m3h",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 16",
+              "placement": {
+                "bottom": 82.7054794520548,
+                "left": 51.26682501979414,
+                "right": 44.77434679334917,
+                "rotation": 0,
+                "top": 14.81164383561644
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 17",
+              "placement": {
+                "bottom": 82.7054794520548,
+                "left": 49.049881235154395,
+                "right": 48.73317498020586,
+                "top": 14.81164383561644
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "浸染區"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 1395,
+                    "y": 155
+                  },
+                  "target": {
+                    "x": -1.2962962962962963,
+                    "y": 0.09090909090909091
+                  },
+                  "targetName": "Element 14",
+                  "targetOriginal": {
+                    "x": 1531,
+                    "y": 122
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 20",
+              "placement": {
+                "bottom": 85.18835616438356,
+                "left": 49.01029295328583,
+                "right": 44.77434679334917,
+                "top": 11.729452054794521
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "IN2_m3h",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "IN2_m3h",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 21",
+              "placement": {
+                "bottom": 30.565068493150683,
+                "left": 22.644497228820267,
+                "right": 73.39667458432304,
+                "rotation": 0,
+                "top": 66.95205479452055
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Flow"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 22",
+              "placement": {
+                "bottom": 30.565068493150683,
+                "left": 20.42755344418052,
+                "right": 77.35550277117973,
+                "top": 66.95205479452055
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#011020"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "進水口"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -1,
+                    "y": -1
+                  },
+                  "sourceOriginal": {
+                    "x": 514.984375,
+                    "y": 782
+                  },
+                  "target": {
+                    "x": 0.8518518518518519,
+                    "y": 0.5454545454545454
+                  },
+                  "targetName": "Element 15",
+                  "targetOriginal": {
+                    "x": 281,
+                    "y": 845
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 25",
+              "placement": {
+                "bottom": 33.04794520547945,
+                "left": 20.387965162311954,
+                "right": 73.39667458432304,
+                "top": 63.869863013698634
+              },
+              "type": "text"
+            }
+          ],
+          "name": "Element 1784882730529",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "rotation": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\r\n  SELECT\r\n    DISTINCT ON (meter_id) meter_id,\r\n    flow_rate_m3h\r\n  FROM\r\n    realtime_water\r\n  WHERE\r\n    meter_id IN (\r\n      'W-DYE1',\r\n      'W-DYE2',\r\n      'W-IN2',\r\n      'W-IN1'\r\n    )\r\n  ORDER BY\r\n    meter_id,\r\n    time DESC\r\n)\r\nSELECT\r\n  MAX(flow_rate_m3h) FILTER (\r\n    WHERE\r\n      meter_id = 'W-DYE1'\r\n  ) AS \"DYE1_m3h\",\r\n  MAX(flow_rate_m3h) FILTER (\r\n    WHERE\r\n      meter_id = 'W-DYE2'\r\n  ) AS \"DYE2_m3h\",\r\n  MAX(flow_rate_m3h) FILTER (\r\n    WHERE\r\n      meter_id = 'W-IN2'\r\n  ) AS \"IN2_m3h\",\r\n  MAX(flow_rate_m3h) FILTER (\r\n    WHERE\r\n      meter_id = 'W-IN1'\r\n  ) AS \"IN1_m3h\"\r\nFROM\r\n  latest;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "",
+      "type": "canvas"
+    }
+  ],
+  "preload": false,
+  "refresh": "10s",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1m",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "browser",
+  "title": "ECI_Layout_Water",
+  "uid": "eci-layout-water",
+  "version": 7
+}

@@ -6,10 +6,12 @@ datasources:
     uid: ems-timescaledb
     url: timescaledb:5432
     user: admin
+    database: ems
     secureJsonData:
       password: ems123456
     jsonData:
       database: ems
       sslmode: disable
       timescaledb: true
-    editable: false
+      postgresVersion: 1600
+    editable: true

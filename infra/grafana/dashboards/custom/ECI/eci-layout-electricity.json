@@ -1,0 +1,5663 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/_kW/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatt"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-red"
+                    },
+                    {
+                      "color": "#747474",
+                      "value": 0
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.001
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/_PF/"
+            },
+            "properties": [
+              {
+                "id": "unit"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-red"
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.95
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 31,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "infinitePan": false,
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "#011223"
+            },
+            "image": {
+              "fixed": "__GRAFANA_HOST__/grafana/public/img/custom/ECI_layout_electricity.png",
+              "mode": "fixed"
+            },
+            "size": "fill"
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            },
+            "radius": 0,
+            "width": 0
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ATS1_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ATS1_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Power",
+              "placement": {
+                "bottom": 83.60128617363344,
+                "left": 12.504978096375947,
+                "right": 84.22939068100358,
+                "top": 13.987138263665594
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Power-Title",
+              "placement": {
+                "bottom": 83.60128617363344,
+                "left": 10.27479091995221,
+                "right": 87.49502190362406,
+                "top": 13.987138263665594
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "ATS-1"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 348.703125,
+                    "y": 145.0625
+                  },
+                  "target": {
+                    "x": -1.0888888888888888,
+                    "y": -0.06666666666666667
+                  },
+                  "targetName": "Element 136",
+                  "targetOriginal": {
+                    "x": 571,
+                    "y": 221
+                  },
+                  "vertices": [
+                    {
+                      "x": 0.5861390314191326,
+                      "y": 0.02551440329218107
+                    }
+                  ]
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-Title",
+              "placement": {
+                "bottom": 86.0128617363344,
+                "left": 10.234966148944643,
+                "right": 84.22939068100358,
+                "top": 10.85209003215434
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-PF-Title",
+              "placement": {
+                "bottom": 81.18971061093248,
+                "left": 10.27479091995221,
+                "right": 87.49502190362406,
+                "top": 16.39871382636656
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ATS1_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ATS1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "ATS-1-PF",
+              "placement": {
+                "bottom": 81.18971061093248,
+                "left": 12.504978096375947,
+                "right": 84.22939068100358,
+                "top": 16.39871382636656
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ATS2_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ATS2_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 6",
+              "placement": {
+                "bottom": 59.72668810289389,
+                "left": 85.78255675029868,
+                "right": 10.911987256073278,
+                "rotation": 0,
+                "top": 37.861736334405144
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ATS2_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ATS2_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 7",
+              "placement": {
+                "bottom": 62.13826366559485,
+                "left": 85.78255675029868,
+                "right": 10.911987256073278,
+                "rotation": 0,
+                "top": 35.450160771704184
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "ATS-2"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -0.00011092623405435385,
+                    "y": 1
+                  },
+                  "sourceOriginal": {
+                    "x": 2179.9375,
+                    "y": 377.4375
+                  },
+                  "target": {
+                    "x": -1.1040073416947078,
+                    "y": 0.022222222222222223
+                  },
+                  "targetName": "Element 137",
+                  "targetOriginal": {
+                    "x": 2310,
+                    "y": 307
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 8",
+              "placement": {
+                "bottom": 64.54983922829582,
+                "left": 83.51254480286738,
+                "right": 10.911987256073278,
+                "top": 32.31511254019293
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 9",
+              "placement": {
+                "bottom": 62.13826366559485,
+                "left": 83.57086302454474,
+                "right": 14.212193190815519,
+                "top": 35.450160771704184
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 10",
+              "placement": {
+                "bottom": 59.72668810289389,
+                "left": 83.57086302454474,
+                "right": 14.212193190815519,
+                "top": 37.861736334405144
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "PRO1_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "PRO1_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 11",
+              "placement": {
+                "bottom": 73.23151125401928,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "rotation": 0,
+                "top": 24.356913183279744
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 12",
+              "placement": {
+                "bottom": 73.23151125401928,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 24.356913183279744
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 14",
+              "placement": {
+                "bottom": 70.81993569131832,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 26.768488745980708
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "PRO1_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "PRO1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 15",
+              "placement": {
+                "bottom": 70.81993569131832,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "rotation": 0,
+                "top": 26.768488745980708
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE3_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE3_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 16",
+              "placement": {
+                "bottom": 73.23151125401928,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "rotation": 0,
+                "top": 24.356913183279744
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 17",
+              "placement": {
+                "bottom": 73.23151125401928,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 24.356913183279744
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 19",
+              "placement": {
+                "bottom": 70.81993569131832,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 26.768488745980708
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE3_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 20",
+              "placement": {
+                "bottom": 70.81993569131832,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "rotation": 0,
+                "top": 26.768488745980708
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "加工+電梯1"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 13",
+              "placement": {
+                "bottom": 75.64308681672026,
+                "left": 3.26563122262047,
+                "right": 91.19872560732776,
+                "top": 21.221864951768488
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "連染"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 18",
+              "placement": {
+                "bottom": 75.64308681672026,
+                "left": 10.15531660692951,
+                "right": 84.30904022301871,
+                "top": 21.221864951768488
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "FIBAC_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "FIBAC_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 21",
+              "placement": {
+                "bottom": 63.344051446945336,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 34.244372990353696
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 22",
+              "placement": {
+                "bottom": 63.344051446945336,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 34.244372990353696
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 23",
+              "placement": {
+                "bottom": 60.932475884244376,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 36.655948553054664
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "FIBAC_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "FIBAC_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 24",
+              "placement": {
+                "bottom": 60.932475884244376,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 36.655948553054664
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "AIR_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "AIR_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 25",
+              "placement": {
+                "bottom": 63.344051446945336,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "top": 34.244372990353696
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 26",
+              "placement": {
+                "bottom": 63.344051446945336,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 34.244372990353696
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 27",
+              "placement": {
+                "bottom": 60.932475884244376,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 36.655948553054664
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "AIR_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "AIR_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 28",
+              "placement": {
+                "bottom": 60.932475884244376,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "top": 36.655948553054664
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "織造冷氣"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 29",
+              "placement": {
+                "bottom": 65.7556270096463,
+                "left": 3.26563122262047,
+                "right": 91.19872560732776,
+                "top": 31.109324758842444
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "空壓機"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 30",
+              "placement": {
+                "bottom": 65.7556270096463,
+                "left": 10.15531660692951,
+                "right": 84.30904022301871,
+                "top": 31.109324758842444
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "FIB1_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "FIB1_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 31",
+              "placement": {
+                "bottom": 53.456591639871384,
+                "left": 5.4958183990442055,
+                "right": 91.23855037833533,
+                "top": 44.13183279742765
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 32",
+              "placement": {
+                "bottom": 53.456591639871384,
+                "left": 3.26563122262047,
+                "right": 94.50418160095579,
+                "top": 44.13183279742765
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 33",
+              "placement": {
+                "bottom": 51.045016077170416,
+                "left": 3.26563122262047,
+                "right": 94.50418160095579,
+                "top": 46.543408360128616
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "FIB1_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "FIB1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 34",
+              "placement": {
+                "bottom": 51.045016077170416,
+                "left": 5.4958183990442055,
+                "right": 91.23855037833533,
+                "top": 46.543408360128616
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "WH_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "WH_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 35",
+              "placement": {
+                "bottom": 53.456591639871384,
+                "left": 12.385503783353245,
+                "right": 84.34886499402629,
+                "top": 44.13183279742765
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 36",
+              "placement": {
+                "bottom": 53.456591639871384,
+                "left": 10.15531660692951,
+                "right": 87.61449621664676,
+                "top": 44.13183279742765
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 37",
+              "placement": {
+                "bottom": 51.045016077170416,
+                "left": 10.15531660692951,
+                "right": 87.61449621664676,
+                "top": 46.543408360128616
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "WH_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "WH_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 38",
+              "placement": {
+                "bottom": 51.045016077170416,
+                "left": 12.385503783353245,
+                "right": 84.34886499402629,
+                "top": 46.543408360128616
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "織造"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 39",
+              "placement": {
+                "bottom": 55.86816720257235,
+                "left": 3.225806451612903,
+                "right": 91.23855037833533,
+                "top": 40.9967845659164
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "原料倉"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 40",
+              "placement": {
+                "bottom": 55.86816720257235,
+                "left": 10.115491835921944,
+                "right": 84.34886499402629,
+                "top": 40.9967845659164
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "OFF_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "OFF_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 41",
+              "placement": {
+                "bottom": 43.569131832797424,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 54.019292604501615
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 42",
+              "placement": {
+                "bottom": 43.569131832797424,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 54.019292604501615
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 43",
+              "placement": {
+                "bottom": 41.157556270096464,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 56.430868167202576
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "OFF_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "OFF_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 44",
+              "placement": {
+                "bottom": 41.157556270096464,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 56.430868167202576
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "CRANE_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "CRANE_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 45",
+              "placement": {
+                "bottom": 43.569131832797424,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "top": 54.019292604501615
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 46",
+              "placement": {
+                "bottom": 43.569131832797424,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 54.019292604501615
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 47",
+              "placement": {
+                "bottom": 41.157556270096464,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 56.430868167202576
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "CRANE_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "CRANE_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 48",
+              "placement": {
+                "bottom": 41.157556270096464,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "top": 56.430868167202576
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "辦公室"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 49",
+              "placement": {
+                "bottom": 45.98070739549839,
+                "left": 3.26563122262047,
+                "right": 91.19872560732776,
+                "top": 50.88424437299035
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "天車"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 50",
+              "placement": {
+                "bottom": 45.98070739549839,
+                "left": 10.15531660692951,
+                "right": 84.30904022301871,
+                "top": 50.88424437299035
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "PRINT_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "PRINT_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 51",
+              "placement": {
+                "bottom": 33.68167202572347,
+                "left": 5.4958183990442055,
+                "right": 91.23855037833533,
+                "top": 63.90675241157556
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 52",
+              "placement": {
+                "bottom": 33.68167202572347,
+                "left": 3.26563122262047,
+                "right": 94.50418160095579,
+                "top": 63.90675241157556
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 53",
+              "placement": {
+                "bottom": 31.270096463022508,
+                "left": 3.26563122262047,
+                "right": 94.50418160095579,
+                "top": 66.31832797427653
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "PRINT_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "PRINT_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 54",
+              "placement": {
+                "bottom": 31.270096463022508,
+                "left": 5.4958183990442055,
+                "right": 91.23855037833533,
+                "top": 66.31832797427653
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "EXH1_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "EXH1_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 55",
+              "placement": {
+                "bottom": 33.68167202572347,
+                "left": 12.385503783353245,
+                "right": 84.34886499402629,
+                "top": 63.90675241157556
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 56",
+              "placement": {
+                "bottom": 33.68167202572347,
+                "left": 10.15531660692951,
+                "right": 87.61449621664676,
+                "top": 63.90675241157556
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 57",
+              "placement": {
+                "bottom": 31.270096463022508,
+                "left": 10.15531660692951,
+                "right": 87.61449621664676,
+                "top": 66.31832797427653
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "EXH1_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "EXH1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 58",
+              "placement": {
+                "bottom": 31.270096463022508,
+                "left": 12.385503783353245,
+                "right": 84.34886499402629,
+                "top": 66.31832797427653
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "網印"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 59",
+              "placement": {
+                "bottom": 36.09324758842444,
+                "left": 3.225806451612903,
+                "right": 91.23855037833533,
+                "top": 60.77170418006431
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "染整抽風機"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 60",
+              "placement": {
+                "bottom": 36.09324758842444,
+                "left": 10.115491835921944,
+                "right": 84.34886499402629,
+                "top": 60.77170418006431
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ELV2_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ELV2_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 61",
+              "placement": {
+                "bottom": 23.79421221864952,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 73.79421221864952
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 62",
+              "placement": {
+                "bottom": 23.79421221864952,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 73.79421221864952
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 63",
+              "placement": {
+                "bottom": 21.382636655948552,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 76.20578778135048
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ELV2_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ELV2_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 64",
+              "placement": {
+                "bottom": 21.382636655948552,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 76.20578778135048
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "SEC_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "SEC_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 65",
+              "placement": {
+                "bottom": 23.79421221864952,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "top": 73.79421221864952
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 66",
+              "placement": {
+                "bottom": 23.79421221864952,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 73.79421221864952
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 67",
+              "placement": {
+                "bottom": 21.382636655948552,
+                "left": 10.195141377937077,
+                "right": 87.57467144563918,
+                "top": 76.20578778135048
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "SEC_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "SEC_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 68",
+              "placement": {
+                "bottom": 21.382636655948552,
+                "left": 12.425328554360812,
+                "right": 84.30904022301871,
+                "top": 76.20578778135048
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "織造電梯"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 69",
+              "placement": {
+                "bottom": 26.20578778135048,
+                "left": 3.26563122262047,
+                "right": 91.19872560732776,
+                "top": 70.65916398713826
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "保衛室"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 70",
+              "placement": {
+                "bottom": 26.20578778135048,
+                "left": 10.15531660692951,
+                "right": 84.30904022301871,
+                "top": 70.65916398713826
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "EXH2_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "EXH2_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 71",
+              "placement": {
+                "bottom": 13.906752411575562,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 83.68167202572347
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 72",
+              "placement": {
+                "bottom": 13.906752411575562,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 83.68167202572347
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 73",
+              "placement": {
+                "bottom": 11.495176848874598,
+                "left": 3.305455993628036,
+                "right": 94.46435682994823,
+                "top": 86.09324758842443
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "EXH2_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "EXH2_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 74",
+              "placement": {
+                "bottom": 11.495176848874598,
+                "left": 5.535643170051772,
+                "right": 91.19872560732776,
+                "top": 86.09324758842443
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "第一電站抽風機"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 75",
+              "placement": {
+                "bottom": 16.318327974276528,
+                "left": 3.26563122262047,
+                "right": 91.19872560732776,
+                "top": 80.54662379421221
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE1_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 76",
+              "placement": {
+                "bottom": 51.76848874598071,
+                "left": 85.86220629231381,
+                "right": 10.87216248506571,
+                "rotation": 0,
+                "top": 45.81993569131833
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 77",
+              "placement": {
+                "bottom": 51.76848874598071,
+                "left": 83.63201911589009,
+                "right": 14.13779370768618,
+                "top": 45.81993569131833
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 78",
+              "placement": {
+                "bottom": 49.356913183279744,
+                "left": 83.63201911589009,
+                "right": 14.13779370768618,
+                "top": 48.231511254019296
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE1_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 79",
+              "placement": {
+                "bottom": 49.356913183279744,
+                "left": 85.86220629231381,
+                "right": 10.87216248506571,
+                "rotation": 0,
+                "top": 48.231511254019296
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "BOIL_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "BOIL_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 80",
+              "placement": {
+                "bottom": 51.76848874598071,
+                "left": 92.75189167662286,
+                "right": 3.982477100756671,
+                "rotation": 0,
+                "top": 45.81993569131833
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 81",
+              "placement": {
+                "bottom": 51.76848874598071,
+                "left": 90.52170450019914,
+                "right": 7.24810832337714,
+                "top": 45.81993569131833
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 82",
+              "placement": {
+                "bottom": 49.356913183279744,
+                "left": 90.52170450019914,
+                "right": 7.24810832337714,
+                "top": 48.231511254019296
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "BOIL_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "BOIL_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 83",
+              "placement": {
+                "bottom": 49.356913183279744,
+                "left": 92.75189167662286,
+                "right": 3.982477100756671,
+                "rotation": 0,
+                "top": 48.231511254019296
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "浸染+化料+染料"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 84",
+              "placement": {
+                "bottom": 54.18006430868167,
+                "left": 83.59219434488251,
+                "right": 10.87216248506571,
+                "top": 42.68488745980707
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "鍋爐"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 85",
+              "placement": {
+                "bottom": 54.18006430868167,
+                "left": 90.48187972919156,
+                "right": 3.982477100756671,
+                "top": 42.68488745980707
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "WASTE_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "WASTE_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 86",
+              "placement": {
+                "bottom": 41.88102893890675,
+                "left": 85.82238152130626,
+                "right": 10.911987256073278,
+                "rotation": 0,
+                "top": 55.70739549839229
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 87",
+              "placement": {
+                "bottom": 41.88102893890675,
+                "left": 83.59219434488251,
+                "right": 14.177618478693748,
+                "top": 55.70739549839229
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 88",
+              "placement": {
+                "bottom": 39.469453376205784,
+                "left": 83.59219434488251,
+                "right": 14.177618478693748,
+                "top": 58.11897106109325
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "WASTE_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "WASTE_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 89",
+              "placement": {
+                "bottom": 39.469453376205784,
+                "left": 85.82238152130626,
+                "right": 10.911987256073278,
+                "rotation": 0,
+                "top": 58.11897106109325
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "QAHB_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "QAHB_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 90",
+              "placement": {
+                "bottom": 41.88102893890675,
+                "left": 92.7120669056153,
+                "right": 4.022301871764237,
+                "rotation": 0,
+                "top": 55.70739549839229
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 91",
+              "placement": {
+                "bottom": 41.88102893890675,
+                "left": 90.48187972919156,
+                "right": 7.287933094384708,
+                "top": 55.70739549839229
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 92",
+              "placement": {
+                "bottom": 39.469453376205784,
+                "left": 90.48187972919156,
+                "right": 7.287933094384708,
+                "top": 58.11897106109325
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "QAHB_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "QAHB_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 93",
+              "placement": {
+                "bottom": 39.469453376205784,
+                "left": 92.7120669056153,
+                "right": 4.022301871764237,
+                "rotation": 0,
+                "top": 58.11897106109325
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "廢水+食堂+軟水"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 94",
+              "placement": {
+                "bottom": 44.29260450160772,
+                "left": 83.55236957387496,
+                "right": 10.911987256073278,
+                "top": 52.572347266881025
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "品保+熱縮"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 95",
+              "placement": {
+                "bottom": 44.29260450160772,
+                "left": 90.44205495818399,
+                "right": 4.022301871764237,
+                "top": 52.572347266881025
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "RSV2_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "RSV2_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 96",
+              "placement": {
+                "bottom": 31.9935691318328,
+                "left": 85.78255675029868,
+                "right": 10.951812027080845,
+                "rotation": 0,
+                "top": 65.59485530546624
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 97",
+              "placement": {
+                "bottom": 31.9935691318328,
+                "left": 83.55236957387496,
+                "right": 14.217443249701315,
+                "top": 65.59485530546624
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 98",
+              "placement": {
+                "bottom": 29.581993569131832,
+                "left": 83.55236957387496,
+                "right": 14.217443249701315,
+                "top": 68.0064308681672
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "RSV2_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "RSV2_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 99",
+              "placement": {
+                "bottom": 29.581993569131832,
+                "left": 85.78255675029868,
+                "right": 10.951812027080845,
+                "rotation": 0,
+                "top": 68.0064308681672
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "RSV3_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "RSV3_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 100",
+              "placement": {
+                "bottom": 31.9935691318328,
+                "left": 92.67224213460773,
+                "right": 4.062126642771804,
+                "rotation": 0,
+                "top": 65.59485530546624
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 101",
+              "placement": {
+                "bottom": 31.9935691318328,
+                "left": 90.44205495818399,
+                "right": 7.327757865392274,
+                "top": 65.59485530546624
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 102",
+              "placement": {
+                "bottom": 29.581993569131832,
+                "left": 90.44205495818399,
+                "right": 7.327757865392274,
+                "top": 68.0064308681672
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "RSV3_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "RSV3_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 103",
+              "placement": {
+                "bottom": 29.581993569131832,
+                "left": 92.67224213460773,
+                "right": 4.062126642771804,
+                "rotation": 0,
+                "top": 68.0064308681672
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "備用"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 104",
+              "placement": {
+                "bottom": 34.40514469453376,
+                "left": 83.51254480286738,
+                "right": 10.951812027080845,
+                "top": 62.459807073954984
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "備用"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 105",
+              "placement": {
+                "bottom": 34.40514469453376,
+                "left": 90.40223018717643,
+                "right": 4.062126642771804,
+                "top": 62.459807073954984
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE2_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE2_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 110",
+              "placement": {
+                "bottom": 51.76848874598071,
+                "left": 78.89287136598965,
+                "right": 17.841497411389884,
+                "rotation": 0,
+                "top": 45.81993569131833
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 111",
+              "placement": {
+                "bottom": 51.76848874598071,
+                "left": 76.66268418956591,
+                "right": 21.107128634010355,
+                "top": 45.81993569131833
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 112",
+              "placement": {
+                "bottom": 49.356913183279744,
+                "left": 76.66268418956591,
+                "right": 21.107128634010355,
+                "top": 48.231511254019296
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "DYE2_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "DYE2_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 113",
+              "placement": {
+                "bottom": 49.356913183279744,
+                "left": 78.89287136598965,
+                "right": 17.841497411389884,
+                "rotation": 0,
+                "top": 48.231511254019296
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "浸染+滴定"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 115",
+              "placement": {
+                "bottom": 54.18006430868167,
+                "left": 76.62285941855835,
+                "right": 17.841497411389884,
+                "top": 42.68488745980707
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "SOC2_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "SOC2_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 116",
+              "placement": {
+                "bottom": 22.106109324758844,
+                "left": 85.86220629231381,
+                "right": 10.87216248506571,
+                "rotation": 0,
+                "top": 75.48231511254019
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 117",
+              "placement": {
+                "bottom": 22.106109324758844,
+                "left": 83.63201911589009,
+                "right": 14.13779370768618,
+                "top": 75.48231511254019
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 118",
+              "placement": {
+                "bottom": 19.69453376205788,
+                "left": 83.63201911589009,
+                "right": 14.13779370768618,
+                "top": 77.89389067524117
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "SOC2_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "SOC2_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 119",
+              "placement": {
+                "bottom": 19.69453376205788,
+                "left": 85.86220629231381,
+                "right": 10.87216248506571,
+                "rotation": 0,
+                "top": 77.89389067524117
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "RSV1_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "RSV1_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 120",
+              "placement": {
+                "bottom": 41.88102893890675,
+                "left": 78.85304659498208,
+                "right": 17.88132218239745,
+                "rotation": 0,
+                "top": 55.70739549839229
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 121",
+              "placement": {
+                "bottom": 41.88102893890675,
+                "left": 76.62285941855835,
+                "right": 21.14695340501792,
+                "top": 55.70739549839229
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 122",
+              "placement": {
+                "bottom": 39.469453376205784,
+                "left": 76.62285941855835,
+                "right": 21.14695340501792,
+                "top": 58.11897106109325
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "RSV1_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "RSV1_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 123",
+              "placement": {
+                "bottom": 39.469453376205784,
+                "left": 78.85304659498208,
+                "right": 17.88132218239745,
+                "rotation": 0,
+                "top": 58.11897106109325
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "第二電站插座"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 124",
+              "placement": {
+                "bottom": 24.517684887459808,
+                "left": 83.59219434488251,
+                "right": 10.87216248506571,
+                "top": 72.34726688102894
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "備用"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 125",
+              "placement": {
+                "bottom": 44.29260450160772,
+                "left": 76.58303464755078,
+                "right": 17.88132218239745,
+                "top": 52.572347266881025
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ELV3_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ELV3_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 126",
+              "placement": {
+                "bottom": 22.106109324758844,
+                "left": 92.7120669056153,
+                "right": 4.022301871764237,
+                "rotation": 0,
+                "top": 75.48231511254019
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 127",
+              "placement": {
+                "bottom": 22.106109324758844,
+                "left": 90.48187972919156,
+                "right": 7.287933094384708,
+                "top": 75.48231511254019
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 128",
+              "placement": {
+                "bottom": 19.69453376205788,
+                "left": 90.48187972919156,
+                "right": 7.287933094384708,
+                "top": 77.89389067524117
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "ELV3_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "ELV3_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 129",
+              "placement": {
+                "bottom": 19.69453376205788,
+                "left": 92.7120669056153,
+                "right": 4.022301871764237,
+                "rotation": 0,
+                "top": 77.89389067524117
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "FIRE_kW",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "FIRE_kW",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 130",
+              "placement": {
+                "bottom": 31.9935691318328,
+                "left": 78.89287136598965,
+                "right": 17.841497411389884,
+                "rotation": 0,
+                "top": 65.59485530546624
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Power"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 131",
+              "placement": {
+                "bottom": 31.9935691318328,
+                "left": 76.66268418956591,
+                "right": 21.107128634010355,
+                "top": 65.59485530546624
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "image": {
+                  "field": "ATS1_kW",
+                  "mode": "fixed"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "PF"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 132",
+              "placement": {
+                "bottom": 29.581993569131832,
+                "left": 76.66268418956591,
+                "right": 21.107128634010355,
+                "top": 68.0064308681672
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#035d6480"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#035d63"
+                },
+                "radius": 0,
+                "width": 1
+              },
+              "config": {
+                "align": "right",
+                "color": {
+                  "field": "FIRE_PF",
+                  "fixed": "#000000"
+                },
+                "size": 18,
+                "text": {
+                  "field": "FIRE_PF",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 133",
+              "placement": {
+                "bottom": 29.581993569131832,
+                "left": 78.89287136598965,
+                "right": 17.841497411389884,
+                "rotation": 0,
+                "top": 68.0064308681672
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "電梯3"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 134",
+              "placement": {
+                "bottom": 24.517684887459808,
+                "left": 90.44205495818399,
+                "right": 4.022301871764237,
+                "top": 72.34726688102894
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#021121"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0dc7d5"
+                },
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "消防系統"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 135",
+              "placement": {
+                "bottom": 34.40514469453376,
+                "left": 76.62285941855835,
+                "right": 17.841497411389884,
+                "top": 62.459807073954984
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 136",
+              "placement": {
+                "bottom": 79.28082191780823,
+                "left": 25.87601078167116,
+                "right": 72.10242587601078,
+                "rotation": 0,
+                "top": 16.866438356164384
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "scale",
+                "vertical": "scale"
+              },
+              "links": [],
+              "name": "Element 137",
+              "placement": {
+                "bottom": 71.74657534246576,
+                "left": 91.55435759209344,
+                "right": 6.424079065588499,
+                "rotation": 0,
+                "top": 24.40068493150685
+              },
+              "type": "rectangle"
+            }
+          ],
+          "name": "Element 1784882730529",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "rotation": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\r\n  SELECT DISTINCT ON (meter_id)\r\n    meter_id, power_kw, power_factor\r\n  FROM realtime_electricity\r\n  WHERE meter_id IN (\r\n    'E-WH','E-EXH1','E-EXH2','E-ELV2','E-ELV3','E-QAHB','E-FIRE','E-WASTE',\r\n    'E-CRANE','E-DYE3','E-DYE1','E-DYE2','E-FIBAC','E-PRO1','E-FIB1','E-BOIL',\r\n    'E-PRINT','E-OFF','E-RSV1','E-RSV2','E-RSV3','E-SEC',\r\n    'E-ATS1','E-ATS2','E-AIR','E-SOC2'\r\n  )\r\n  ORDER BY meter_id, time DESC\r\n)\r\nSELECT\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-WH')    AS \"WH_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-WH')    AS \"WH_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-EXH1')  AS \"EXH1_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-EXH1')  AS \"EXH1_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-EXH2')  AS \"EXH2_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-EXH2')  AS \"EXH2_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-ELV2')  AS \"ELV2_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-ELV2')  AS \"ELV2_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-ELV3')  AS \"ELV3_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-ELV3')  AS \"ELV3_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-QAHB')  AS \"QAHB_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-QAHB')  AS \"QAHB_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-FIRE')  AS \"FIRE_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-FIRE')  AS \"FIRE_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-WASTE') AS \"WASTE_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-WASTE') AS \"WASTE_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-CRANE') AS \"CRANE_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-CRANE') AS \"CRANE_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-DYE3')  AS \"DYE3_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-DYE3')  AS \"DYE3_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-DYE1')  AS \"DYE1_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-DYE1')  AS \"DYE1_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-DYE2')  AS \"DYE2_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-DYE2')  AS \"DYE2_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-FIBAC') AS \"FIBAC_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-FIBAC') AS \"FIBAC_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-PRO1')  AS \"PRO1_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-PRO1')  AS \"PRO1_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-FIB1')  AS \"FIB1_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-FIB1')  AS \"FIB1_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-BOIL')  AS \"BOIL_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-BOIL')  AS \"BOIL_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-PRINT') AS \"PRINT_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-PRINT') AS \"PRINT_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-OFF')   AS \"OFF_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-OFF')   AS \"OFF_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-RSV1')  AS \"RSV1_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-RSV1')  AS \"RSV1_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-RSV2')  AS \"RSV2_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-RSV2')  AS \"RSV2_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-RSV3')  AS \"RSV3_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-RSV3')  AS \"RSV3_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-SEC')   AS \"SEC_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-SEC')   AS \"SEC_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-ATS1')  AS \"ATS1_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-ATS1')  AS \"ATS1_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-ATS2')  AS \"ATS2_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-ATS2')  AS \"ATS2_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-AIR')   AS \"AIR_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-AIR')   AS \"AIR_PF\",\r\n  MAX(power_kw)     FILTER (WHERE meter_id = 'E-SOC2')  AS \"SOC2_kW\",\r\n  MAX(power_factor) FILTER (WHERE meter_id = 'E-SOC2')  AS \"SOC2_PF\"\r\nFROM latest;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "",
+      "type": "canvas"
+    }
+  ],
+  "preload": false,
+  "refresh": "10s",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1m",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "browser",
+  "title": "ECI_Layout_Electricity",
+  "uid": "eci-layout-electricity",
+  "version": 37
+}

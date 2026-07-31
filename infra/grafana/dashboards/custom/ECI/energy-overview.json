@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 8,
+  "id": null,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -1191,5 +1191,5 @@
   "timezone": "browser",
   "title": "Energy Overview",
   "uid": "energy-overview",
-  "version": 10
+  "version": 1
 }
