@@ -110,7 +110,7 @@
       "id": 1,
       "options": {
         "infinitePan": false,
-        "inlineEditing": true,
+        "inlineEditing": false,
         "panZoom": false,
         "root": {
           "background": {
