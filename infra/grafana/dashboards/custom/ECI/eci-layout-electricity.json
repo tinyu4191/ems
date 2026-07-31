@@ -118,7 +118,7 @@
               "fixed": "#011223"
             },
             "image": {
-              "fixed": "__GRAFANA_HOST__/grafana/public/img/custom/ECI_layout_electricity.png",
+              "fixed": "http://192.168.2.127:8080/grafana/public/img/custom/ECI_layout_electricity.png",
               "mode": "fixed"
             },
             "size": "fill"
