@@ -1,5 +1,7 @@
 .env
 collector/.env
+node_modules/
+collector/.env
 collector/node_modules/
 collector/logs/
 web/dist/
