@@ -25,7 +25,6 @@ services:
       GF_SECURITY_ALLOW_EMBEDDING: "true"
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
-      # 讓 Grafana 知道自己被 proxy 到 /grafana/ 這個子路徑下
       GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:${WEB_PORT}/grafana/"
       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
       GF_SECURITY_ADMIN_USER: admin
@@ -37,7 +36,8 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
-      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - ./infra/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./infra/grafana/assets:/usr/share/grafana/public/img/custom:ro
     depends_on:
       - timescaledb
     networks:
@@ -50,8 +50,6 @@ services:
     env_file:
       - ./collector/.env
     environment:
-      # 覆蓋 .env 裡的 DB_HOST/DB_PORT：容器對容器要用 service name + 內部 port，
-      # 不是 host 對外映射的 5433
       DB_HOST: timescaledb
       DB_PORT: 5432
     extra_hosts:

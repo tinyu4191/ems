@@ -1,0 +1,1195 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "能源總覽",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": 8,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "SVGBaseFix": false,
+        "add100Percentage": true,
+        "calcsMutation": "none",
+        "centerAlignContent": true,
+        "codeData": "{\n  \"totalPower\": 584,\n  \"todayEnergy\": 6820,\n  \"monthEnergy\": 142.6,\n  \"peakDemand\": 712,\n  \"peakDemandTime\": \"14:32\",\n  \"trendData\": [\n    90,\n    85,\n    95,\n    70,\n    80,\n    55,\n    68,\n    45,\n    60,\n    40,\n    58,\n    48,\n    60,\n    52,\n    58,\n    50,\n    62,\n    55,\n    60,\n    52,\n    58,\n    48,\n    55,\n    45,\n    52,\n    42,\n    50,\n    38,\n    48,\n    35,\n    45,\n    32,\n    42,\n    30,\n    40,\n    35\n  ]\n}",
+        "css": ".ems-power-panel {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  padding: 14px 18px;\n  display: flex;\n  flex-direction: column;\n  font-family: 'Roboto', 'Noto Sans TC', sans-serif;\n  color: #d8d9da;\n  cursor: pointer;\n}\n.ems-power-panel:hover {\n  background: #ffffff08;\n}\n.top {\n  position: relative;\n  flex: 0 0 58%;\n  min-height: 0;\n}\n.trend-chart {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n}\n.top-content {\n  position: absolute;\n  inset: 0;\n  z-index: 1;\n  pointer-events: none;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: flex-end;\n}\n.label {\n  align-self: flex-start;\n  font-size: 14px;\n  color: #9fa7b3;\n  background: #181b1f50;\n  backdrop-filter: blur(1px);\n  padding: 2px 8px;\n  border-radius: 6px;\n}\n.main-value {\n  align-self: flex-start;\n  font-size: 84px;\n  font-weight: 500;\n  line-height: 1;\n  background: #181b1f50;\n  backdrop-filter: blur(1px);\n  padding: 4px 16px;\n}\n.unit {\n  font-size: 32px;\n  font-weight: 400;\n  color: #9fa7b3;\n  margin-left: 6px;\n}\n.bottom {\n  flex: 0 0 auto;\n  display: flex;\n  border-top: 1px solid #2c3235;\n  margin-top: 8px;\n  padding-top: 10px;\n}\n.stat {\n  flex: 1;\n  text-align: center;\n}\n.stat-label {\n  font-size: 12px;\n  color: #9fa7b3;\n}\n.stat-value {\n  font-size: 32px;\n  font-weight: 500;\n  margin-top: 2px;\n}\n.stat-unit {\n  font-size: 16px;\n  font-weight: 400;\n  color: #9fa7b3;\n  margin-left: 4px;\n}\n.stat-sub {\n  font-size: 16px;\n  color: #6c7580;\n}\n.divider {\n  width: 1px;\n  background: #2c3235;\n  margin: 2px 0;\n}",
+        "dynamicData": false,
+        "dynamicFieldDisplayValues": false,
+        "dynamicHtmlGraphics": false,
+        "dynamicProps": false,
+        "html": "<div class=\"ems-power-panel\">\n  <div class=\"top\">\n    <div id=\"trend-chart\" class=\"trend-chart\"></div>\n    <div class=\"top-content\">\n      <span class=\"label\">目前總功率</span>\n      <div class=\"main-value\">\n        <span id=\"total-power-value\">--</span><span class=\"unit\">kW</span>\n      </div>\n    </div>\n  </div>\n  <div class=\"bottom\">\n    <div class=\"stat\">\n      <div class=\"stat-label\">今日累積用電量</div>\n      <div class=\"stat-value\"><span id=\"today-energy-value\">--</span><span class=\"stat-unit\">kWh</span></div>\n    </div>\n    <div class=\"divider\"></div>\n    <div class=\"stat\">\n      <div class=\"stat-label\">本月累積用電量</div>\n      <div class=\"stat-value\"><span id=\"month-energy-value\">--</span><span class=\"stat-unit\">kWh</span></div>\n    </div>\n    <div class=\"divider\"></div>\n    <div class=\"stat\">\n      <div class=\"stat-label\">今日尖峰需量</div>\n      <div class=\"stat-value\"><span id=\"peak-demand-value\">--</span><span class=\"stat-unit\">kW</span></div>\n      <div class=\"stat-sub\" id=\"peak-demand-time\"></div>\n    </div>\n  </div>\n</div>",
+        "onInit": "function loadECharts() {\n  if (window.__echartsModulePromise) return window.__echartsModulePromise;\n  window.__echartsModulePromise = import('https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.esm.min.js');\n  return window.__echartsModulePromise;\n}\n\nconst GRADIENTS = [\n  { line: ['#1de9b6', '#00897b'] }, // 電力（本面板使用）：青綠\n  { line: ['#00d2ff', '#0066cc'] }, // 水：亮藍\n  { line: ['#26c6da', '#006064'] }, // 蒸氣：深青色\n  { line: ['#f7971e', '#ff4e50'] }, // 保留：告警/尖峰\n];\n\nfunction buildTrendOption(values, timestamps, peakIndex) {\n  const [from, to] = GRADIENTS[0].line;\n  const hasPeak = typeof peakIndex === 'number' && peakIndex >= 0 && peakIndex < values.length;\n\n  const markAreaData = hasPeak\n    ? [[\n        { xAxis: Math.max(peakIndex - 0.4, 0) },\n        { xAxis: Math.min(peakIndex + 0.4, values.length - 1) },\n      ]]\n    : [];\n\n  const markPointData = hasPeak\n    ? [{ coord: [peakIndex, values[peakIndex]], value: values[peakIndex] }]\n    : [];\n\n  return {\n    backgroundColor: 'transparent',\n    grid: { left: 0, right: 0, top: 4, bottom: 4 },\n    xAxis: { type: 'category', show: false, boundaryGap: false, data: values.map((_, i) => i) },\n    yAxis: { type: 'value', show: false, scale: true },\n    tooltip: {\n      trigger: 'axis',\n      backgroundColor: '#1f2329',\n      borderColor: '#2c3235',\n      textStyle: { color: '#d8d9da', fontSize: 11 },\n      formatter: (p) => {\n        const point = p?.[0];\n        if (!point) return '';\n        const ts = timestamps?.[point.dataIndex];\n        const timeLabel = ts\n          ? new Date(ts).toLocaleTimeString('en-GB', {\n              timeZone: 'Asia/Ho_Chi_Minh',\n              hour: '2-digit',\n              minute: '2-digit',\n            })\n          : '--:--';\n        return `${point.value?.toFixed(2) ?? '--'} kW (${timeLabel})`;\n      },\n    },\n    series: [{\n      type: 'line',\n      data: values,\n      smooth: 0.3,\n      symbol: 'none',\n      lineStyle: {\n        width: 2,\n        color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [\n          { offset: 0, color: from },\n          { offset: 1, color: to },\n        ] },\n      },\n      areaStyle: {\n        color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [\n          { offset: 0, color: 'rgba(29, 233, 182, 0.35)' },\n          { offset: 1, color: 'rgba(0, 137, 123, 0)' },\n        ] },\n      }\n    }],\n  };\n}\n\nfunction animateNumberTo(el, newValue, decimals = 0, duration = 500) {\n  if (!el) return;\n\n  const prevValue = parseFloat(el.dataset.rawValue ?? '0') || 0;\n  el.dataset.rawValue = newValue;\n\n  if (prevValue === newValue) {\n    el.textContent = newValue.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n    return;\n  }\n\n  if (el.__rollAnimFrame) {\n    cancelAnimationFrame(el.__rollAnimFrame);\n  }\n\n  const startTime = performance.now();\n\n  function tick(now) {\n    const progress = Math.min((now - startTime) / duration, 1);\n    const eased = 1 - Math.pow(1 - progress, 3);\n    const current = prevValue + (newValue - prevValue) * eased;\n\n    el.textContent = current.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n\n    if (progress < 1) {\n      el.__rollAnimFrame = requestAnimationFrame(tick);\n    } else {\n      el.__rollAnimFrame = null;\n    }\n  }\n\n  el.__rollAnimFrame = requestAnimationFrame(tick);\n}\n\nfunction renderPanel(props) {\n  animateNumberTo(htmlNode.getElementById('total-power-value'), props.totalPower, 2);\n  htmlNode.getElementById('today-energy-value').textContent = props.todayEnergy.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('month-energy-value').textContent = props.monthEnergy.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-demand-value').textContent = props.peakDemand.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-demand-time').textContent = props.peakDemandTime;\n  if (htmlNode.__trendChart) {\n    htmlNode.__trendChart.setOption(buildTrendOption(props.trendData, props.trendTimestamps, props.peakIndex));\n  }\n}\n\nfunction bindPanelClick(meterType) {\n  const panelRoot = htmlNode.querySelector('.ems-power-panel');\n  if (!panelRoot) return;\n\n  panelRoot.onclick = () => {\n    getLocationSrv().update({\n      query: { 'var-meterType': meterType },\n      partial: true,\n      replace: true,\n    });\n  };\n}\n\nloadECharts().then((echarts) => {\n  if (!htmlNode.__trendChart) {\n    htmlNode.__trendChart = echarts.init(htmlNode.getElementById('trend-chart'), null, { renderer: 'svg' });\n    let lastW = 0, lastH = 0;\n    htmlNode.onpanelupdate = () => {\n      const el = htmlNode.getElementById('trend-chart');\n      const { width, height } = el.getBoundingClientRect();\n      if (width !== lastW || height !== lastH) {\n        lastW = width;\n        lastH = height;\n        htmlNode.__trendChart.resize();\n      }\n    };\n  }\n  renderPanel({\n    totalPower: 0,\n    todayEnergy: 0,\n    monthEnergy: 0,\n    peakDemand: 0,\n    peakDemandTime: '---',\n    trendData: [],\n    trendTimestamps: [],\n    peakIndex: -1,\n  });\n  bindPanelClick('electricity');\n});",
+        "onInitOnResize": false,
+        "onRender": "const GRADIENTS = [\n  { line: ['#1de9b6', '#00897b'] },\n  { line: ['#00d2ff', '#0066cc'] },\n  { line: ['#26c6da', '#006064'] },\n  { line: ['#f7971e', '#ff4e50'] },\n];\n\nfunction buildTrendOption(values, timestamps, peakIndex) {\n  const [from, to] = GRADIENTS[0].line;\n  const hasPeak = typeof peakIndex === 'number' && peakIndex >= 0 && peakIndex < values.length;\n\n  const markAreaData = hasPeak\n    ? [[\n        { xAxis: Math.max(peakIndex - 0.4, 0) },\n        { xAxis: Math.min(peakIndex + 0.4, values.length - 1) },\n      ]]\n    : [];\n\n  const markPointData = hasPeak\n    ? [{ coord: [peakIndex, values[peakIndex]], value: values[peakIndex] }]\n    : [];\n\n  return {\n    backgroundColor: 'transparent',\n    grid: { left: 0, right: 0, top: 4, bottom: 4 },\n    xAxis: { type: 'category', show: false, boundaryGap: false, data: values.map((_, i) => i) },\n    yAxis: { type: 'value', show: false, scale: true },\n    tooltip: {\n      trigger: 'axis',\n      backgroundColor: '#1f2329',\n      borderColor: '#2c3235',\n      textStyle: { color: '#d8d9da', fontSize: 11 },\n      formatter: (p) => {\n        const point = p?.[0];\n        if (!point) return '';\n        const ts = timestamps?.[point.dataIndex];\n        const timeLabel = ts\n          ? new Date(ts).toLocaleTimeString('en-GB', {\n              timeZone: 'Asia/Ho_Chi_Minh',\n              hour: '2-digit',\n              minute: '2-digit',\n            })\n          : '--:--';\n        return `${point.value?.toFixed(2) ?? '--'} kW (${timeLabel})`;\n      },\n    },\n    series: [{\n      type: 'line',\n      data: values,\n      smooth: 0.3,\n      symbol: 'none',\n      lineStyle: {\n        width: 2,\n        color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [\n          { offset: 0, color: from },\n          { offset: 1, color: to },\n        ] },\n      },\n      areaStyle: {\n        color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [\n          { offset: 0, color: 'rgba(29, 233, 182, 0.35)' },\n          { offset: 1, color: 'rgba(0, 137, 123, 0)' },\n        ] },\n      }\n    }],\n  };\n}\n\nfunction animateNumberTo(el, newValue, decimals = 0, duration = 500) {\n  if (!el) return;\n\n  const prevValue = parseFloat(el.dataset.rawValue ?? '0') || 0;\n  el.dataset.rawValue = newValue;\n\n  if (prevValue === newValue) {\n    el.textContent = newValue.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n    return;\n  }\n\n  if (el.__rollAnimFrame) {\n    cancelAnimationFrame(el.__rollAnimFrame);\n  }\n\n  const startTime = performance.now();\n\n  function tick(now) {\n    const progress = Math.min((now - startTime) / duration, 1);\n    const eased = 1 - Math.pow(1 - progress, 3);\n    const current = prevValue + (newValue - prevValue) * eased;\n\n    el.textContent = current.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n\n    if (progress < 1) {\n      el.__rollAnimFrame = requestAnimationFrame(tick);\n    } else {\n      el.__rollAnimFrame = null;\n    }\n  }\n\n  el.__rollAnimFrame = requestAnimationFrame(tick);\n}\n\nfunction renderPanel(props) {\n  animateNumberTo(htmlNode.getElementById('total-power-value'), props.totalPower, 2);\n  htmlNode.getElementById('today-energy-value').textContent = props.todayEnergy.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('month-energy-value').textContent = props.monthEnergy.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-demand-value').textContent = props.peakDemand.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-demand-time').textContent = props.peakDemandTime;\n  if (htmlNode.__trendChart) {\n    htmlNode.__trendChart.setOption(buildTrendOption(props.trendData, props.trendTimestamps, props.peakIndex));\n  }\n}\n\nfunction addArrays(...arrays) {\n  const maxLen = Math.max(...arrays.map(arr => arr.length));\n  return Array.from({ length: maxLen }, (_, i) =>\n    arrays.reduce((sum, arr) => sum + (arr[i] || 0), 0)\n  );\n}\n\nfunction findMaxWithTime(values, times) {\n  if (!values || values.length === 0) {\n    return { maxValue: 0, maxIndex: -1, maxTime: null, maxTimeFormat: '---' };\n  }\n\n  const maxIndex = values.reduce((maxIdx, val, i, arr) =>\n    val > arr[maxIdx] ? i : maxIdx, 0);\n\n  const maxTime = times?.[maxIndex];\n\n  return {\n    maxValue: values[maxIndex] ?? 0,\n    maxIndex,\n    maxTime: maxTime ?? null,\n    maxTimeFormat: maxTime\n      ? new Date(maxTime).toLocaleTimeString('en-GB', {\n          timeZone: 'Asia/Ho_Chi_Minh',\n          hour: '2-digit',\n          minute: '2-digit',\n        })\n      : '---',\n  };\n}\n\nconst getScalarByRefId = (refId, seriesArr, noDataValue = 0) => {\n  const s = (seriesArr ?? []).find(item => item.refId === refId);\n  const numField = s?.fields?.find(f => f.type === 'number');\n  const values = numField?.values ?? [];\n  return values.length > 0 ? (values[values.length - 1] ?? noDataValue) : noDataValue;\n};\n\nconst { series } = data ?? {};\nconst realtimePower = (series ?? []).find(s => s.refId === 'power');\nconst seriesPowerTimestamp = realtimePower?.fields\n  ?.find(f => f.type === 'time')\n  ?.values ?? [];\nconst seriesPower = realtimePower?.fields\n  ?.filter(f => f.type === 'number')\n  ?.map(({ values }) => values) ?? [];\n\nconst datasetTotalPower = seriesPower.length > 0 ? addArrays(...seriesPower) : [];\nconst resultMaxDemand = findMaxWithTime(datasetTotalPower, seriesPowerTimestamp);\n\nconst liveProps = {\n  totalPower: datasetTotalPower.at(-1) ?? 0,\n  todayEnergy: getScalarByRefId('today_energy', series, 0),\n  monthEnergy: getScalarByRefId('month_energy', series, 0),\n  peakDemand: resultMaxDemand.maxValue,\n  peakDemandTime: resultMaxDemand.maxTimeFormat,\n  trendData: datasetTotalPower,\n  trendTimestamps: seriesPowerTimestamp,\n  peakIndex: resultMaxDemand.maxIndex,\n};\n\nrenderPanel(liveProps);",
+        "overflow": "visible",
+        "panelupdateOnMount": false,
+        "reduceOptions": {
+          "calcs": []
+        },
+        "renderOnMount": false,
+        "rootCSS": "",
+        "useGrafanaScrollbar": false
+      },
+      "pluginVersion": "2.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  time_bucket('15 minute', r.time) AS time,\r\n  r.meter_id,\r\n  AVG(r.power_kw) AS value\r\nFROM realtime_electricity r\r\nJOIN meters m ON m.meter_id = r.meter_id\r\nWHERE $__timeFilter(r.time)\r\n  AND m.meter_type = 'electricity'\r\n  AND m.is_main = true\r\nGROUP BY time_bucket('15 minute', r.time), r.meter_id\r\nORDER BY time ASC;",
+          "refId": "power",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(meter_kwh), 0) AS value\r\nFROM (\r\n  SELECT\r\n    a.meter_id,\r\n    GREATEST(MAX(a.total_kwh) - MIN(a.total_kwh), 0) AS meter_kwh\r\n  FROM accumulator_electricity a\r\n  JOIN meters m ON m.meter_id = a.meter_id\r\n  WHERE m.meter_type = 'electricity'\r\n    AND m.is_main = true\r\n    AND a.time >= date_trunc('day', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\r\n  GROUP BY a.meter_id\r\n) per_meter;",
+          "refId": "today_energy",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(meter_kwh), 0) AS value\r\nFROM (\r\n  SELECT\r\n    a.meter_id,\r\n    GREATEST(MAX(a.total_kwh) - MIN(a.total_kwh), 0) AS meter_kwh\r\n  FROM accumulator_electricity a\r\n  JOIN meters m ON m.meter_id = a.meter_id\r\n  WHERE m.meter_type = 'electricity'\r\n    AND m.is_main = true\r\n    AND a.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\r\n  GROUP BY a.meter_id\r\n) per_meter;",
+          "refId": "month_energy",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "",
+      "type": "gapit-htmlgraphics-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "SVGBaseFix": false,
+        "add100Percentage": true,
+        "calcsMutation": "none",
+        "centerAlignContent": true,
+        "codeData": "{\n  \"totalPower\": 584,\n  \"todayEnergy\": 6820,\n  \"monthEnergy\": 142.6,\n  \"peakDemand\": 712,\n  \"peakDemandTime\": \"14:32\",\n  \"trendData\": [\n    90,\n    85,\n    95,\n    70,\n    80,\n    55,\n    68,\n    45,\n    60,\n    40,\n    58,\n    48,\n    60,\n    52,\n    58,\n    50,\n    62,\n    55,\n    60,\n    52,\n    58,\n    48,\n    55,\n    45,\n    52,\n    42,\n    50,\n    38,\n    48,\n    35,\n    45,\n    32,\n    42,\n    30,\n    40,\n    35\n  ]\n}",
+        "css": ".ems-water-panel {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  padding: 14px 18px;\n  display: flex;\n  flex-direction: column;\n  font-family: 'Roboto', 'Noto Sans TC', sans-serif;\n  color: #d8d9da;\n  cursor: pointer;\n}\n.ems-water-panel:hover {\n  background: #ffffff08;\n}\n.top {\n  position: relative;\n  flex: 0 0 58%;\n  min-height: 0;\n}\n.trend-chart {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n}\n.top-content {\n  position: absolute;\n  inset: 0;\n  z-index: 1;\n  pointer-events: none;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: flex-end;\n}\n.label {\n  align-self: flex-start;\n  font-size: 14px;\n  color: #9fa7b3;\n  background: #181b1f50;\n  backdrop-filter: blur(1px);\n  padding: 2px 8px;\n  border-radius: 6px;\n}\n.main-value {\n  align-self: flex-start;\n  font-size: 84px;\n  font-weight: 500;\n  line-height: 1;\n  background: #181b1f50;\n  backdrop-filter: blur(1px);\n  padding: 4px 16px;\n}\n.unit {\n  font-size: 32px;\n  font-weight: 400;\n  color: #9fa7b3;\n  margin-left: 6px;\n}\n.bottom {\n  flex: 0 0 auto;\n  display: flex;\n  border-top: 1px solid #2c3235;\n  margin-top: 8px;\n  padding-top: 10px;\n}\n.stat {\n  flex: 1;\n  text-align: center;\n}\n.stat-label {\n  font-size: 12px;\n  color: #9fa7b3;\n}\n.stat-value {\n  font-size: 32px;\n  font-weight: 500;\n  margin-top: 2px;\n}\n.stat-unit {\n  font-size: 16px;\n  font-weight: 400;\n  color: #9fa7b3;\n  margin-left: 4px;\n}\n.stat-sub {\n  font-size: 16px;\n  color: #6c7580;\n}\n.divider {\n  width: 1px;\n  background: #2c3235;\n  margin: 2px 0;\n}",
+        "dynamicData": false,
+        "dynamicFieldDisplayValues": false,
+        "dynamicHtmlGraphics": false,
+        "dynamicProps": false,
+        "html": "<div class=\"ems-water-panel\">\n  <div class=\"top\">\n    <div id=\"trend-chart\" class=\"trend-chart\"></div>\n    <div class=\"top-content\">\n      <span class=\"label\">目前用水總流量</span>\n      <div class=\"main-value\">\n        <span id=\"total-water-value\">--</span><span class=\"unit\">m³/h</span>\n      </div>\n    </div>\n  </div>\n  <div class=\"bottom\">\n    <div class=\"stat\">\n      <div class=\"stat-label\">今日累積用水量</div>\n      <div class=\"stat-value\"><span id=\"today-water-value\">--</span><span class=\"stat-unit\">m³</span></div>\n    </div>\n    <div class=\"divider\"></div>\n    <div class=\"stat\">\n      <div class=\"stat-label\">本月累積用水量</div>\n      <div class=\"stat-value\"><span id=\"month-water-value\">--</span><span class=\"stat-unit\">m³</span></div>\n    </div>\n    <div class=\"divider\"></div>\n    <div class=\"stat\">\n      <div class=\"stat-label\">今日最高流速</div>\n      <div class=\"stat-value\"><span id=\"peak-flow-value\">--</span><span class=\"stat-unit\">m³/h</span></div>\n      <div class=\"stat-sub\" id=\"peak-flow-time\"></div>\n    </div>\n  </div>\n</div>",
+        "onInit": "function loadECharts() {\n  if (window.__echartsModulePromise) return window.__echartsModulePromise;\n  window.__echartsModulePromise = import('https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.esm.min.js');\n  return window.__echartsModulePromise;\n}\n\nconst GRADIENTS = [\n  { line: ['#1de9b6', '#00897b'] }, // 電力：青綠\n  { line: ['#00d2ff', '#0066cc'] }, // 水（本面板使用）：亮藍\n  { line: ['#26c6da', '#006064'] }, // 蒸氣：深青色\n  { line: ['#f7971e', '#ff4e50'] }, // 保留：告警/尖峰\n];\n\nfunction buildTrendOption(values, timestamps) {\n  const [from, to] = GRADIENTS[1].line;\n  return {\n    backgroundColor: 'transparent',\n    grid: { left: 0, right: 0, top: 4, bottom: 4 },\n    xAxis: { type: 'category', show: false, boundaryGap: false, data: values.map((_, i) => i) },\n    yAxis: { type: 'value', show: false, scale: true },\n    tooltip: {\n      trigger: 'axis',\n      backgroundColor: '#1f2329',\n      borderColor: '#2c3235',\n      textStyle: { color: '#d8d9da', fontSize: 11 },\n      formatter: (p) => {\n        const point = p?.[0];\n        if (!point) return '';\n        const ts = timestamps?.[point.dataIndex];\n        const timeLabel = ts\n          ? new Date(ts).toLocaleTimeString('en-GB', {\n              timeZone: 'Asia/Ho_Chi_Minh',\n              hour: '2-digit',\n              minute: '2-digit',\n            })\n          : '--:--';\n        return `${point.value?.toFixed(2) ?? '--'} m³/h (${timeLabel})`;\n      },\n    },\n    series: [{\n      type: 'line',\n      data: values,\n      smooth: 0.3,\n      symbol: 'none',\n      lineStyle: {\n        width: 2,\n        color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [\n          { offset: 0, color: from },\n          { offset: 1, color: to },\n        ] },\n      },\n      areaStyle: {\n        color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [\n          { offset: 0, color: 'rgba(0,210,255,0.35)' },\n          { offset: 1, color: 'rgba(0,102,204,0)' },\n        ] },\n      },\n    }],\n  };\n}\n\nfunction animateNumberTo(el, newValue, decimals = 0, duration = 500) {\n  if (!el) return;\n\n  const prevValue = parseFloat(el.dataset.rawValue ?? '0') || 0;\n  el.dataset.rawValue = newValue;\n\n  if (prevValue === newValue) {\n    el.textContent = newValue.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n    return;\n  }\n\n  if (el.__rollAnimFrame) {\n    cancelAnimationFrame(el.__rollAnimFrame);\n  }\n\n  const startTime = performance.now();\n\n  function tick(now) {\n    const progress = Math.min((now - startTime) / duration, 1);\n    const eased = 1 - Math.pow(1 - progress, 3);\n    const current = prevValue + (newValue - prevValue) * eased;\n\n    el.textContent = current.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n\n    if (progress < 1) {\n      el.__rollAnimFrame = requestAnimationFrame(tick);\n    } else {\n      el.__rollAnimFrame = null;\n    }\n  }\n\n  el.__rollAnimFrame = requestAnimationFrame(tick);\n}\n\nfunction renderPanel(props) {\n  animateNumberTo(htmlNode.getElementById('total-water-value'), props.totalFlow, 2);\n  htmlNode.getElementById('today-water-value').textContent = props.todayWater.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('month-water-value').textContent = props.monthWater.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-flow-value').textContent = props.peakFlow.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-flow-time').textContent = props.peakFlowTime;\n  if (htmlNode.__trendChart) {\n    htmlNode.__trendChart.setOption(buildTrendOption(props.trendData, props.trendTimestamps));\n  }\n}\n\nfunction bindPanelClick(meterType) {\n  const panelRoot = htmlNode.querySelector('.ems-water-panel');\n  if (!panelRoot) return;\n\n  panelRoot.onclick = () => {\n    getLocationSrv().update({\n      query: { 'var-meterType': meterType },\n      partial: true,\n      replace: true,\n    });\n  };\n}\n\nloadECharts().then((echarts) => {\n  if (!htmlNode.__trendChart) {\n    htmlNode.__trendChart = echarts.init(htmlNode.getElementById('trend-chart'), null, { renderer: 'svg' });\n    let lastW = 0, lastH = 0;\n    htmlNode.onpanelupdate = () => {\n      const el = htmlNode.getElementById('trend-chart');\n      const { width, height } = el.getBoundingClientRect();\n      if (width !== lastW || height !== lastH) {\n        lastW = width;\n        lastH = height;\n        htmlNode.__trendChart.resize();\n      }\n    };\n  }\n  renderPanel({\n    totalFlow: 0,\n    todayWater: 0,\n    monthWater: 0,\n    peakFlow: 0,\n    peakFlowTime: '---',\n    trendData: [],\n    trendTimestamps: [],\n  });\n  bindPanelClick('water');\n});",
+        "onInitOnResize": false,
+        "onRender": "const GRADIENTS = [\n  { line: ['#1de9b6', '#00897b'] },\n  { line: ['#00d2ff', '#0066cc'] },\n  { line: ['#26c6da', '#006064'] },\n  { line: ['#f7971e', '#ff4e50'] },\n];\n\nfunction buildTrendOption(values, timestamps) {\n  const [from, to] = GRADIENTS[1].line;\n  return {\n    backgroundColor: 'transparent',\n    grid: { left: 0, right: 0, top: 4, bottom: 4 },\n    xAxis: { type: 'category', show: false, boundaryGap: false, data: values.map((_, i) => i) },\n    yAxis: { type: 'value', show: false, scale: true },\n    tooltip: {\n      trigger: 'axis',\n      backgroundColor: '#1f2329',\n      borderColor: '#2c3235',\n      textStyle: { color: '#d8d9da', fontSize: 11 },\n      formatter: (p) => {\n        const point = p?.[0];\n        if (!point) return '';\n        const ts = timestamps?.[point.dataIndex];\n        const timeLabel = ts\n          ? new Date(ts).toLocaleTimeString('en-GB', {\n              timeZone: 'Asia/Ho_Chi_Minh',\n              hour: '2-digit',\n              minute: '2-digit',\n            })\n          : '--:--';\n        return `${point.value?.toFixed(2) ?? '--'} m³/h (${timeLabel})`;\n      },\n    },\n    series: [{\n      type: 'line',\n      data: values,\n      smooth: 0.3,\n      symbol: 'none',\n      lineStyle: {\n        width: 2,\n        color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [\n          { offset: 0, color: from },\n          { offset: 1, color: to },\n        ] },\n      },\n      areaStyle: {\n        color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [\n          { offset: 0, color: 'rgba(0,210,255,0.35)' },\n          { offset: 1, color: 'rgba(0,102,204,0)' },\n        ] },\n      },\n    }],\n  };\n}\n\nfunction animateNumberTo(el, newValue, decimals = 0, duration = 500) {\n  if (!el) return;\n\n  const prevValue = parseFloat(el.dataset.rawValue ?? '0') || 0;\n  el.dataset.rawValue = newValue;\n\n  if (prevValue === newValue) {\n    el.textContent = newValue.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n    return;\n  }\n\n  if (el.__rollAnimFrame) {\n    cancelAnimationFrame(el.__rollAnimFrame);\n  }\n\n  const startTime = performance.now();\n\n  function tick(now) {\n    const progress = Math.min((now - startTime) / duration, 1);\n    const eased = 1 - Math.pow(1 - progress, 3);\n    const current = prevValue + (newValue - prevValue) * eased;\n\n    el.textContent = current.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n\n    if (progress < 1) {\n      el.__rollAnimFrame = requestAnimationFrame(tick);\n    } else {\n      el.__rollAnimFrame = null;\n    }\n  }\n\n  el.__rollAnimFrame = requestAnimationFrame(tick);\n}\n\nfunction renderPanel(props) {\n  animateNumberTo(htmlNode.getElementById('total-water-value'), props.totalFlow, 2);\n  htmlNode.getElementById('today-water-value').textContent = props.todayWater.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('month-water-value').textContent = props.monthWater.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-flow-value').textContent = props.peakFlow.toLocaleString(undefined, { maximumFractionDigits: 0 });\n  htmlNode.getElementById('peak-flow-time').textContent = props.peakFlowTime;\n  if (htmlNode.__trendChart) {\n    htmlNode.__trendChart.setOption(buildTrendOption(props.trendData, props.trendTimestamps));\n  }\n}\n\nfunction addArrays(...arrays) {\n  const maxLen = Math.max(...arrays.map(arr => arr.length));\n  return Array.from({ length: maxLen }, (_, i) =>\n    arrays.reduce((sum, arr) => sum + (arr[i] || 0), 0)\n  );\n}\n\nfunction findMaxWithTime(values, times) {\n  if (!values || values.length === 0) {\n    return { maxValue: 0, maxIndex: -1, maxTime: null, maxTimeFormat: '---' };\n  }\n\n  const maxIndex = values.reduce((maxIdx, val, i, arr) =>\n    val > arr[maxIdx] ? i : maxIdx, 0);\n\n  const maxTime = times?.[maxIndex];\n\n  return {\n    maxValue: values[maxIndex] ?? 0,\n    maxIndex,\n    maxTime: maxTime ?? null,\n    maxTimeFormat: maxTime\n      ? new Date(maxTime).toLocaleTimeString('en-GB', {\n          timeZone: 'Asia/Ho_Chi_Minh',\n          hour: '2-digit',\n          minute: '2-digit',\n        })\n      : '---',\n  };\n}\n\nconst getScalarByRefId = (refId, seriesArr, noDataValue = 0) => {\n  const s = (seriesArr ?? []).find(item => item.refId === refId);\n  const numField = s?.fields?.find(f => f.type === 'number');\n  const values = numField?.values ?? [];\n  return values.length > 0 ? (values[values.length - 1] ?? noDataValue) : noDataValue;\n};\n\nconst { series } = data ?? {};\nconst realtimeFlow = (series ?? []).find(s => s.refId === 'power');\nconst seriesFlowTimestamp = realtimeFlow?.fields\n  ?.find(f => f.type === 'time')\n  ?.values ?? [];\nconst seriesFlow = realtimeFlow?.fields\n  ?.filter(f => f.type === 'number')\n  ?.map(({ values }) => values) ?? [];\n\nconst datasetTotalFlow = seriesFlow.length > 0 ? addArrays(...seriesFlow) : [];\nconst resultPeakFlow = findMaxWithTime(datasetTotalFlow, seriesFlowTimestamp);\n\nconst liveProps = {\n  totalFlow: datasetTotalFlow.at(-1) ?? 0,\n  todayWater: getScalarByRefId('today_energy', series, 0),\n  monthWater: getScalarByRefId('month_energy', series, 0),\n  peakFlow: resultPeakFlow.maxValue,\n  peakFlowTime: resultPeakFlow.maxTimeFormat,\n  trendData: datasetTotalFlow,\n  trendTimestamps: seriesFlowTimestamp,\n};\n\nrenderPanel(liveProps);",
+        "overflow": "visible",
+        "panelupdateOnMount": false,
+        "reduceOptions": {
+          "calcs": []
+        },
+        "renderOnMount": false,
+        "rootCSS": "",
+        "useGrafanaScrollbar": false
+      },
+      "pluginVersion": "2.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  time_bucket('15 minute', r.time) AS time,\r\n  r.meter_id,\r\n  AVG(r.flow_rate_m3h) AS value\r\nFROM realtime_water r\r\nJOIN meters m ON m.meter_id = r.meter_id\r\nWHERE $__timeFilter(r.time)\r\n  AND m.meter_type = 'water'\r\n  AND m.is_main = true\r\nGROUP BY time_bucket('15 minute', r.time), r.meter_id\r\nORDER BY time ASC;",
+          "refId": "power",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(meter_m3), 0) AS value\r\nFROM (\r\n  SELECT\r\n    a.meter_id,\r\n    GREATEST(MAX(a.total_m3) - MIN(a.total_m3), 0) AS meter_m3\r\n  FROM accumulator_water a\r\n  JOIN meters m ON m.meter_id = a.meter_id\r\n  WHERE m.meter_type = 'water'\r\n    AND m.is_main = true\r\n    AND a.time >= date_trunc('day', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\r\n  GROUP BY a.meter_id\r\n) per_meter;",
+          "refId": "today_energy",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(meter_m3), 0) AS value\r\nFROM (\r\n  SELECT\r\n    a.meter_id,\r\n    GREATEST(MAX(a.total_m3) - MIN(a.total_m3), 0) AS meter_m3\r\n  FROM accumulator_water a\r\n  JOIN meters m ON m.meter_id = a.meter_id\r\n  WHERE m.meter_type = 'water'\r\n    AND m.is_main = true\r\n    AND a.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\r\n  GROUP BY a.meter_id\r\n) per_meter;",
+          "refId": "month_energy",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "",
+      "type": "gapit-htmlgraphics-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "SVGBaseFix": false,
+        "add100Percentage": true,
+        "calcsMutation": "none",
+        "centerAlignContent": true,
+        "codeData": "{\n  \"totalPower\": 584,\n  \"todayEnergy\": 6820,\n  \"monthEnergy\": 142.6,\n  \"peakDemand\": 712,\n  \"peakDemandTime\": \"14:32\",\n  \"trendData\": [\n    90,\n    85,\n    95,\n    70,\n    80,\n    55,\n    68,\n    45,\n    60,\n    40,\n    58,\n    48,\n    60,\n    52,\n    58,\n    50,\n    62,\n    55,\n    60,\n    52,\n    58,\n    48,\n    55,\n    45,\n    52,\n    42,\n    50,\n    38,\n    48,\n    35,\n    45,\n    32,\n    42,\n    30,\n    40,\n    35\n  ]\n}",
+        "css": ".ems-steam-panel {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  padding: 14px 18px;\n  display: flex;\n  flex-direction: column;\n  font-family: 'Roboto', 'Noto Sans TC', sans-serif;\n  color: #d8d9da;\n}\n.top {\n  position: relative;\n  flex: 0 0 58%;\n  min-height: 0;\n}\n.trend-chart {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n}\n.top-content {\n  position: absolute;\n  inset: 0;\n  z-index: 1;\n  pointer-events: none;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: flex-end;\n}\n.label {\n  align-self: flex-start;\n  font-size: 14px;\n  color: #9fa7b3;\n  background: #181b1f50;\n  backdrop-filter: blur(1px);\n  padding: 2px 8px;\n  border-radius: 6px;\n}\n.main-value {\n  align-self: flex-start;\n  font-size: 84px;\n  font-weight: 500;\n  line-height: 1;\n  background: #181b1f50;\n  backdrop-filter: blur(1px);\n  padding: 4px 16px;\n}\n.unit {\n  font-size: 32px;\n  font-weight: 400;\n  color: #9fa7b3;\n  margin-left: 6px;\n}\n.bottom {\n  flex: 0 0 auto;\n  display: flex;\n  border-top: 1px solid #2c3235;\n  margin-top: 8px;\n  padding-top: 10px;\n}\n.stat {\n  flex: 1;\n  text-align: left;\n  padding: 0 8px;\n}\n.stat-label {\n  font-size: 12px;\n  color: #9fa7b3;\n  text-align: center;\n  margin-bottom: 4px;\n}\n.meter-body {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  gap: 28px;\n}\n.meter-flow {\n  flex: 0 0 auto;\n  font-size: 28px;\n  font-weight: 500;\n  white-space: nowrap;\n}\n.stat-unit {\n  font-size: 16px;\n  font-weight: 400;\n  color: #9fa7b3;\n  margin-left: 4px;\n}\n.meter-sub {\n  flex: 0 0 auto;\n  display: flex;\n  flex-direction: column;\n  gap: 2px;\n  font-size: 12px;\n  color: #9fa7b3;\n  text-align: left;\n}\n.sub-metric .pressure-value,\n.sub-metric .temp-value {\n  color: #d8d9da;\n  font-weight: 500;\n}\n.divider {\n  width: 1px;\n  background: #2c3235;\n  margin: 2px 0;\n}",
+        "dynamicData": false,
+        "dynamicFieldDisplayValues": false,
+        "dynamicHtmlGraphics": false,
+        "dynamicProps": false,
+        "html": "<div class=\"ems-steam-panel\">\n  <div class=\"top\">\n    <div id=\"trend-chart\" class=\"trend-chart\"></div>\n    <div class=\"top-content\">\n      <span class=\"label\">目前蒸氣總流量</span>\n      <div class=\"main-value\">\n        <span id=\"total-flow-value\">--</span><span class=\"unit\">kg/h</span>\n      </div>\n    </div>\n  </div>\n  <div class=\"bottom\">\n    <div class=\"stat meter-col\" data-meter=\"S-DYE1\">\n      <div class=\"stat-label\">染紗區</div>\n      <div class=\"meter-body\">\n        <div class=\"meter-flow\">\n          <span class=\"flow-value\">--</span><span class=\"stat-unit\">kg/h</span>\n        </div>\n        <div class=\"meter-sub\">\n          <span class=\"sub-metric\">壓力 <span class=\"pressure-value\">--</span> bar</span>\n          <span class=\"sub-metric\">溫度 <span class=\"temp-value\">--</span> °C</span>\n        </div>\n      </div>\n    </div>\n    <div class=\"divider\"></div>\n    <div class=\"stat meter-col\" data-meter=\"S-BOIL\">\n      <div class=\"stat-label\">鍋爐</div>\n      <div class=\"meter-body\">\n        <div class=\"meter-flow\">\n          <span class=\"flow-value\">--</span><span class=\"stat-unit\">kg/h</span>\n        </div>\n        <div class=\"meter-sub\">\n          <span class=\"sub-metric\">壓力 <span class=\"pressure-value\">--</span> bar</span>\n          <span class=\"sub-metric\">溫度 <span class=\"temp-value\">--</span> °C</span>\n        </div>\n      </div>\n    </div>\n    <div class=\"divider\"></div>\n    <div class=\"stat meter-col\" data-meter=\"S-DYE2\">\n      <div class=\"stat-label\">連染區</div>\n      <div class=\"meter-body\">\n        <div class=\"meter-flow\">\n          <span class=\"flow-value\">--</span><span class=\"stat-unit\">kg/h</span>\n        </div>\n        <div class=\"meter-sub\">\n          <span class=\"sub-metric\">壓力 <span class=\"pressure-value\">--</span> bar</span>\n          <span class=\"sub-metric\">溫度 <span class=\"temp-value\">--</span> °C</span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+        "onInit": "function loadECharts() {\n  if (window.__echartsModulePromise) return window.__echartsModulePromise;\n  window.__echartsModulePromise = import('https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.esm.min.js');\n  return window.__echartsModulePromise;\n}\n\nconst GRADIENTS = [\n  { line: ['#1de9b6', '#00897b'] }, // 電力：青綠\n  { line: ['#00d2ff', '#0066cc'] }, // 水：亮藍\n  { line: ['#26c6da', '#006064'] }, // 蒸氣（本面板使用）：深青色\n  { line: ['#f7971e', '#ff4e50'] }, // 保留：告警/尖峰\n];\n\nconst METER_IDS = ['S-DYE1', 'S-BOIL', 'S-DYE2'];\n\nfunction buildTrendOption(values, timestamps, peakIndex) {\n  const [from, to] = GRADIENTS[2].line;\n  const hasPeak = typeof peakIndex === 'number' && peakIndex >= 0 && peakIndex < values.length;\n\n  const markAreaData = hasPeak\n    ? [[\n        { xAxis: Math.max(peakIndex - 0.4, 0) },\n        { xAxis: Math.min(peakIndex + 0.4, values.length - 1) },\n      ]]\n    : [];\n\n  const markPointData = hasPeak\n    ? [{ coord: [peakIndex, values[peakIndex]], value: values[peakIndex] }]\n    : [];\n\n  return {\n    backgroundColor: 'transparent',\n    grid: { left: 0, right: 0, top: 4, bottom: 4 },\n    xAxis: { type: 'category', show: false, boundaryGap: false, data: values.map((_, i) => i) },\n    yAxis: { type: 'value', show: false, scale: true },\n    tooltip: {\n      trigger: 'axis',\n      backgroundColor: '#1f2329',\n      borderColor: '#2c3235',\n      textStyle: { color: '#d8d9da', fontSize: 11 },\n      formatter: (p) => {\n        const point = p?.[0];\n        if (!point) return '';\n        const ts = timestamps?.[point.dataIndex];\n        const timeLabel = ts\n          ? new Date(ts).toLocaleTimeString('en-GB', {\n              timeZone: 'Asia/Ho_Chi_Minh',\n              hour: '2-digit',\n              minute: '2-digit',\n            })\n          : '--:--';\n        return `${point.value?.toFixed(2) ?? '--'} kg/h (${timeLabel})`;\n      },\n    },\n    series: [{\n      type: 'line',\n      data: values,\n      smooth: 0.3,\n      symbol: 'none',\n      lineStyle: {\n        width: 2,\n        color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [\n          { offset: 0, color: from },\n          { offset: 1, color: to },\n        ] },\n      },\n      areaStyle: {\n        color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [\n          { offset: 0, color: 'rgba(38, 198, 218, 0.35)' },\n          { offset: 1, color: 'rgba(0, 96, 100, 0)' },\n        ] },\n      }\n    }],\n  };\n}\n\nfunction animateNumberTo(el, newValue, decimals = 0, duration = 500) {\n  if (!el) return;\n\n  const prevValue = parseFloat(el.dataset.rawValue ?? '0') || 0;\n  el.dataset.rawValue = newValue;\n\n  if (prevValue === newValue) {\n    el.textContent = newValue.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n    return;\n  }\n\n  if (el.__rollAnimFrame) {\n    cancelAnimationFrame(el.__rollAnimFrame);\n  }\n\n  const startTime = performance.now();\n\n  function tick(now) {\n    const progress = Math.min((now - startTime) / duration, 1);\n    const eased = 1 - Math.pow(1 - progress, 3);\n    const current = prevValue + (newValue - prevValue) * eased;\n\n    el.textContent = current.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n\n    if (progress < 1) {\n      el.__rollAnimFrame = requestAnimationFrame(tick);\n    } else {\n      el.__rollAnimFrame = null;\n    }\n  }\n\n  el.__rollAnimFrame = requestAnimationFrame(tick);\n}\n\nconst getMeterSnapshot = (meterId, snapshotSeries) => {\n  const fields = snapshotSeries?.fields ?? [];\n  const meterIdField = fields.find(f => f.name === 'meter_id');\n  const flowField = fields.find(f => f.name === 'flow_rate_kgh');\n  const pressureField = fields.find(f => f.name === 'pressure_bar');\n  const tempField = fields.find(f => f.name === 'temperature_c');\n\n  const idx = meterIdField?.values?.findIndex(v => v === meterId) ?? -1;\n  if (idx === -1) {\n    return { flow: 0, pressure: 0, temp: 0 };\n  }\n\n  return {\n    flow: flowField?.values?.[idx] ?? 0,\n    pressure: pressureField?.values?.[idx] ?? 0,\n    temp: tempField?.values?.[idx] ?? 0,\n  };\n};\n\nfunction renderPanel(props) {\n  animateNumberTo(htmlNode.getElementById('total-flow-value'), props.totalFlow, 0);\n\n  props.meters.forEach(({ meterId, flow, pressure, temp }) => {\n    const col = htmlNode.querySelector(`.meter-col[data-meter=\"${meterId}\"]`);\n    if (!col) return;\n    col.querySelector('.flow-value').textContent = flow.toLocaleString(undefined, { maximumFractionDigits: 1 });\n    col.querySelector('.pressure-value').textContent = pressure.toLocaleString(undefined, { maximumFractionDigits: 2 });\n    col.querySelector('.temp-value').textContent = temp.toLocaleString(undefined, { maximumFractionDigits: 1 });\n  });\n\n  if (htmlNode.__trendChart) {\n    htmlNode.__trendChart.setOption(buildTrendOption(props.trendData, props.trendTimestamps, props.peakIndex));\n  }\n}\n\nloadECharts().then((echarts) => {\n  if (!htmlNode.__trendChart) {\n    htmlNode.__trendChart = echarts.init(htmlNode.getElementById('trend-chart'), null, { renderer: 'svg' });\n    htmlNode.onpanelupdate = () => htmlNode.__trendChart.resize();\n  }\n  renderPanel({\n    totalFlow: 0,\n    trendData: [],\n    trendTimestamps: [],\n    peakIndex: -1,\n    meters: METER_IDS.map(meterId => ({ meterId, flow: 0, pressure: 0, temp: 0 })),\n  });\n});",
+        "onInitOnResize": false,
+        "onRender": "const GRADIENTS = [\n  { line: ['#1de9b6', '#00897b'] },\n  { line: ['#00d2ff', '#0066cc'] },\n  { line: ['#26c6da', '#006064'] },\n  { line: ['#f7971e', '#ff4e50'] },\n];\n\nconst METER_IDS = ['S-DYE1', 'S-BOIL', 'S-DYE2'];\n\nfunction addArrays(...arrays) {\n  const maxLen = Math.max(...arrays.map(arr => arr.length));\n  return Array.from({ length: maxLen }, (_, i) =>\n    arrays.reduce((sum, arr) => sum + (arr[i] || 0), 0)\n  );\n}\n\nfunction findMaxWithTime(values, times) {\n  if (!values || values.length === 0) {\n    return { maxValue: 0, maxIndex: -1, maxTime: null, maxTimeFormat: '---' };\n  }\n  const maxIndex = values.reduce((maxIdx, val, i, arr) =>\n    val > arr[maxIdx] ? i : maxIdx, 0);\n  const maxTime = times?.[maxIndex];\n  return {\n    maxValue: values[maxIndex] ?? 0,\n    maxIndex,\n    maxTime: maxTime ?? null,\n    maxTimeFormat: maxTime\n      ? new Date(maxTime).toLocaleTimeString('en-GB', {\n          timeZone: 'Asia/Ho_Chi_Minh',\n          hour: '2-digit',\n          minute: '2-digit',\n        })\n      : '---',\n  };\n}\n\nfunction buildTrendOption(values, timestamps, peakIndex) {\n  const [from, to] = GRADIENTS[2].line;\n  const hasPeak = typeof peakIndex === 'number' && peakIndex >= 0 && peakIndex < values.length;\n\n  const markAreaData = hasPeak\n    ? [[\n        { xAxis: Math.max(peakIndex - 0.4, 0) },\n        { xAxis: Math.min(peakIndex + 0.4, values.length - 1) },\n      ]]\n    : [];\n\n  const markPointData = hasPeak\n    ? [{ coord: [peakIndex, values[peakIndex]], value: values[peakIndex] }]\n    : [];\n\n  return {\n    backgroundColor: 'transparent',\n    grid: { left: 0, right: 0, top: 4, bottom: 4 },\n    xAxis: { type: 'category', show: false, boundaryGap: false, data: values.map((_, i) => i) },\n    yAxis: { type: 'value', show: false, scale: true },\n    tooltip: {\n      trigger: 'axis',\n      backgroundColor: '#1f2329',\n      borderColor: '#2c3235',\n      textStyle: { color: '#d8d9da', fontSize: 11 },\n      formatter: (p) => {\n        const point = p?.[0];\n        if (!point) return '';\n        const ts = timestamps?.[point.dataIndex];\n        const timeLabel = ts\n          ? new Date(ts).toLocaleTimeString('en-GB', {\n              timeZone: 'Asia/Ho_Chi_Minh',\n              hour: '2-digit',\n              minute: '2-digit',\n            })\n          : '--:--';\n        return `${point.value?.toFixed(2) ?? '--'} kg/h (${timeLabel})`;\n      },\n    },\n    series: [{\n      type: 'line',\n      data: values,\n      smooth: 0.3,\n      symbol: 'none',\n      lineStyle: {\n        width: 2,\n        color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [\n          { offset: 0, color: from },\n          { offset: 1, color: to },\n        ] },\n      },\n      areaStyle: {\n        color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [\n          { offset: 0, color: 'rgba(38, 198, 218, 0.35)' },\n          { offset: 1, color: 'rgba(0, 96, 100, 0)' },\n        ] },\n      }\n    }],\n  };\n}\n\nfunction animateNumberTo(el, newValue, decimals = 0, duration = 500) {\n  if (!el) return;\n\n  const prevValue = parseFloat(el.dataset.rawValue ?? '0') || 0;\n  el.dataset.rawValue = newValue;\n\n  if (prevValue === newValue) {\n    el.textContent = newValue.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n    return;\n  }\n\n  if (el.__rollAnimFrame) {\n    cancelAnimationFrame(el.__rollAnimFrame);\n  }\n\n  const startTime = performance.now();\n\n  function tick(now) {\n    const progress = Math.min((now - startTime) / duration, 1);\n    const eased = 1 - Math.pow(1 - progress, 3);\n    const current = prevValue + (newValue - prevValue) * eased;\n\n    el.textContent = current.toLocaleString(undefined, {\n      minimumFractionDigits: decimals,\n      maximumFractionDigits: decimals,\n    });\n\n    if (progress < 1) {\n      el.__rollAnimFrame = requestAnimationFrame(tick);\n    } else {\n      el.__rollAnimFrame = null;\n    }\n  }\n\n  el.__rollAnimFrame = requestAnimationFrame(tick);\n}\n\nfunction renderPanel(props) {\n  animateNumberTo(htmlNode.getElementById('total-flow-value'), props.totalFlow, 3);\n\n  props.meters.forEach(({ meterId, flow, pressure, temp }) => {\n    const col = htmlNode.querySelector(`.meter-col[data-meter=\"${meterId}\"]`);\n    if (!col) return;\n    col.querySelector('.flow-value').textContent = flow.toLocaleString(undefined, { maximumFractionDigits: 3 });\n    col.querySelector('.pressure-value').textContent = pressure.toLocaleString(undefined, { maximumFractionDigits: 2 });\n    col.querySelector('.temp-value').textContent = temp.toLocaleString(undefined, { maximumFractionDigits: 1 });\n  });\n\n  if (htmlNode.__trendChart) {\n    htmlNode.__trendChart.setOption(buildTrendOption(props.trendData, props.trendTimestamps, props.peakIndex));\n  }\n}\n\nconst getMeterSnapshot = (meterId, snapshotSeries) => {\n  const fields = snapshotSeries?.fields ?? [];\n  const meterIdField = fields.find(f => f.name === 'meter_id');\n  const flowField = fields.find(f => f.name === 'flow_rate_kgh');\n  const pressureField = fields.find(f => f.name === 'pressure_bar');\n  const tempField = fields.find(f => f.name === 'temperature_c');\n\n  const idx = meterIdField?.values?.findIndex(v => v === meterId) ?? -1;\n  if (idx === -1) {\n    return { flow: 0, pressure: 0, temp: 0 };\n  }\n\n  return {\n    flow: flowField?.values?.[idx] ?? 0,\n    pressure: pressureField?.values?.[idx] ?? 0,\n    temp: tempField?.values?.[idx] ?? 0,\n  };\n};\n\nconst { series } = data ?? {};\n\nconst realtimeFlow = (series ?? []).find(s => s.refId === 'flow');\nconst flowTimestamp = realtimeFlow?.fields\n  ?.find(f => f.type === 'time')\n  ?.values ?? [];\nconst flowSeries = realtimeFlow?.fields\n  ?.filter(f => f.type === 'number')\n  ?.map(({ values }) => values) ?? [];\n\nconst datasetTotalFlow = flowSeries.length > 0 ? addArrays(...flowSeries) : [];\nconst resultPeakFlow = findMaxWithTime(datasetTotalFlow, flowTimestamp);\n\nconst snapshotSeries = (series ?? []).find(s => s.refId === 'latest_snapshot');\nconst meters = METER_IDS.map(meterId => ({\n  meterId,\n  ...getMeterSnapshot(meterId, snapshotSeries),\n}));\n\nconst liveProps = {\n  totalFlow: datasetTotalFlow.at(-1) ?? 0,\n  trendData: datasetTotalFlow,\n  trendTimestamps: flowTimestamp,\n  peakIndex: resultPeakFlow.maxIndex,\n  meters,\n};\n\nrenderPanel(liveProps);",
+        "overflow": "visible",
+        "panelupdateOnMount": false,
+        "reduceOptions": {
+          "calcs": []
+        },
+        "renderOnMount": false,
+        "rootCSS": "",
+        "useGrafanaScrollbar": false
+      },
+      "pluginVersion": "2.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  time_bucket('15 minute', time) AS time,\r\n  AVG(flow_rate_kgh) FILTER (WHERE meter_id = 'S-DYE1') AS \"S-DYE1\",\r\n  AVG(flow_rate_kgh) FILTER (WHERE meter_id = 'S-BOIL') AS \"S-BOIL\",\r\n  AVG(flow_rate_kgh) FILTER (WHERE meter_id = 'S-DYE2') AS \"S-DYE2\"\r\nFROM realtime_steam\r\nWHERE $__timeFilter(time)\r\nGROUP BY 1\r\nORDER BY 1;",
+          "refId": "flow",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT DISTINCT ON (r.meter_id)\r\n  r.meter_id,\r\n  r.flow_rate_kgh,\r\n  r.pressure_bar,\r\n  r.temperature_c,\r\n  r.time\r\nFROM realtime_steam r\r\nJOIN meters m ON m.meter_id = r.meter_id\r\nWHERE m.meter_type = 'steam'\r\nORDER BY r.meter_id, r.time DESC;",
+          "refId": "latest_snapshot",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "",
+      "type": "gapit-htmlgraphics-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 0,
+        "y": 8
+      },
+      "hideTimeOverride": true,
+      "id": 1,
+      "options": {
+        "baidu": {
+          "callback": "bmapReady",
+          "key": ""
+        },
+        "editor": {
+          "format": "auto"
+        },
+        "editorMode": "code",
+        "gaode": {
+          "key": "",
+          "plugin": "AMap.Scale,AMap.ToolBar"
+        },
+        "getOption": "// ── 依 meterType 決定單位 ──────────────────────────\nconst meterType = context.grafana.replaceVariables('$meterType');\n\nconst UNIT_MAP = {\n  electricity: { unit: 'kWh', title: '用電佔比', emptyText: '無用電紀錄' },\n  water: { unit: 'm³', title: '用水佔比', emptyText: '無用水紀錄' },\n  steam: { unit: 't', title: '用汽佔比', emptyText: '無用汽紀錄' },\n};\nconst { unit, title, emptyText } = UNIT_MAP[meterType] || { unit: '', title: '佔比', emptyText: '無資料' };\n\n// ── 組資料 + 過濾 0 值 + 排序 ──────────────────────\nlet pieData = context.panel.data.series.flatMap(frame =>\n  frame.fields.map(f => ({\n    name: f.labels?.description || f.name,\n    value: parseFloat(f.values[0].toFixed(2))\n  }))\n).filter(d => d.value > 0)\n  .sort((a, b) => b.value - a.value);\n\n// ── Top N + 其他聚合 ────────────────────────────────\nconst TOP_N = 7;\nif (pieData.length > TOP_N) {\n  const top = pieData.slice(0, TOP_N);\n  const restSum = pieData.slice(TOP_N).reduce((sum, d) => sum + d.value, 0);\n  pieData = [...top, { name: '其他', value: parseFloat(restSum.toFixed(2)) }];\n}\n\n// ── 全為 0 / 無資料時顯示空狀態 ──────────────────────\nif (pieData.length === 0) {\n  return {\n    backgroundColor: 'transparent',\n    title: [{\n      text: emptyText,\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: 16 }\n    }],\n    series: [{\n      type: 'pie',\n      radius: ['42%', '68%'],\n      center: ['42%', '55%'],\n      data: [{ value: 1, name: '', itemStyle: { color: '#2a2f38' }, emphasis: { disabled: true } }],\n      label: { show: false },\n      labelLine: { show: false },\n      silent: true\n    }]\n  };\n}\n\nconst colors = [\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00d2ff' }, { offset: 1, color: '#0066cc' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00f5a0' }, { offset: 1, color: '#00d9a3' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#9d50bb' }, { offset: 1, color: '#6e48aa' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#f7971e' }, { offset: 1, color: '#ff4e50' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ffd200' }, { offset: 1, color: '#ff8c00' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ff6ec7' }, { offset: 1, color: '#c724b1' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#43e97b' }, { offset: 1, color: '#38f9d7' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#6b7280' }, { offset: 1, color: '#4b5563' }] }, // 其他:灰色\n];\n\nconst chart = context.panel.chart;\nconst width = chart.getWidth();\nconst base = Math.max(16, Math.min(20, Math.floor(width / 40)));\nconst fs = {\n  label: base,\n  value: base + 6,\n  sub: base,\n  legend: base - 1,\n  center: base + 2,\n};\n\nconst defaultTitle = { name: '懸停查看', value: '', percent: '' };\n\nconst updateCenter = (p) => {\n  chart.setOption({\n    title: [\n      {\n        text: p.name,\n        left: '41.5%',\n        top: p.value ? '46%' : '52%',\n        textAlign: 'center',\n        textStyle: { color: p.value ? '#e0e0e0' : '#555c6a', fontSize: fs.center, fontWeight: 'bold' }\n      },\n      {\n        text: p.value ? `${p.value} ${unit}` : '',\n        left: '41.5%',\n        top: '54%',\n        textAlign: 'center',\n        textStyle: { color: '#00d2ff', fontSize: fs.value, fontWeight: 'bold' }\n      },\n      {\n        text: p.percent ? `${p.percent}%` : '',\n        left: '41.5%',\n        top: '61%',\n        textAlign: 'center',\n        textStyle: { color: '#aab0b8', fontSize: fs.sub }\n      },\n    ]\n  });\n};\n\nupdateCenter(defaultTitle);\n\nchart.off('mouseover');\nchart.on('mouseover', p => updateCenter(p));\nchart.off('mouseout');\nchart.on('mouseout', () => updateCenter(defaultTitle));\n\nreturn {\n  backgroundColor: 'transparent',\n  title: [\n    {\n      text: '懸停查看',\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: fs.center }\n    }\n  ],\n  tooltip: {\n    show: false,\n    trigger: 'item',\n    backgroundColor: '#1e2329',\n    borderColor: '#2a2f38',\n    textStyle: { color: '#e0e0e0', fontSize: fs.label },\n    formatter: p => `${p.name}<br/>${p.value} ${unit} (${p.percent}%)`\n  },\n  legend: {\n    orient: 'vertical',\n    right: 10,\n    top: 10,\n    itemGap: 8,\n    textStyle: { color: '#aab0b8', fontSize: fs.legend },\n    formatter: name => {\n      const item = pieData.find(d => d.name === name);\n      const shortName = name.length > 6 ? name.slice(0, 6) + '…' : name;\n      return `${shortName}`;\n    }\n  },\n  series: [{\n    name: title,\n    type: 'pie',\n    radius: ['42%', '68%'],\n    center: ['42%', '55%'],\n    data: pieData.map((d, i) => ({ ...d, itemStyle: { color: colors[i % colors.length] } })),\n    emphasis: {\n      itemStyle: { shadowBlur: 15, shadowColor: 'rgba(0,180,255,0.3)' }\n    },\n    label: { show: false },\n    labelLine: { show: false }\n  }]\n};",
+        "google": {
+          "callback": "gmapReady",
+          "key": ""
+        },
+        "map": "none",
+        "renderer": "canvas",
+        "themeEditor": {
+          "config": "{}",
+          "name": "default"
+        },
+        "visualEditor": {
+          "code": "return {\n  dataset: context.editor.dataset,\n  series: context.editor.series,\n  xAxis: {\n    type: 'time',\n  },\n  yAxis: {\n    type: 'value',\n    min: 'dataMin',\n  },\n}\n",
+          "dataset": [],
+          "series": []
+        }
+      },
+      "pluginVersion": "7.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": true,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  time_bucket('1 minute', r.time) AS time,\n  m.description,\n  AVG(r.total_m3) AS total_m3\nFROM\n  accumulator_water r\n  JOIN meters m USING (meter_id)\nWHERE\n  r.meter_id NOT LIKE '%IN%'\n  AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n  AND r.time < NOW()\nGROUP BY\n  time_bucket('1 minute', r.time),\n  m.description\nORDER BY\n  time asc;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT time, description, value FROM (\n  SELECT\n    time_bucket('1 day', r.time) AS time,\n    m.description,\n    AVG(r.total_m3) AS value\n  FROM accumulator_water r\n  JOIN meters m USING (meter_id)\n  WHERE  m.is_main = FALSE\n    AND '$meterType' = 'water'\n    AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 day', r.time), m.description\n\n  UNION ALL\n\n  SELECT\n    time_bucket('1 day', r.time) AS time,\n    m.description,\n    AVG(r.total_kwh) AS value\n  FROM accumulator_electricity r\n  JOIN meters m USING (meter_id)\n  WHERE m.is_main = FALSE\n    AND '$meterType' = 'electricity'\n    AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 day', r.time), m.description\n) sub\nORDER BY time ASC",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "timeFrom": "now/y",
+      "title": "【今年度】用量佔比",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "total_m3 (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "diff"
+            ]
+          }
+        }
+      ],
+      "type": "volkovlabs-echarts-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 4,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "baidu": {
+          "callback": "bmapReady",
+          "key": ""
+        },
+        "editor": {
+          "format": "auto"
+        },
+        "editorMode": "code",
+        "gaode": {
+          "key": "",
+          "plugin": "AMap.Scale,AMap.ToolBar"
+        },
+        "getOption": "// ── 依 meterType 決定單位 ──────────────────────────\nconst meterType = context.grafana.replaceVariables('$meterType');\n\nconst UNIT_MAP = {\n  electricity: { unit: 'kWh', title: '用電佔比', emptyText: '無用電紀錄' },\n  water: { unit: 'm³', title: '用水佔比', emptyText: '無用水紀錄' },\n  steam: { unit: 't', title: '用汽佔比', emptyText: '無用汽紀錄' },\n};\nconst { unit, title, emptyText } = UNIT_MAP[meterType] || { unit: '', title: '佔比', emptyText: '無資料' };\n\n// ── 組資料 + 過濾 0 值 + 排序 ──────────────────────\nlet pieData = context.panel.data.series.flatMap(frame =>\n  frame.fields.map(f => ({\n    name: f.labels?.description || f.name,\n    value: parseFloat(f.values[0].toFixed(2))\n  }))\n).filter(d => d.value > 0)\n  .sort((a, b) => b.value - a.value);\n\n// ── Top N + 其他聚合 ────────────────────────────────\nconst TOP_N = 7;\nif (pieData.length > TOP_N) {\n  const top = pieData.slice(0, TOP_N);\n  const restSum = pieData.slice(TOP_N).reduce((sum, d) => sum + d.value, 0);\n  pieData = [...top, { name: '其他', value: parseFloat(restSum.toFixed(2)) }];\n}\n\n// ── 全為 0 / 無資料時顯示空狀態 ──────────────────────\nif (pieData.length === 0) {\n  return {\n    backgroundColor: 'transparent',\n    title: [{\n      text: emptyText,\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: 16 }\n    }],\n    series: [{\n      type: 'pie',\n      radius: ['42%', '68%'],\n      center: ['42%', '55%'],\n      data: [{ value: 1, name: '', itemStyle: { color: '#2a2f38' }, emphasis: { disabled: true } }],\n      label: { show: false },\n      labelLine: { show: false },\n      silent: true\n    }]\n  };\n}\n\nconst colors = [\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00d2ff' }, { offset: 1, color: '#0066cc' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00f5a0' }, { offset: 1, color: '#00d9a3' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#9d50bb' }, { offset: 1, color: '#6e48aa' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#f7971e' }, { offset: 1, color: '#ff4e50' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ffd200' }, { offset: 1, color: '#ff8c00' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ff6ec7' }, { offset: 1, color: '#c724b1' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#43e97b' }, { offset: 1, color: '#38f9d7' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#6b7280' }, { offset: 1, color: '#4b5563' }] }, // 其他:灰色\n];\n\nconst chart = context.panel.chart;\nconst width = chart.getWidth();\nconst base = Math.max(16, Math.min(20, Math.floor(width / 40)));\nconst fs = {\n  label: base,\n  value: base + 6,\n  sub: base,\n  legend: base - 1,\n  center: base + 2,\n};\n\nconst defaultTitle = { name: '懸停查看', value: '', percent: '' };\n\nconst updateCenter = (p) => {\n  chart.setOption({\n    title: [\n      {\n        text: p.name,\n        left: '41.5%',\n        top: p.value ? '46%' : '52%',\n        textAlign: 'center',\n        textStyle: { color: p.value ? '#e0e0e0' : '#555c6a', fontSize: fs.center, fontWeight: 'bold' }\n      },\n      {\n        text: p.value ? `${p.value} ${unit}` : '',\n        left: '41.5%',\n        top: '54%',\n        textAlign: 'center',\n        textStyle: { color: '#00d2ff', fontSize: fs.value, fontWeight: 'bold' }\n      },\n      {\n        text: p.percent ? `${p.percent}%` : '',\n        left: '41.5%',\n        top: '61%',\n        textAlign: 'center',\n        textStyle: { color: '#aab0b8', fontSize: fs.sub }\n      },\n    ]\n  });\n};\n\nupdateCenter(defaultTitle);\n\nchart.off('mouseover');\nchart.on('mouseover', p => updateCenter(p));\nchart.off('mouseout');\nchart.on('mouseout', () => updateCenter(defaultTitle));\n\nreturn {\n  backgroundColor: 'transparent',\n  title: [\n    {\n      text: '懸停查看',\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: fs.center }\n    }\n  ],\n  tooltip: {\n    show: false,\n    trigger: 'item',\n    backgroundColor: '#1e2329',\n    borderColor: '#2a2f38',\n    textStyle: { color: '#e0e0e0', fontSize: fs.label },\n    formatter: p => `${p.name}<br/>${p.value} ${unit} (${p.percent}%)`\n  },\n  legend: {\n    orient: 'vertical',\n    right: 10,\n    top: 10,\n    itemGap: 8,\n    textStyle: { color: '#aab0b8', fontSize: fs.legend },\n    formatter: name => {\n      const item = pieData.find(d => d.name === name);\n      const shortName = name.length > 6 ? name.slice(0, 6) + '…' : name;\n      return `${shortName}`;\n    }\n  },\n  series: [{\n    name: title,\n    type: 'pie',\n    radius: ['42%', '68%'],\n    center: ['42%', '55%'],\n    data: pieData.map((d, i) => ({ ...d, itemStyle: { color: colors[i % colors.length] } })),\n    emphasis: {\n      itemStyle: { shadowBlur: 15, shadowColor: 'rgba(0,180,255,0.3)' }\n    },\n    label: { show: false },\n    labelLine: { show: false }\n  }]\n};",
+        "google": {
+          "callback": "gmapReady",
+          "key": ""
+        },
+        "map": "none",
+        "renderer": "canvas",
+        "themeEditor": {
+          "config": "{}",
+          "name": "default"
+        },
+        "visualEditor": {
+          "code": "return {\n  dataset: context.editor.dataset,\n  series: context.editor.series,\n  xAxis: {\n    type: 'time',\n  },\n  yAxis: {\n    type: 'value',\n    min: 'dataMin',\n  },\n}\n",
+          "dataset": [],
+          "series": []
+        }
+      },
+      "pluginVersion": "7.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": true,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  time_bucket('1 minute', r.time) AS time,\n  m.description,\n  AVG(r.total_m3) AS total_m3\nFROM accumulator_water r\nJOIN meters m USING (meter_id)\nWHERE\n  r.meter_id NOT LIKE '%IN%'\n  AND r.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh' - INTERVAL '1 month')\n                AT TIME ZONE 'Asia/Ho_Chi_Minh'\n  AND r.time <  date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh')\n                AT TIME ZONE 'Asia/Ho_Chi_Minh'\nGROUP BY time_bucket('1 minute', r.time), m.description\nORDER BY time asc;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT time, description, value FROM (\n  SELECT\n    time_bucket('1 hour', r.time) AS time,\n    m.description,\n    AVG(r.total_m3) AS value\n  FROM accumulator_water r\n  JOIN meters m USING (meter_id)\n  WHERE  m.is_main = FALSE\n    AND '$meterType' = 'water'\n    AND r.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh' - INTERVAL '1 month')\n                AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time <  date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh')\n                AT TIME ZONE 'Asia/Ho_Chi_Minh'\n  GROUP BY time_bucket('1 hour', r.time), m.description\n\n  UNION ALL\n\n  SELECT\n    time_bucket('1 hour', r.time) AS time,\n    m.description,\n    AVG(r.total_kwh) AS value\n  FROM accumulator_electricity r\n  JOIN meters m USING (meter_id)\n  WHERE m.is_main = FALSE\n    AND '$meterType' = 'electricity'\n    AND r.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh' - INTERVAL '1 month')\n                AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time <  date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh')\n                AT TIME ZONE 'Asia/Ho_Chi_Minh'\n  GROUP BY time_bucket('1 hour', r.time), m.description\n) sub\nORDER BY time ASC",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "【上個月】用量佔比",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "total_m3 (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "diff"
+            ]
+          }
+        }
+      ],
+      "type": "volkovlabs-echarts-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 65,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "染紗區入水口"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#00d2ff",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "m³"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "連染區入水口"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#00f5a0",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "m³"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ATS1市電進線"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#00d2ff",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ATS2市電進線"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#00f5a0",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 16,
+        "x": 8,
+        "y": 8
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "min",
+            "mean",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT time, description, consumed FROM (\r\n  SELECT\r\n    time_bucket('15 minute', r.time) AS time,\r\n    m.description,\r\n    MAX(r.total_m3) - MIN(r.total_m3) AS consumed\r\n  FROM accumulator_water r\r\n  JOIN meters m USING (meter_id)\r\n  WHERE $__timeFilter(r.time)\r\n    AND m.is_main = FALSE\r\n    AND '$meterType' = 'water'\r\n  GROUP BY time_bucket('15 minute', r.time), m.description\r\n\r\n  UNION ALL\r\n\r\n  SELECT\r\n    time_bucket('15 minute', r.time) AS time,\r\n    m.description,\r\n    MAX(r.total_kwh) - MIN(r.total_kwh) AS consumed\r\n  FROM accumulator_electricity r\r\n  JOIN meters m USING (meter_id)\r\n  WHERE $__timeFilter(r.time)\r\n    AND m.is_main = TRUE\r\n    AND '$meterType' = 'electricity'\r\n  GROUP BY time_bucket('15 minute', r.time), m.description\r\n) sub\r\nORDER BY time ASC",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "用能趨勢分析",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "consumed (.*)",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 0,
+        "y": 19
+      },
+      "hideTimeOverride": true,
+      "id": 2,
+      "options": {
+        "baidu": {
+          "callback": "bmapReady",
+          "key": ""
+        },
+        "editor": {
+          "format": "auto"
+        },
+        "editorMode": "code",
+        "gaode": {
+          "key": "",
+          "plugin": "AMap.Scale,AMap.ToolBar"
+        },
+        "getOption": "// ── 依 meterType 決定單位 ──────────────────────────\nconst meterType = context.grafana.replaceVariables('$meterType');\n\nconst UNIT_MAP = {\n  electricity: { unit: 'kWh', title: '用電佔比', emptyText: '無用電紀錄' },\n  water: { unit: 'm³', title: '用水佔比', emptyText: '無用水紀錄' },\n  steam: { unit: 't', title: '用汽佔比', emptyText: '無用汽紀錄' },\n};\nconst { unit, title, emptyText } = UNIT_MAP[meterType] || { unit: '', title: '佔比', emptyText: '無資料' };\n\n// ── 組資料 + 過濾 0 值 + 排序 ──────────────────────\nlet pieData = context.panel.data.series.flatMap(frame =>\n  frame.fields.map(f => ({\n    name: f.labels?.description || f.name,\n    value: parseFloat(f.values[0].toFixed(2))\n  }))\n).filter(d => d.value > 0)\n  .sort((a, b) => b.value - a.value);\n\n// ── Top N + 其他聚合 ────────────────────────────────\nconst TOP_N = 7;\nif (pieData.length > TOP_N) {\n  const top = pieData.slice(0, TOP_N);\n  const restSum = pieData.slice(TOP_N).reduce((sum, d) => sum + d.value, 0);\n  pieData = [...top, { name: '其他', value: parseFloat(restSum.toFixed(2)) }];\n}\n\n// ── 全為 0 / 無資料時顯示空狀態 ──────────────────────\nif (pieData.length === 0) {\n  return {\n    backgroundColor: 'transparent',\n    title: [{\n      text: emptyText,\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: 16 }\n    }],\n    series: [{\n      type: 'pie',\n      radius: ['42%', '68%'],\n      center: ['42%', '55%'],\n      data: [{ value: 1, name: '', itemStyle: { color: '#2a2f38' }, emphasis: { disabled: true } }],\n      label: { show: false },\n      labelLine: { show: false },\n      silent: true\n    }]\n  };\n}\n\nconst colors = [\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00d2ff' }, { offset: 1, color: '#0066cc' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00f5a0' }, { offset: 1, color: '#00d9a3' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#9d50bb' }, { offset: 1, color: '#6e48aa' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#f7971e' }, { offset: 1, color: '#ff4e50' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ffd200' }, { offset: 1, color: '#ff8c00' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ff6ec7' }, { offset: 1, color: '#c724b1' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#43e97b' }, { offset: 1, color: '#38f9d7' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#6b7280' }, { offset: 1, color: '#4b5563' }] }, // 其他:灰色\n];\n\nconst chart = context.panel.chart;\nconst width = chart.getWidth();\nconst base = Math.max(16, Math.min(20, Math.floor(width / 40)));\nconst fs = {\n  label: base,\n  value: base + 6,\n  sub: base,\n  legend: base - 1,\n  center: base + 2,\n};\n\nconst defaultTitle = { name: '懸停查看', value: '', percent: '' };\n\nconst updateCenter = (p) => {\n  chart.setOption({\n    title: [\n      {\n        text: p.name,\n        left: '41.5%',\n        top: p.value ? '46%' : '52%',\n        textAlign: 'center',\n        textStyle: { color: p.value ? '#e0e0e0' : '#555c6a', fontSize: fs.center, fontWeight: 'bold' }\n      },\n      {\n        text: p.value ? `${p.value} ${unit}` : '',\n        left: '41.5%',\n        top: '54%',\n        textAlign: 'center',\n        textStyle: { color: '#00d2ff', fontSize: fs.value, fontWeight: 'bold' }\n      },\n      {\n        text: p.percent ? `${p.percent}%` : '',\n        left: '41.5%',\n        top: '61%',\n        textAlign: 'center',\n        textStyle: { color: '#aab0b8', fontSize: fs.sub }\n      },\n    ]\n  });\n};\n\nupdateCenter(defaultTitle);\n\nchart.off('mouseover');\nchart.on('mouseover', p => updateCenter(p));\nchart.off('mouseout');\nchart.on('mouseout', () => updateCenter(defaultTitle));\n\nreturn {\n  backgroundColor: 'transparent',\n  title: [\n    {\n      text: '懸停查看',\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: fs.center }\n    }\n  ],\n  tooltip: {\n    show: false,\n    trigger: 'item',\n    backgroundColor: '#1e2329',\n    borderColor: '#2a2f38',\n    textStyle: { color: '#e0e0e0', fontSize: fs.label },\n    formatter: p => `${p.name}<br/>${p.value} ${unit} (${p.percent}%)`\n  },\n  legend: {\n    orient: 'vertical',\n    right: 10,\n    top: 10,\n    itemGap: 8,\n    textStyle: { color: '#aab0b8', fontSize: fs.legend },\n    formatter: name => {\n      const item = pieData.find(d => d.name === name);\n      const shortName = name.length > 6 ? name.slice(0, 6) + '…' : name;\n      return `${shortName}`;\n    }\n  },\n  series: [{\n    name: title,\n    type: 'pie',\n    radius: ['42%', '68%'],\n    center: ['42%', '55%'],\n    data: pieData.map((d, i) => ({ ...d, itemStyle: { color: colors[i % colors.length] } })),\n    emphasis: {\n      itemStyle: { shadowBlur: 15, shadowColor: 'rgba(0,180,255,0.3)' }\n    },\n    label: { show: false },\n    labelLine: { show: false }\n  }]\n};",
+        "google": {
+          "callback": "gmapReady",
+          "key": ""
+        },
+        "map": "none",
+        "renderer": "canvas",
+        "themeEditor": {
+          "config": "{}",
+          "name": "default"
+        },
+        "visualEditor": {
+          "code": "return {\n  dataset: context.editor.dataset,\n  series: context.editor.series,\n  xAxis: {\n    type: 'time',\n  },\n  yAxis: {\n    type: 'value',\n    min: 'dataMin',\n  },\n}\n",
+          "dataset": [],
+          "series": []
+        }
+      },
+      "pluginVersion": "7.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": true,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  time_bucket('1 minute', r.time) AS time,\n  m.description,\n  AVG(r.total_m3) AS total_m3\nFROM\n  accumulator_water r\n  JOIN meters m USING (meter_id)\nWHERE\n  r.meter_id NOT LIKE '%IN%'\n  AND r.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n  AND r.time < NOW()\nGROUP BY\n  time_bucket('1 minute', r.time),\n  m.description\nORDER BY\n  time asc;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT time, description, value FROM (\n  SELECT\n    time_bucket('1 hour', r.time) AS time,\n    m.description,\n    AVG(r.total_m3) AS value\n  FROM accumulator_water r\n  JOIN meters m USING (meter_id)\n  WHERE  m.is_main = FALSE\n    AND '$meterType' = 'water'\n    AND r.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 hour', r.time), m.description\n\n  UNION ALL\n\n  SELECT\n    time_bucket('1 hour', r.time) AS time,\n    m.description,\n    AVG(r.total_kwh) AS value\n  FROM accumulator_electricity r\n  JOIN meters m USING (meter_id)\n  WHERE m.is_main = FALSE\n    AND '$meterType' = 'electricity'\n    AND r.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 hour', r.time), m.description\n) sub\nORDER BY time ASC",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "timeFrom": "now/M",
+      "title": "【本月】用量佔比",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "total_m3 (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "diff"
+            ]
+          }
+        }
+      ],
+      "type": "volkovlabs-echarts-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 4,
+        "y": 19
+      },
+      "id": 4,
+      "options": {
+        "baidu": {
+          "callback": "bmapReady",
+          "key": ""
+        },
+        "editor": {
+          "format": "auto"
+        },
+        "editorMode": "code",
+        "gaode": {
+          "key": "",
+          "plugin": "AMap.Scale,AMap.ToolBar"
+        },
+        "getOption": "// ── 依 meterType 決定單位 ──────────────────────────\nconst meterType = context.grafana.replaceVariables('$meterType');\n\nconst UNIT_MAP = {\n  electricity: { unit: 'kWh', title: '用電佔比', emptyText: '無用電紀錄' },\n  water: { unit: 'm³', title: '用水佔比', emptyText: '無用水紀錄' },\n  steam: { unit: 't', title: '用汽佔比', emptyText: '無用汽紀錄' },\n};\nconst { unit, title, emptyText } = UNIT_MAP[meterType] || { unit: '', title: '佔比', emptyText: '無資料' };\n\n// ── 組資料 + 過濾 0 值 + 排序 ──────────────────────\nlet pieData = context.panel.data.series.flatMap(frame =>\n  frame.fields.map(f => ({\n    name: f.labels?.description || f.name,\n    value: parseFloat(f.values[0].toFixed(2))\n  }))\n).filter(d => d.value > 0)\n  .sort((a, b) => b.value - a.value);\n\n// ── Top N + 其他聚合 ────────────────────────────────\nconst TOP_N = 7;\nif (pieData.length > TOP_N) {\n  const top = pieData.slice(0, TOP_N);\n  const restSum = pieData.slice(TOP_N).reduce((sum, d) => sum + d.value, 0);\n  pieData = [...top, { name: '其他', value: parseFloat(restSum.toFixed(2)) }];\n}\n\n// ── 全為 0 / 無資料時顯示空狀態 ──────────────────────\nif (pieData.length === 0) {\n  return {\n    backgroundColor: 'transparent',\n    title: [{\n      text: emptyText,\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: 16 }\n    }],\n    series: [{\n      type: 'pie',\n      radius: ['42%', '68%'],\n      center: ['42%', '55%'],\n      data: [{ value: 1, name: '', itemStyle: { color: '#2a2f38' }, emphasis: { disabled: true } }],\n      label: { show: false },\n      labelLine: { show: false },\n      silent: true\n    }]\n  };\n}\n\nconst colors = [\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00d2ff' }, { offset: 1, color: '#0066cc' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#00f5a0' }, { offset: 1, color: '#00d9a3' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#9d50bb' }, { offset: 1, color: '#6e48aa' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#f7971e' }, { offset: 1, color: '#ff4e50' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ffd200' }, { offset: 1, color: '#ff8c00' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#ff6ec7' }, { offset: 1, color: '#c724b1' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#43e97b' }, { offset: 1, color: '#38f9d7' }] },\n  { type: 'linear', x: 0, y: 0, x2: 1, y2: 1, colorStops: [{ offset: 0, color: '#6b7280' }, { offset: 1, color: '#4b5563' }] }, // 其他:灰色\n];\n\nconst chart = context.panel.chart;\nconst width = chart.getWidth();\nconst base = Math.max(16, Math.min(20, Math.floor(width / 40)));\nconst fs = {\n  label: base,\n  value: base + 6,\n  sub: base,\n  legend: base - 1,\n  center: base + 2,\n};\n\nconst defaultTitle = { name: '懸停查看', value: '', percent: '' };\n\nconst updateCenter = (p) => {\n  chart.setOption({\n    title: [\n      {\n        text: p.name,\n        left: '41.5%',\n        top: p.value ? '46%' : '52%',\n        textAlign: 'center',\n        textStyle: { color: p.value ? '#e0e0e0' : '#555c6a', fontSize: fs.center, fontWeight: 'bold' }\n      },\n      {\n        text: p.value ? `${p.value} ${unit}` : '',\n        left: '41.5%',\n        top: '54%',\n        textAlign: 'center',\n        textStyle: { color: '#00d2ff', fontSize: fs.value, fontWeight: 'bold' }\n      },\n      {\n        text: p.percent ? `${p.percent}%` : '',\n        left: '41.5%',\n        top: '61%',\n        textAlign: 'center',\n        textStyle: { color: '#aab0b8', fontSize: fs.sub }\n      },\n    ]\n  });\n};\n\nupdateCenter(defaultTitle);\n\nchart.off('mouseover');\nchart.on('mouseover', p => updateCenter(p));\nchart.off('mouseout');\nchart.on('mouseout', () => updateCenter(defaultTitle));\n\nreturn {\n  backgroundColor: 'transparent',\n  title: [\n    {\n      text: '懸停查看',\n      left: '41.5%',\n      top: '52%',\n      textAlign: 'center',\n      textStyle: { color: '#555c6a', fontSize: fs.center }\n    }\n  ],\n  tooltip: {\n    show: false,\n    trigger: 'item',\n    backgroundColor: '#1e2329',\n    borderColor: '#2a2f38',\n    textStyle: { color: '#e0e0e0', fontSize: fs.label },\n    formatter: p => `${p.name}<br/>${p.value} ${unit} (${p.percent}%)`\n  },\n  legend: {\n    orient: 'vertical',\n    right: 10,\n    top: 10,\n    itemGap: 8,\n    textStyle: { color: '#aab0b8', fontSize: fs.legend },\n    formatter: name => {\n      const item = pieData.find(d => d.name === name);\n      const shortName = name.length > 6 ? name.slice(0, 6) + '…' : name;\n      return `${shortName}`;\n    }\n  },\n  series: [{\n    name: title,\n    type: 'pie',\n    radius: ['42%', '68%'],\n    center: ['42%', '55%'],\n    data: pieData.map((d, i) => ({ ...d, itemStyle: { color: colors[i % colors.length] } })),\n    emphasis: {\n      itemStyle: { shadowBlur: 15, shadowColor: 'rgba(0,180,255,0.3)' }\n    },\n    label: { show: false },\n    labelLine: { show: false }\n  }]\n};",
+        "google": {
+          "callback": "gmapReady",
+          "key": ""
+        },
+        "map": "none",
+        "renderer": "canvas",
+        "themeEditor": {
+          "config": "{}",
+          "name": "default"
+        },
+        "visualEditor": {
+          "code": "return {\n  dataset: context.editor.dataset,\n  series: context.editor.series,\n  xAxis: {\n    type: 'time',\n  },\n  yAxis: {\n    type: 'value',\n    min: 'dataMin',\n  },\n}\n",
+          "dataset": [],
+          "series": []
+        }
+      },
+      "pluginVersion": "7.2.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": true,
+          "rawQuery": true,
+          "rawSql": "SELECT\n  time_bucket('1 minute', r.time) AS time,\n  m.description,\n  AVG(r.total_m3) AS total_m3\nFROM accumulator_water r\nJOIN meters m USING (meter_id)\nWHERE $__timeFilter(r.time)\n  AND r.meter_id NOT LIKE '%IN%'\nGROUP BY time_bucket('1 minute', r.time), m.description\nORDER BY time ASC",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "SELECT time, description, value FROM (\n  SELECT\n    time_bucket('1 minute', r.time) AS time,\n    m.description,\n    AVG(r.total_m3) AS value\n  FROM accumulator_water r\n  JOIN meters m USING (meter_id)\n  WHERE $__timeFilter(r.time)\n    AND m.is_main = FALSE\n    AND '$meterType' = 'water'\n  GROUP BY time_bucket('1 minute', r.time), m.description\n\n  UNION ALL\n\n  SELECT\n    time_bucket('1 minute', r.time) AS time,\n    m.description,\n    AVG(r.total_kwh) AS value\n  FROM accumulator_electricity r\n  JOIN meters m USING (meter_id)\n  WHERE $__timeFilter(r.time)\n    AND m.is_main = FALSE\n    AND '$meterType' = 'electricity'\n  GROUP BY time_bucket('1 minute', r.time), m.description\n) sub\nORDER BY time ASC",
+          "refId": "B",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "【本日】用量佔比",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "total_m3 (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "diff"
+            ]
+          }
+        }
+      ],
+      "type": "volkovlabs-echarts-panel"
+    }
+  ],
+  "preload": true,
+  "refresh": "1m",
+  "schemaVersion": 41,
+  "tags": [
+    "overview",
+    "energy"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "electricity",
+          "value": "electricity"
+        },
+        "definition": "SELECT DISTINCT meter_type FROM meters ORDER BY meter_type",
+        "hide": 2,
+        "label": "能源種類",
+        "name": "meterType",
+        "options": [],
+        "query": "SELECT DISTINCT meter_type FROM meters ORDER BY meter_type",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now/d",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "browser",
+  "title": "Energy Overview",
+  "uid": "energy-overview",
+  "version": 10
+}
