@@ -1,25 +1,33 @@
 require('dotenv').config({ path: __dirname + '/.env' });
 
-const REGISTER_E = {
-  VOLTAGE:      { address: 40263 - 40001, count: 2 },
-  CURRENT:      { address: 40295 - 40001, count: 2 },
-  POWER_FACTOR: { address: 40307 - 40001, count: 2 },
-  ACTIVE_POWER: { address: 40325 - 40001, count: 2 },
-  ENERGY_KWH:   { address: 40349 - 40001, count: 2 },
+// ── 電錶：40263 ~ 40350，共 88 個暫存器，一次讀完 ──────────
+const REGISTER_E_BLOCK = { address: 40263 - 40001, count: 88 };
+const REGISTER_E_OFFSETS = {
+  VOLTAGE:      0,   // 40263
+  CURRENT:      32,  // 40295
+  POWER_FACTOR: 44,  // 40307
+  ACTIVE_POWER: 62,  // 40325
+  ENERGY_KWH:   86,  // 40349
 };
 
-const REGISTER_W = {
-  FLOW_RATE:      { address: 40099 - 40001, count: 2 }, 
-  TOTAL_FLOW_FWD: { address: 40091 - 40001, count: 2 }, 
-  TOTAL_FLOW_REV: { address: 40093 - 40001, count: 2 }, 
+// ── 水錶：40091 ~ 40100，共 10 個暫存器，一次讀完 ──────────
+// （涵蓋 TOTAL_FLOW_FWD 40091 與 FLOW_RATE 40099；
+//   TOTAL_FLOW_REV 40093 目前沒在用，但已經包含在區塊內）
+const REGISTER_W_BLOCK = { address: 40091 - 40001, count: 10 };
+const REGISTER_W_OFFSETS = {
+  TOTAL_FLOW_FWD: 0,  // 40091
+  TOTAL_FLOW_REV: 2,  // 40093（保留，目前未使用）
+  FLOW_RATE:      8,  // 40099
 };
 
-const REGISTER_S = {
-  TEMPERATURE: { address: 40001 - 40001, count: 2 },
-  PRESSURE:    { address: 40003 - 40001, count: 2 },
-  FLOW_RATE:   { address: 40007 - 40001, count: 2 },
-  TOTAL_100:   { address: 40009 - 40001, count: 2 },
-  TOTAL_10:    { address: 40011 - 40001, count: 2 },
+// ── 蒸氣錶：40001 ~ 40012，共 12 個暫存器，一次讀完 ────────
+const REGISTER_S_BLOCK = { address: 40001 - 40001, count: 12 };
+const REGISTER_S_OFFSETS = {
+  TEMPERATURE: 0,   // 40001
+  PRESSURE:    2,   // 40003
+  FLOW_RATE:   6,   // 40007
+  TOTAL_100:   8,   // 40009
+  TOTAL_10:    10,  // 40011
 };
 
 const e = process.env;
@@ -107,6 +115,8 @@ const GATEWAYS_STEAM = [
 ];
 
 module.exports = {
-  REGISTER_E, REGISTER_W, REGISTER_S,
+  REGISTER_E_BLOCK, REGISTER_E_OFFSETS,
+  REGISTER_W_BLOCK, REGISTER_W_OFFSETS,
+  REGISTER_S_BLOCK, REGISTER_S_OFFSETS,
   GATEWAYS_ELECTRICITY, GATEWAYS_WATER, GATEWAYS_STEAM,
 };

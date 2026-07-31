@@ -4,7 +4,9 @@ const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
 const {
-  REGISTER_E, REGISTER_W, REGISTER_S,
+  REGISTER_E_BLOCK, REGISTER_E_OFFSETS,
+  REGISTER_W_BLOCK, REGISTER_W_OFFSETS,
+  REGISTER_S_BLOCK, REGISTER_S_OFFSETS,
   GATEWAYS_ELECTRICITY, GATEWAYS_WATER, GATEWAYS_STEAM,
 } = require('./config');
 
@@ -20,10 +22,16 @@ const pool = new Pool({
   connectionTimeoutMillis: 5000,
 });
 
+// ★ 監控用 SQL
+const gatewayStatusQuery = `
+  INSERT INTO gateway_connection_status (time, gateway_name, connection_type, is_connected, error_message)
+  VALUES (NOW(), $1, $2, $3, $4)`;
+
+const heartbeatQuery = `
+  INSERT INTO collector_heartbeat (time, round_duration_ms, meters_success, meters_failed)
+  VALUES (NOW(), $1, $2, $3)`;
+
 // ── Log 系統 ──────────────────────────────────────
-// ★ v2 變更：改用 __dirname + 'logs'（容器內固定是 /app/logs，
-//   對應 docker-compose.yml 的 volume mount ./collector/logs:/app/logs）
-//   原本的 '../../logs' 是假設特定資料夾深度的相對路徑，換到新結構會指錯地方
 const LOG_DIR = path.join(__dirname, 'logs');
 if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
 
@@ -49,41 +57,38 @@ const stats = {
 };
 
 // ── Float 工具函數 ────────────────────────────────
-// ABCD - 標準 Big Endian（Delta 電錶）
-function registersToFloatABCD(registers) {
+// 從一次讀回的整段 register 陣列中，取某個 offset 的 float
+function floatAt(data, offset, byteOrder = 'ABCD') {
   const buf = Buffer.allocUnsafe(4);
-  buf.writeUInt16BE(registers[0], 0);
-  buf.writeUInt16BE(registers[1], 2);
+  if (byteOrder === 'CDAB') {
+    buf.writeUInt16BE(data[offset + 1], 0);
+    buf.writeUInt16BE(data[offset], 2);
+  } else {
+    buf.writeUInt16BE(data[offset], 0);
+    buf.writeUInt16BE(data[offset + 1], 2);
+  }
   return buf.readFloatBE(0);
-}
-
-// CDAB - Mid-Little（Woteck 水錶，目前電錶也在用）
-function registersToFloatCDAB(registers) {
-  const buf = Buffer.allocUnsafe(4);
-  buf.writeUInt16BE(registers[1], 0);
-  buf.writeUInt16BE(registers[0], 2);
-  return buf.readFloatBE(0);
-}
-
-async function readFloat(client, reg, byteOrder = 'ABCD') {
-  const result = await client.readHoldingRegisters(reg.address, reg.count);
-  if (byteOrder === 'CDAB') return registersToFloatCDAB(result.data);
-  return registersToFloatABCD(result.data);
 }
 
 function isValidFloat(val) {
   return typeof val === 'number' && isFinite(val) && !isNaN(val);
 }
 
-// ── 電錶 ──────────────────────────────────────────
+// ── 電錶：原本 5 次讀取 → 現在 1 次 ────────────────────────
 async function readElecMeter(client, slaveId, meterId) {
   client.setID(slaveId);
   try {
-    const voltage     = await readFloat(client, REGISTER_E.VOLTAGE);
-    const current     = await readFloat(client, REGISTER_E.CURRENT);
-    const powerFactor = await readFloat(client, REGISTER_E.POWER_FACTOR);
-    const activePower = await readFloat(client, REGISTER_E.ACTIVE_POWER) / 1000;
-    const energyKwh   = await readFloat(client, REGISTER_E.ENERGY_KWH);
+    const result = await client.readHoldingRegisters(
+      REGISTER_E_BLOCK.address,
+      REGISTER_E_BLOCK.count
+    );
+    const data = result.data;
+
+    const voltage     = floatAt(data, REGISTER_E_OFFSETS.VOLTAGE);
+    const current      = floatAt(data, REGISTER_E_OFFSETS.CURRENT);
+    const powerFactor = floatAt(data, REGISTER_E_OFFSETS.POWER_FACTOR);
+    const activePower = floatAt(data, REGISTER_E_OFFSETS.ACTIVE_POWER) / 1000;
+    const energyKwh   = floatAt(data, REGISTER_E_OFFSETS.ENERGY_KWH);
 
     if (!isValidFloat(activePower) || !isValidFloat(energyKwh)) {
       log('WARN', `[${meterId}] 異常數值被過濾: kW=${activePower}, kWh=${energyKwh}`);
@@ -110,12 +115,18 @@ async function readElecMeter(client, slaveId, meterId) {
   }
 }
 
-// ── 水錶 ──────────────────────────────────────────
+// ── 水錶：原本 2 次讀取 → 現在 1 次 ────────────────────────
 async function readWaterMeter(client, slaveId, meterId) {
   client.setID(slaveId);
   try {
-    const flowRate = await readFloat(client, REGISTER_W.FLOW_RATE);
-    const totalM3  = await readFloat(client, REGISTER_W.TOTAL_FLOW_FWD);
+    const result = await client.readHoldingRegisters(
+      REGISTER_W_BLOCK.address,
+      REGISTER_W_BLOCK.count
+    );
+    const data = result.data;
+
+    const totalM3  = floatAt(data, REGISTER_W_OFFSETS.TOTAL_FLOW_FWD);
+    const flowRate = floatAt(data, REGISTER_W_OFFSETS.FLOW_RATE);
 
     if (!isValidFloat(flowRate) || !isValidFloat(totalM3)) {
       log('WARN', `[${meterId}] 異常數值被過濾: flow=${flowRate}, total=${totalM3}`);
@@ -142,16 +153,23 @@ async function readWaterMeter(client, slaveId, meterId) {
   }
 }
 
-// ── 蒸氣錶 ────────────────────────────────────────
+// ── 蒸氣錶：原本 5 次讀取 → 現在 1 次 ──────────────────────
+// 注意：蒸氣錶原本全部欄位都是用 CDAB 解碼，這裡沿用同樣的 byteOrder
 async function readSteamMeter(client, slaveId, meterId) {
   client.setID(slaveId);
   try {
-    const temperature = await readFloat(client, REGISTER_S.TEMPERATURE, 'CDAB');
-    const pressure    = await readFloat(client, REGISTER_S.PRESSURE,    'CDAB');
-    const flowRate    = await readFloat(client, REGISTER_S.FLOW_RATE,   'CDAB');
-    const total100    = await readFloat(client, REGISTER_S.TOTAL_100,   'CDAB');
-    const total10     = await readFloat(client, REGISTER_S.TOTAL_10,    'CDAB');
-    const totalFlow = total100 * 100 + total10 * 10;
+    const result = await client.readHoldingRegisters(
+      REGISTER_S_BLOCK.address,
+      REGISTER_S_BLOCK.count
+    );
+    const data = result.data;
+
+    const temperature = floatAt(data, REGISTER_S_OFFSETS.TEMPERATURE, 'CDAB');
+    const pressure    = floatAt(data, REGISTER_S_OFFSETS.PRESSURE, 'CDAB');
+    const flowRate    = floatAt(data, REGISTER_S_OFFSETS.FLOW_RATE, 'CDAB');
+    const total100    = floatAt(data, REGISTER_S_OFFSETS.TOTAL_100, 'CDAB');
+    const total10     = floatAt(data, REGISTER_S_OFFSETS.TOTAL_10, 'CDAB');
+    const totalFlow = total100 * 100 + total10 * 10; // 保留原邏輯，目前未寫入 DB
 
     if (!isValidFloat(temperature) || !isValidFloat(pressure) || !isValidFloat(flowRate)) {
       log('WARN', `[${meterId}] 異常數值被過濾: temp=${temperature}, press=${pressure}, flow=${flowRate}`);
@@ -176,18 +194,30 @@ async function readSteamMeter(client, slaveId, meterId) {
 // ── Gateway 輪詢 ──────────────────────────────────
 async function pollGateway(gateway, readFn) {
   const client = new ModbusRTU();
+  let connected = false;
+  let errorMsg = null;
+
   try {
-    await client.connectTCP(gateway.host, { port: gateway.port, timeout: 5000 });
-    client.setTimeout(5000);
+    await client.connectTCP(gateway.host, { port: gateway.port, timeout: 1500 });
+    client.setTimeout(1500);
+    connected = true;
     log('INFO', `✓ 連線成功: ${gateway.name}`);
     for (const meter of gateway.meters) {
       await readFn(client, meter.slaveId, meter.meterId);
     }
   } catch (err) {
+    errorMsg = err.message;
     log('WARN', `✗ Gateway 連線失敗: ${gateway.name} — ${err.message}`);
     stats.gatewayErrors[gateway.name] = (stats.gatewayErrors[gateway.name] || 0) + 1;
   } finally {
-    // ★ 強制 destroy 底層 socket，防止半開連線導致下一輪 hang 住
+    // ★ 寫入連線狀態（失敗不影響採集主流程）
+    try {
+      await pool.query(gatewayStatusQuery, [gateway.name, 'modbus', connected, errorMsg]);
+    } catch (dbErr) {
+      log('ERROR', `寫入 gateway_connection_status 失敗: ${dbErr.message}`);
+    }
+
+    // ★ 原本的 socket 清理邏輯，維持不變
     try {
       const sock = client._port?._client;
       if (sock && !sock.destroyed) sock.destroy();
@@ -220,7 +250,7 @@ function printDailyStats() {
 
 // ── 主迴圈 ────────────────────────────────────────
 // ★ 整輪超時：55 秒（比 setInterval 60s 留 5 秒緩衝）
-const POLL_TIMEOUT_MS = 55 * 1000;
+const POLL_TIMEOUT_MS = 8 * 1000;    // 10 秒一輪，留 2 秒緩衝
 
 async function startCollector() {
   log('INFO', '=== ECI Modbus 採集程式啟動 ===');
@@ -237,7 +267,11 @@ async function startCollector() {
     isPolling = true;
     stats.totalPolls++;
 
-    // ★ 抽出 collectAll，套入 Promise.race 做整輪超時保護
+    // ★ 本輪起訖用的量測基準點
+    const roundStart = Date.now();
+    const successBefore = stats.successCount;
+    const errorBefore = stats.errorCount;
+
     const collectAll = async () => {
       log('INFO', `開始第 ${stats.totalPolls} 輪採集...`);
       for (const gw of GATEWAYS_ELECTRICITY) await pollGateway(gw, readElecMeter);
@@ -257,11 +291,21 @@ async function startCollector() {
       log('ERROR', `採集主迴圈異常: ${err.message}`);
     } finally {
       isPolling = false;
+
+      // ★ 寫入本輪 heartbeat
+      const roundDuration = Date.now() - roundStart;
+      const roundSuccess = stats.successCount - successBefore;
+      const roundError = stats.errorCount - errorBefore;
+      try {
+        await pool.query(heartbeatQuery, [roundDuration, roundSuccess, roundError]);
+      } catch (dbErr) {
+        log('ERROR', `寫入 collector_heartbeat 失敗: ${dbErr.message}`);
+      }
     }
   };
 
   await poll();
-  setInterval(poll, 60 * 1000);
+  setInterval(poll, 10 * 1000);
 
   // 每天 00:00 印出統計報告
   const now = new Date();
