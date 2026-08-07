@@ -1,0 +1,10 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: internal-only
+      receivers:
+        - uid: internal-only-webhook
+          type: webhook
+          settings:
+            url: http://localhost:9999/unused
+          disableResolveMessage: false
