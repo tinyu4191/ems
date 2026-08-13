@@ -1,9 +1,9 @@
-name: ems-v2
+name: ems
 
 services:
   timescaledb:
     image: timescale/timescaledb:2.26.3-pg16
-    container_name: ems-v2-timescaledb
+    container_name: ems-timescaledb
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -19,7 +19,7 @@ services:
 
   grafana:
     image: grafana/grafana:12.4.5
-    container_name: ems-v2-grafana
+    container_name: ems-grafana
     restart: unless-stopped
     environment:
       GF_SECURITY_ALLOW_EMBEDDING: "true"
@@ -45,7 +45,7 @@ services:
 
   collector:
     build: ./collector
-    container_name: ems-v2-collector
+    container_name: ems-collector
     restart: unless-stopped
     env_file:
       - ./collector/.env
@@ -63,7 +63,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: ems-v2-nginx
+    container_name: ems-nginx
     restart: unless-stopped
     ports:
       - "${WEB_PORT}:80"
@@ -83,4 +83,8 @@ networks:
 
 volumes:
   pgdata:
+    name: ems_pgdata
+    external: true
   grafana-data:
+    name: ems_grafana-data
+    external: true
