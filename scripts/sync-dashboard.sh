@@ -24,7 +24,7 @@ DEV_HOST="${DEV_HOST:?請設定 DEV_HOST，例如 localhost:3000（要跟 dev-ap
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 # 假設路徑，若你實際的 dashboards-src 不在這裡，改這一行就好
-SRC_DIR="${REPO_ROOT}/docker/grafana-provisioning/dashboards-src"
+SRC_DIR="${REPO_ROOT}/infra/grafana/dashboards-src"
 DEST_PATH="${SRC_DIR}/${DEST_REL}"
 
 if [ ! -f "$SRC_FILE" ]; then
@@ -45,9 +45,9 @@ jq '.id = null' "$SRC_FILE" \
 echo "==> 已寫入 $DEST_PATH"
 echo
 echo "==> git diff:"
-cd "$REPO_ROOT" && git --no-pager diff -- "docker/grafana-provisioning/dashboards-src/${DEST_REL}" || true
+cd "$REPO_ROOT" && git --no-pager diff -- "infra/grafana/dashboards-src/${DEST_REL}" || true
 
 echo
 echo "確認 diff 沒問題後："
-echo "  git add docker/grafana-provisioning/dashboards-src/${DEST_REL}"
+echo "  git add infra/grafana/dashboards-src/${DEST_REL}"
 echo "  git commit -m 'chore(grafana): sync ${DEST_REL} from dev'"
