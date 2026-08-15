@@ -41,7 +41,7 @@ services:
       - "${GRAFANA_PORT}:3000"
     volumes:
       - grafana-data:/var/lib/grafana
-      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning
       - ./infra/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
       - ./infra/grafana/assets:/usr/share/grafana/public/img/custom:ro
     depends_on:

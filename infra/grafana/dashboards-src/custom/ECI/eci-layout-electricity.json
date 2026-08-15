@@ -15,10 +15,9 @@
       }
     ]
   },
-  "editable": true,
+  "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -36,7 +35,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-green"
+                "color": "light-green",
+                "value": 0
               }
             ]
           }
@@ -58,7 +58,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "semi-dark-red"
+                      "color": "semi-dark-red",
+                      "value": 0
                     },
                     {
                       "color": "#747474",
@@ -88,7 +89,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "semi-dark-red"
+                      "color": "semi-dark-red",
+                      "value": 0
                     },
                     {
                       "color": "green",
@@ -118,7 +120,7 @@
               "fixed": "#011223"
             },
             "image": {
-              "fixed": "__GRAFANA_HOST__/grafana/public/img/custom/ECI_layout_electricity.png",
+              "fixed": "http://__GRAFANA_HOST__/grafana/public/img/custom/ECI_layout_electricity.png",
               "mode": "fixed"
             },
             "size": "fill"
@@ -166,7 +168,36 @@
                 },
                 "valign": "middle"
               },
-              "connections": [],
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": -1
+                  },
+                  "sourceOriginal": {
+                    "x": 2208.53125,
+                    "y": 306.734375
+                  },
+                  "target": {
+                    "x": -0.9082288161517283,
+                    "y": -0.022222222222222223
+                  },
+                  "targetName": "Element 137",
+                  "targetOriginal": {
+                    "x": 2315,
+                    "y": 308
+                  }
+                }
+              ],
               "constraint": {
                 "horizontal": "scale",
                 "vertical": "scale"
@@ -174,10 +205,11 @@
               "links": [],
               "name": "ATS-1-Power",
               "placement": {
-                "bottom": 83.60128617363344,
-                "left": 12.504978096375947,
-                "right": 84.22939068100358,
-                "top": 13.987138263665594
+                "bottom": 73.71575342465754,
+                "left": 84.2042755344418,
+                "right": 12.54948535233571,
+                "rotation": 0,
+                "top": 23.8013698630137
               },
               "type": "metric-value"
             },
@@ -217,17 +249,17 @@
               "links": [],
               "name": "ATS-1-Power-Title",
               "placement": {
-                "bottom": 83.60128617363344,
-                "left": 10.27479091995221,
-                "right": 87.49502190362406,
-                "top": 13.987138263665594
+                "bottom": 73.73913043478261,
+                "left": 81.9672131147541,
+                "right": 15.801457194899818,
+                "top": 23.82608695652174
               },
               "type": "text"
             },
             {
               "background": {
                 "color": {
-                  "fixed": "transparent"
+                  "fixed": "#021121"
                 }
               },
               "border": {
@@ -247,53 +279,26 @@
                 },
                 "valign": "middle"
               },
-              "connections": [
-                {
-                  "color": {
-                    "fixed": "rgb(204, 204, 220)"
-                  },
-                  "path": "straight",
-                  "size": {
-                    "fixed": 2,
-                    "max": 10,
-                    "min": 1
-                  },
-                  "source": {
-                    "x": 1,
-                    "y": 0
-                  },
-                  "sourceOriginal": {
-                    "x": 348.703125,
-                    "y": 145.0625
-                  },
-                  "target": {
-                    "x": -1.0888888888888888,
-                    "y": -0.06666666666666667
-                  },
-                  "targetName": "Element 136",
-                  "targetOriginal": {
-                    "x": 571,
-                    "y": 221
-                  },
-                  "vertices": [
-                    {
-                      "x": 0.5861390314191326,
-                      "y": 0.02551440329218107
-                    }
-                  ]
-                }
-              ],
+              "connections": [],
               "constraint": {
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-ATS1&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "ATS-1-Title",
               "placement": {
-                "bottom": 86.0128617363344,
-                "left": 10.234966148944643,
-                "right": 84.22939068100358,
-                "top": 10.85209003215434
+                "bottom": 76.1986301369863,
+                "left": 81.90815518606492,
+                "right": 12.54948535233571,
+                "rotation": 0,
+                "top": 20.71917808219178
               },
               "type": "text"
             },
@@ -333,10 +338,10 @@
               "links": [],
               "name": "ATS-1-PF-Title",
               "placement": {
-                "bottom": 81.18971061093248,
-                "left": 10.27479091995221,
-                "right": 87.49502190362406,
-                "top": 16.39871382636656
+                "bottom": 71.30434782608695,
+                "left": 81.9672131147541,
+                "right": 15.801457194899818,
+                "top": 26.260869565217394
               },
               "type": "text"
             },
@@ -379,10 +384,10 @@
               "links": [],
               "name": "ATS-1-PF",
               "placement": {
-                "bottom": 81.18971061093248,
-                "left": 12.504978096375947,
-                "right": 84.22939068100358,
-                "top": 16.39871382636656
+                "bottom": 71.30434782608695,
+                "left": 84.19854280510019,
+                "right": 12.568306010928962,
+                "top": 26.260869565217394
               },
               "type": "metric-value"
             },
@@ -420,11 +425,10 @@
               "links": [],
               "name": "Element 6",
               "placement": {
-                "bottom": 59.72668810289389,
-                "left": 85.78255675029868,
-                "right": 10.911987256073278,
-                "rotation": 0,
-                "top": 37.861736334405144
+                "bottom": 77.73913043478261,
+                "left": 13.160291438979963,
+                "right": 83.56102003642987,
+                "top": 19.91304347826087
               },
               "type": "metric-value"
             },
@@ -455,6 +459,36 @@
                 },
                 "valign": "middle"
               },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": -1
+                  },
+                  "sourceOriginal": {
+                    "x": 361,
+                    "y": 229
+                  },
+                  "target": {
+                    "x": -0.8754398311048557,
+                    "y": -0.49101163200563974
+                  },
+                  "targetName": "Element 136",
+                  "targetOriginal": {
+                    "x": 571,
+                    "y": 227
+                  }
+                }
+              ],
               "constraint": {
                 "horizontal": "scale",
                 "vertical": "scale"
@@ -462,11 +496,10 @@
               "links": [],
               "name": "Element 7",
               "placement": {
-                "bottom": 62.13826366559485,
-                "left": 85.78255675029868,
-                "right": 10.911987256073278,
-                "rotation": 0,
-                "top": 35.450160771704184
+                "bottom": 80.08695652173913,
+                "left": 13.160291438979963,
+                "right": 83.56102003642987,
+                "top": 17.47826086956522
               },
               "type": "metric-value"
             },
@@ -493,47 +526,25 @@
                 },
                 "valign": "middle"
               },
-              "connections": [
-                {
-                  "color": {
-                    "fixed": "rgb(204, 204, 220)"
-                  },
-                  "path": "straight",
-                  "size": {
-                    "fixed": 2,
-                    "max": 10,
-                    "min": 1
-                  },
-                  "source": {
-                    "x": -0.00011092623405435385,
-                    "y": 1
-                  },
-                  "sourceOriginal": {
-                    "x": 2179.9375,
-                    "y": 377.4375
-                  },
-                  "target": {
-                    "x": -1.1040073416947078,
-                    "y": 0.022222222222222223
-                  },
-                  "targetName": "Element 137",
-                  "targetOriginal": {
-                    "x": 2310,
-                    "y": 307
-                  }
-                }
-              ],
+              "connections": [],
               "constraint": {
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-ATS2&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 8",
               "placement": {
-                "bottom": 64.54983922829582,
-                "left": 83.51254480286738,
-                "right": 10.911987256073278,
-                "top": 32.31511254019293
+                "bottom": 82.53424657534246,
+                "left": 10.886777513855899,
+                "right": 83.57086302454474,
+                "top": 14.383561643835616
               },
               "type": "text"
             },
@@ -572,10 +583,10 @@
               "links": [],
               "name": "Element 9",
               "placement": {
-                "bottom": 62.13826366559485,
-                "left": 83.57086302454474,
-                "right": 14.212193190815519,
-                "top": 35.450160771704184
+                "bottom": 80.08695652173913,
+                "left": 10.92896174863388,
+                "right": 86.83970856102003,
+                "top": 17.47826086956522
               },
               "type": "text"
             },
@@ -615,10 +626,10 @@
               "links": [],
               "name": "Element 10",
               "placement": {
-                "bottom": 59.72668810289389,
-                "left": 83.57086302454474,
-                "right": 14.212193190815519,
-                "top": 37.861736334405144
+                "bottom": 77.73913043478261,
+                "left": 10.92896174863388,
+                "right": 86.83970856102003,
+                "top": 19.91304347826087
               },
               "type": "text"
             },
@@ -656,11 +667,10 @@
               "links": [],
               "name": "Element 11",
               "placement": {
-                "bottom": 73.23151125401928,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "rotation": 0,
-                "top": 24.356913183279744
+                "bottom": 63.391304347826086,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 34.17391304347826
               },
               "type": "metric-value"
             },
@@ -699,10 +709,10 @@
               "links": [],
               "name": "Element 12",
               "placement": {
-                "bottom": 73.23151125401928,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 24.356913183279744
+                "bottom": 63.391304347826086,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 34.17391304347826
               },
               "type": "text"
             },
@@ -741,10 +751,10 @@
               "links": [],
               "name": "Element 14",
               "placement": {
-                "bottom": 70.81993569131832,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 26.768488745980708
+                "bottom": 60.95652173913043,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 36.608695652173914
               },
               "type": "text"
             },
@@ -783,11 +793,10 @@
               "links": [],
               "name": "Element 15",
               "placement": {
-                "bottom": 70.81993569131832,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "rotation": 0,
-                "top": 26.768488745980708
+                "bottom": 60.95652173913043,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 36.608695652173914
               },
               "type": "metric-value"
             },
@@ -826,11 +835,10 @@
               "links": [],
               "name": "Element 16",
               "placement": {
-                "bottom": 73.23151125401928,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "rotation": 0,
-                "top": 24.356913183279744
+                "bottom": 63.391304347826086,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 34.17391304347826
               },
               "type": "metric-value"
             },
@@ -869,10 +877,10 @@
               "links": [],
               "name": "Element 17",
               "placement": {
-                "bottom": 73.23151125401928,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 24.356913183279744
+                "bottom": 63.391304347826086,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 34.17391304347826
               },
               "type": "text"
             },
@@ -911,10 +919,10 @@
               "links": [],
               "name": "Element 19",
               "placement": {
-                "bottom": 70.81993569131832,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 26.768488745980708
+                "bottom": 60.95652173913043,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 36.608695652173914
               },
               "type": "text"
             },
@@ -952,11 +960,10 @@
               "links": [],
               "name": "Element 20",
               "placement": {
-                "bottom": 70.81993569131832,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "rotation": 0,
-                "top": 26.768488745980708
+                "bottom": 60.95652173913043,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 36.608695652173914
               },
               "type": "metric-value"
             },
@@ -988,13 +995,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-PRO1&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 13",
               "placement": {
-                "bottom": 75.64308681672026,
-                "left": 3.26563122262047,
-                "right": 91.19872560732776,
-                "top": 21.221864951768488
+                "bottom": 65.82608695652173,
+                "left": 74.9544626593807,
+                "right": 19.53551912568306,
+                "top": 31.043478260869566
               },
               "type": "text"
             },
@@ -1025,13 +1039,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-DYE3&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 18",
               "placement": {
-                "bottom": 75.64308681672026,
-                "left": 10.15531660692951,
-                "right": 84.30904022301871,
-                "top": 21.221864951768488
+                "bottom": 65.83904109589042,
+                "left": 81.82897862232778,
+                "right": 12.628661916072842,
+                "top": 31.07876712328767
               },
               "type": "text"
             },
@@ -1070,10 +1091,10 @@
               "links": [],
               "name": "Element 21",
               "placement": {
-                "bottom": 63.344051446945336,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 34.244372990353696
+                "bottom": 53.47826086956522,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 44.086956521739125
               },
               "type": "metric-value"
             },
@@ -1112,10 +1133,10 @@
               "links": [],
               "name": "Element 22",
               "placement": {
-                "bottom": 63.344051446945336,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 34.244372990353696
+                "bottom": 53.47826086956522,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 44.086956521739125
               },
               "type": "text"
             },
@@ -1154,10 +1175,10 @@
               "links": [],
               "name": "Element 23",
               "placement": {
-                "bottom": 60.932475884244376,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 36.655948553054664
+                "bottom": 51.04347826086957,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 46.52173913043478
               },
               "type": "text"
             },
@@ -1195,10 +1216,10 @@
               "links": [],
               "name": "Element 24",
               "placement": {
-                "bottom": 60.932475884244376,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 36.655948553054664
+                "bottom": 51.04347826086957,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 46.52173913043478
               },
               "type": "metric-value"
             },
@@ -1236,10 +1257,10 @@
               "links": [],
               "name": "Element 25",
               "placement": {
-                "bottom": 63.344051446945336,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "top": 34.244372990353696
+                "bottom": 53.47826086956522,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 44.086956521739125
               },
               "type": "metric-value"
             },
@@ -1278,10 +1299,10 @@
               "links": [],
               "name": "Element 26",
               "placement": {
-                "bottom": 63.344051446945336,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 34.244372990353696
+                "bottom": 53.47826086956522,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 44.086956521739125
               },
               "type": "text"
             },
@@ -1320,10 +1341,10 @@
               "links": [],
               "name": "Element 27",
               "placement": {
-                "bottom": 60.932475884244376,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 36.655948553054664
+                "bottom": 51.04347826086957,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 46.52173913043478
               },
               "type": "text"
             },
@@ -1361,10 +1382,10 @@
               "links": [],
               "name": "Element 28",
               "placement": {
-                "bottom": 60.932475884244376,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "top": 36.655948553054664
+                "bottom": 51.04347826086957,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 46.52173913043478
               },
               "type": "metric-value"
             },
@@ -1396,13 +1417,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-FIBAC&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 29",
               "placement": {
-                "bottom": 65.7556270096463,
-                "left": 3.26563122262047,
-                "right": 91.19872560732776,
-                "top": 31.109324758842444
+                "bottom": 55.913043478260875,
+                "left": 74.9544626593807,
+                "right": 19.53551912568306,
+                "top": 40.95652173913044
               },
               "type": "text"
             },
@@ -1433,13 +1461,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-AIR&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 30",
               "placement": {
-                "bottom": 65.7556270096463,
-                "left": 10.15531660692951,
-                "right": 84.30904022301871,
-                "top": 31.109324758842444
+                "bottom": 55.913043478260875,
+                "left": 81.83060109289617,
+                "right": 12.61384335154827,
+                "top": 40.95652173913044
               },
               "type": "text"
             },
@@ -1477,10 +1512,10 @@
               "links": [],
               "name": "Element 31",
               "placement": {
-                "bottom": 53.456591639871384,
-                "left": 5.4958183990442055,
-                "right": 91.23855037833533,
-                "top": 44.13183279742765
+                "bottom": 43.65217391304348,
+                "left": 77.18579234972678,
+                "right": 19.581056466302368,
+                "top": 54
               },
               "type": "metric-value"
             },
@@ -1519,10 +1554,10 @@
               "links": [],
               "name": "Element 32",
               "placement": {
-                "bottom": 53.456591639871384,
-                "left": 3.26563122262047,
-                "right": 94.50418160095579,
-                "top": 44.13183279742765
+                "bottom": 43.65217391304348,
+                "left": 74.9544626593807,
+                "right": 22.814207650273225,
+                "top": 54
               },
               "type": "text"
             },
@@ -1561,10 +1596,10 @@
               "links": [],
               "name": "Element 33",
               "placement": {
-                "bottom": 51.045016077170416,
-                "left": 3.26563122262047,
-                "right": 94.50418160095579,
-                "top": 46.543408360128616
+                "bottom": 41.21739130434783,
+                "left": 74.9544626593807,
+                "right": 22.814207650273225,
+                "top": 56.34782608695652
               },
               "type": "text"
             },
@@ -1602,10 +1637,10 @@
               "links": [],
               "name": "Element 34",
               "placement": {
-                "bottom": 51.045016077170416,
-                "left": 5.4958183990442055,
-                "right": 91.23855037833533,
-                "top": 46.543408360128616
+                "bottom": 41.21739130434783,
+                "left": 77.18579234972678,
+                "right": 19.581056466302368,
+                "top": 56.34782608695652
               },
               "type": "metric-value"
             },
@@ -1643,10 +1678,10 @@
               "links": [],
               "name": "Element 35",
               "placement": {
-                "bottom": 53.456591639871384,
-                "left": 12.385503783353245,
-                "right": 84.34886499402629,
-                "top": 44.13183279742765
+                "bottom": 43.65217391304348,
+                "left": 84.06193078324226,
+                "right": 12.659380692167577,
+                "top": 54
               },
               "type": "metric-value"
             },
@@ -1685,10 +1720,10 @@
               "links": [],
               "name": "Element 36",
               "placement": {
-                "bottom": 53.456591639871384,
-                "left": 10.15531660692951,
-                "right": 87.61449621664676,
-                "top": 44.13183279742765
+                "bottom": 43.65217391304348,
+                "left": 81.83060109289617,
+                "right": 15.938069216757741,
+                "top": 54
               },
               "type": "text"
             },
@@ -1727,10 +1762,10 @@
               "links": [],
               "name": "Element 37",
               "placement": {
-                "bottom": 51.045016077170416,
-                "left": 10.15531660692951,
-                "right": 87.61449621664676,
-                "top": 46.543408360128616
+                "bottom": 41.21739130434783,
+                "left": 81.83060109289617,
+                "right": 15.938069216757741,
+                "top": 56.34782608695652
               },
               "type": "text"
             },
@@ -1768,10 +1803,10 @@
               "links": [],
               "name": "Element 38",
               "placement": {
-                "bottom": 51.045016077170416,
-                "left": 12.385503783353245,
-                "right": 84.34886499402629,
-                "top": 46.543408360128616
+                "bottom": 41.21739130434783,
+                "left": 84.06193078324226,
+                "right": 12.659380692167577,
+                "top": 56.34782608695652
               },
               "type": "metric-value"
             },
@@ -1794,7 +1829,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "織造"
+                  "fixed": "纖造"
                 },
                 "valign": "middle"
               },
@@ -1802,13 +1837,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-FIB1&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 39",
               "placement": {
-                "bottom": 55.86816720257235,
-                "left": 3.225806451612903,
-                "right": 91.23855037833533,
-                "top": 40.9967845659164
+                "bottom": 46,
+                "left": 74.90892531876139,
+                "right": 19.581056466302368,
+                "top": 50.8695652173913
               },
               "type": "text"
             },
@@ -1839,13 +1881,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-WH&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 40",
               "placement": {
-                "bottom": 55.86816720257235,
-                "left": 10.115491835921944,
-                "right": 84.34886499402629,
-                "top": 40.9967845659164
+                "bottom": 46,
+                "left": 81.78506375227687,
+                "right": 12.659380692167577,
+                "top": 50.8695652173913
               },
               "type": "text"
             },
@@ -1883,10 +1932,10 @@
               "links": [],
               "name": "Element 41",
               "placement": {
-                "bottom": 43.569131832797424,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 54.019292604501615
+                "bottom": 33.73913043478261,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 63.82608695652174
               },
               "type": "metric-value"
             },
@@ -1925,10 +1974,10 @@
               "links": [],
               "name": "Element 42",
               "placement": {
-                "bottom": 43.569131832797424,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 54.019292604501615
+                "bottom": 33.73913043478261,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 63.82608695652174
               },
               "type": "text"
             },
@@ -1967,10 +2016,10 @@
               "links": [],
               "name": "Element 43",
               "placement": {
-                "bottom": 41.157556270096464,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 56.430868167202576
+                "bottom": 31.30434782608696,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 66.26086956521739
               },
               "type": "text"
             },
@@ -2008,10 +2057,10 @@
               "links": [],
               "name": "Element 44",
               "placement": {
-                "bottom": 41.157556270096464,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 56.430868167202576
+                "bottom": 31.30434782608696,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 66.26086956521739
               },
               "type": "metric-value"
             },
@@ -2049,10 +2098,10 @@
               "links": [],
               "name": "Element 45",
               "placement": {
-                "bottom": 43.569131832797424,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "top": 54.019292604501615
+                "bottom": 33.73913043478261,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 63.82608695652174
               },
               "type": "metric-value"
             },
@@ -2091,10 +2140,10 @@
               "links": [],
               "name": "Element 46",
               "placement": {
-                "bottom": 43.569131832797424,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 54.019292604501615
+                "bottom": 33.73913043478261,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 63.82608695652174
               },
               "type": "text"
             },
@@ -2133,10 +2182,10 @@
               "links": [],
               "name": "Element 47",
               "placement": {
-                "bottom": 41.157556270096464,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 56.430868167202576
+                "bottom": 31.30434782608696,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 66.26086956521739
               },
               "type": "text"
             },
@@ -2174,10 +2223,10 @@
               "links": [],
               "name": "Element 48",
               "placement": {
-                "bottom": 41.157556270096464,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "top": 56.430868167202576
+                "bottom": 31.30434782608696,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 66.26086956521739
               },
               "type": "metric-value"
             },
@@ -2208,13 +2257,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-OFF&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 49",
               "placement": {
-                "bottom": 45.98070739549839,
-                "left": 3.26563122262047,
-                "right": 91.19872560732776,
-                "top": 50.88424437299035
+                "bottom": 36.173913043478265,
+                "left": 74.9544626593807,
+                "right": 19.53551912568306,
+                "top": 60.69565217391304
               },
               "type": "text"
             },
@@ -2245,13 +2301,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-CRANE&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 50",
               "placement": {
-                "bottom": 45.98070739549839,
-                "left": 10.15531660692951,
-                "right": 84.30904022301871,
-                "top": 50.88424437299035
+                "bottom": 36.173913043478265,
+                "left": 81.83060109289617,
+                "right": 12.61384335154827,
+                "top": 60.69565217391304
               },
               "type": "text"
             },
@@ -2289,10 +2352,10 @@
               "links": [],
               "name": "Element 51",
               "placement": {
-                "bottom": 33.68167202572347,
-                "left": 5.4958183990442055,
-                "right": 91.23855037833533,
-                "top": 63.90675241157556
+                "bottom": 23.82608695652174,
+                "left": 77.18579234972678,
+                "right": 19.581056466302368,
+                "top": 73.73913043478261
               },
               "type": "metric-value"
             },
@@ -2331,10 +2394,10 @@
               "links": [],
               "name": "Element 52",
               "placement": {
-                "bottom": 33.68167202572347,
-                "left": 3.26563122262047,
-                "right": 94.50418160095579,
-                "top": 63.90675241157556
+                "bottom": 23.82608695652174,
+                "left": 74.9544626593807,
+                "right": 22.814207650273225,
+                "top": 73.73913043478261
               },
               "type": "text"
             },
@@ -2373,10 +2436,10 @@
               "links": [],
               "name": "Element 53",
               "placement": {
-                "bottom": 31.270096463022508,
-                "left": 3.26563122262047,
-                "right": 94.50418160095579,
-                "top": 66.31832797427653
+                "bottom": 21.391304347826086,
+                "left": 74.9544626593807,
+                "right": 22.814207650273225,
+                "top": 76.17391304347827
               },
               "type": "text"
             },
@@ -2414,10 +2477,10 @@
               "links": [],
               "name": "Element 54",
               "placement": {
-                "bottom": 31.270096463022508,
-                "left": 5.4958183990442055,
-                "right": 91.23855037833533,
-                "top": 66.31832797427653
+                "bottom": 21.391304347826086,
+                "left": 77.18579234972678,
+                "right": 19.581056466302368,
+                "top": 76.17391304347827
               },
               "type": "metric-value"
             },
@@ -2455,10 +2518,10 @@
               "links": [],
               "name": "Element 55",
               "placement": {
-                "bottom": 33.68167202572347,
-                "left": 12.385503783353245,
-                "right": 84.34886499402629,
-                "top": 63.90675241157556
+                "bottom": 23.82608695652174,
+                "left": 84.06193078324226,
+                "right": 12.659380692167577,
+                "top": 73.73913043478261
               },
               "type": "metric-value"
             },
@@ -2497,10 +2560,10 @@
               "links": [],
               "name": "Element 56",
               "placement": {
-                "bottom": 33.68167202572347,
-                "left": 10.15531660692951,
-                "right": 87.61449621664676,
-                "top": 63.90675241157556
+                "bottom": 23.82608695652174,
+                "left": 81.83060109289617,
+                "right": 15.938069216757741,
+                "top": 73.73913043478261
               },
               "type": "text"
             },
@@ -2539,10 +2602,10 @@
               "links": [],
               "name": "Element 57",
               "placement": {
-                "bottom": 31.270096463022508,
-                "left": 10.15531660692951,
-                "right": 87.61449621664676,
-                "top": 66.31832797427653
+                "bottom": 21.391304347826086,
+                "left": 81.83060109289617,
+                "right": 15.938069216757741,
+                "top": 76.17391304347827
               },
               "type": "text"
             },
@@ -2580,10 +2643,10 @@
               "links": [],
               "name": "Element 58",
               "placement": {
-                "bottom": 31.270096463022508,
-                "left": 12.385503783353245,
-                "right": 84.34886499402629,
-                "top": 66.31832797427653
+                "bottom": 21.391304347826086,
+                "left": 84.06193078324226,
+                "right": 12.659380692167577,
+                "top": 76.17391304347827
               },
               "type": "metric-value"
             },
@@ -2614,13 +2677,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-PRINT&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 59",
               "placement": {
-                "bottom": 36.09324758842444,
-                "left": 3.225806451612903,
-                "right": 91.23855037833533,
-                "top": 60.77170418006431
+                "bottom": 26.260869565217394,
+                "left": 74.90892531876139,
+                "right": 19.581056466302368,
+                "top": 70.6086956521739
               },
               "type": "text"
             },
@@ -2643,7 +2713,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "染整抽風機"
+                  "fixed": "染整區抽風扇"
                 },
                 "valign": "middle"
               },
@@ -2651,13 +2721,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-EXH1&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 60",
               "placement": {
-                "bottom": 36.09324758842444,
-                "left": 10.115491835921944,
-                "right": 84.34886499402629,
-                "top": 60.77170418006431
+                "bottom": 26.260869565217394,
+                "left": 81.78506375227687,
+                "right": 12.659380692167577,
+                "top": 70.6086956521739
               },
               "type": "text"
             },
@@ -2695,10 +2772,10 @@
               "links": [],
               "name": "Element 61",
               "placement": {
-                "bottom": 23.79421221864952,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 73.79421221864952
+                "bottom": 13.91304347826087,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 83.65217391304348
               },
               "type": "metric-value"
             },
@@ -2737,10 +2814,10 @@
               "links": [],
               "name": "Element 62",
               "placement": {
-                "bottom": 23.79421221864952,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 73.79421221864952
+                "bottom": 13.91304347826087,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 83.65217391304348
               },
               "type": "text"
             },
@@ -2779,10 +2856,10 @@
               "links": [],
               "name": "Element 63",
               "placement": {
-                "bottom": 21.382636655948552,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 76.20578778135048
+                "bottom": 11.565217391304348,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 86.08695652173914
               },
               "type": "text"
             },
@@ -2820,10 +2897,10 @@
               "links": [],
               "name": "Element 64",
               "placement": {
-                "bottom": 21.382636655948552,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 76.20578778135048
+                "bottom": 11.565217391304348,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 86.08695652173914
               },
               "type": "metric-value"
             },
@@ -2861,10 +2938,10 @@
               "links": [],
               "name": "Element 65",
               "placement": {
-                "bottom": 23.79421221864952,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "top": 73.79421221864952
+                "bottom": 13.91304347826087,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 83.65217391304348
               },
               "type": "metric-value"
             },
@@ -2903,10 +2980,10 @@
               "links": [],
               "name": "Element 66",
               "placement": {
-                "bottom": 23.79421221864952,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 73.79421221864952
+                "bottom": 13.91304347826087,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 83.65217391304348
               },
               "type": "text"
             },
@@ -2945,10 +3022,10 @@
               "links": [],
               "name": "Element 67",
               "placement": {
-                "bottom": 21.382636655948552,
-                "left": 10.195141377937077,
-                "right": 87.57467144563918,
-                "top": 76.20578778135048
+                "bottom": 11.565217391304348,
+                "left": 81.87613843351548,
+                "right": 15.892531876138433,
+                "top": 86.08695652173914
               },
               "type": "text"
             },
@@ -2986,10 +3063,10 @@
               "links": [],
               "name": "Element 68",
               "placement": {
-                "bottom": 21.382636655948552,
-                "left": 12.425328554360812,
-                "right": 84.30904022301871,
-                "top": 76.20578778135048
+                "bottom": 11.565217391304348,
+                "left": 84.10746812386157,
+                "right": 12.61384335154827,
+                "top": 86.08695652173914
               },
               "type": "metric-value"
             },
@@ -3012,7 +3089,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "織造電梯"
+                  "fixed": "纖造電梯2"
                 },
                 "valign": "middle"
               },
@@ -3020,13 +3097,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-ELV2&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 69",
               "placement": {
-                "bottom": 26.20578778135048,
-                "left": 3.26563122262047,
-                "right": 91.19872560732776,
-                "top": 70.65916398713826
+                "bottom": 16.34782608695652,
+                "left": 74.9544626593807,
+                "right": 19.53551912568306,
+                "top": 80.52173913043478
               },
               "type": "text"
             },
@@ -3057,13 +3141,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-SEC&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 70",
               "placement": {
-                "bottom": 26.20578778135048,
-                "left": 10.15531660692951,
-                "right": 84.30904022301871,
-                "top": 70.65916398713826
+                "bottom": 16.34782608695652,
+                "left": 81.83060109289617,
+                "right": 12.61384335154827,
+                "top": 80.52173913043478
               },
               "type": "text"
             },
@@ -3101,10 +3192,10 @@
               "links": [],
               "name": "Element 71",
               "placement": {
-                "bottom": 13.906752411575562,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 83.68167202572347
+                "bottom": 4.08695652173913,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 93.56521739130434
               },
               "type": "metric-value"
             },
@@ -3143,10 +3234,10 @@
               "links": [],
               "name": "Element 72",
               "placement": {
-                "bottom": 13.906752411575562,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 83.68167202572347
+                "bottom": 4.08695652173913,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 93.56521739130434
               },
               "type": "text"
             },
@@ -3185,10 +3276,10 @@
               "links": [],
               "name": "Element 73",
               "placement": {
-                "bottom": 11.495176848874598,
-                "left": 3.305455993628036,
-                "right": 94.46435682994823,
-                "top": 86.09324758842443
+                "bottom": 1.652173913043478,
+                "left": 75,
+                "right": 22.768670309653917,
+                "top": 95.91304347826087
               },
               "type": "text"
             },
@@ -3226,10 +3317,10 @@
               "links": [],
               "name": "Element 74",
               "placement": {
-                "bottom": 11.495176848874598,
-                "left": 5.535643170051772,
-                "right": 91.19872560732776,
-                "top": 86.09324758842443
+                "bottom": 1.652173913043478,
+                "left": 77.23132969034609,
+                "right": 19.53551912568306,
+                "top": 95.91304347826087
               },
               "type": "metric-value"
             },
@@ -3252,7 +3343,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "第一電站抽風機"
+                  "fixed": "電站1抽風扇"
                 },
                 "valign": "middle"
               },
@@ -3260,13 +3351,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-EXH2&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 75",
               "placement": {
-                "bottom": 16.318327974276528,
-                "left": 3.26563122262047,
-                "right": 91.19872560732776,
-                "top": 80.54662379421221
+                "bottom": 6.434782608695652,
+                "left": 74.9544626593807,
+                "right": 19.53551912568306,
+                "top": 90.43478260869566
               },
               "type": "text"
             },
@@ -3286,12 +3384,12 @@
               "config": {
                 "align": "right",
                 "color": {
-                  "field": "DYE1_kW",
+                  "field": "DYE2_kW",
                   "fixed": "#000000"
                 },
                 "size": 18,
                 "text": {
-                  "field": "DYE1_kW",
+                  "field": "DYE2_kW",
                   "fixed": "",
                   "mode": "field"
                 },
@@ -3304,11 +3402,11 @@
               "links": [],
               "name": "Element 76",
               "placement": {
-                "bottom": 51.76848874598071,
-                "left": 85.86220629231381,
-                "right": 10.87216248506571,
+                "bottom": 69.77739726027397,
+                "left": 13.262074425969914,
+                "right": 83.53127474267616,
                 "rotation": 0,
-                "top": 45.81993569131833
+                "top": 27.825342465753423
               },
               "type": "metric-value"
             },
@@ -3347,10 +3445,10 @@
               "links": [],
               "name": "Element 77",
               "placement": {
-                "bottom": 51.76848874598071,
-                "left": 83.63201911589009,
-                "right": 14.13779370768618,
-                "top": 45.81993569131833
+                "bottom": 69.73913043478261,
+                "left": 11.020036429872496,
+                "right": 86.74863387978142,
+                "top": 27.82608695652174
               },
               "type": "text"
             },
@@ -3389,10 +3487,10 @@
               "links": [],
               "name": "Element 78",
               "placement": {
-                "bottom": 49.356913183279744,
-                "left": 83.63201911589009,
-                "right": 14.13779370768618,
-                "top": 48.231511254019296
+                "bottom": 67.30434782608695,
+                "left": 11.020036429872496,
+                "right": 86.74863387978142,
+                "top": 30.26086956521739
               },
               "type": "text"
             },
@@ -3412,12 +3510,12 @@
               "config": {
                 "align": "right",
                 "color": {
-                  "field": "DYE1_PF",
+                  "field": "DYE2_PF",
                   "fixed": "#000000"
                 },
                 "size": 18,
                 "text": {
-                  "field": "DYE1_PF",
+                  "field": "DYE2_PF",
                   "fixed": "",
                   "mode": "field"
                 },
@@ -3430,11 +3528,11 @@
               "links": [],
               "name": "Element 79",
               "placement": {
-                "bottom": 49.356913183279744,
-                "left": 85.86220629231381,
-                "right": 10.87216248506571,
+                "bottom": 67.2945205479452,
+                "left": 13.262074425969914,
+                "right": 83.53127474267616,
                 "rotation": 0,
-                "top": 48.231511254019296
+                "top": 30.222602739726028
               },
               "type": "metric-value"
             },
@@ -3472,11 +3570,10 @@
               "links": [],
               "name": "Element 80",
               "placement": {
-                "bottom": 51.76848874598071,
-                "left": 92.75189167662286,
-                "right": 3.982477100756671,
-                "rotation": 0,
-                "top": 45.81993569131833
+                "bottom": 69.73913043478261,
+                "left": 20.127504553734063,
+                "right": 76.59380692167578,
+                "top": 27.82608695652174
               },
               "type": "metric-value"
             },
@@ -3515,10 +3612,10 @@
               "links": [],
               "name": "Element 81",
               "placement": {
-                "bottom": 51.76848874598071,
-                "left": 90.52170450019914,
-                "right": 7.24810832337714,
-                "top": 45.81993569131833
+                "bottom": 69.73913043478261,
+                "left": 17.89617486338798,
+                "right": 79.87249544626593,
+                "top": 27.82608695652174
               },
               "type": "text"
             },
@@ -3557,10 +3654,10 @@
               "links": [],
               "name": "Element 82",
               "placement": {
-                "bottom": 49.356913183279744,
-                "left": 90.52170450019914,
-                "right": 7.24810832337714,
-                "top": 48.231511254019296
+                "bottom": 67.30434782608695,
+                "left": 17.89617486338798,
+                "right": 79.87249544626593,
+                "top": 30.26086956521739
               },
               "type": "text"
             },
@@ -3598,11 +3695,10 @@
               "links": [],
               "name": "Element 83",
               "placement": {
-                "bottom": 49.356913183279744,
-                "left": 92.75189167662286,
-                "right": 3.982477100756671,
-                "rotation": 0,
-                "top": 48.231511254019296
+                "bottom": 67.30434782608695,
+                "left": 20.127504553734063,
+                "right": 76.59380692167578,
+                "top": 30.26086956521739
               },
               "type": "metric-value"
             },
@@ -3625,7 +3721,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "浸染+化料+染料"
+                  "fixed": "浸染區+化料+染料"
                 },
                 "valign": "middle"
               },
@@ -3633,13 +3729,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-DYE2&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 84",
               "placement": {
-                "bottom": 54.18006430868167,
-                "left": 83.59219434488251,
-                "right": 10.87216248506571,
-                "top": 42.68488745980707
+                "bottom": 72.17391304347827,
+                "left": 10.974499089253188,
+                "right": 83.51548269581056,
+                "top": 24.695652173913043
               },
               "type": "text"
             },
@@ -3670,13 +3773,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-BOIL&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 85",
               "placement": {
-                "bottom": 54.18006430868167,
-                "left": 90.48187972919156,
-                "right": 3.982477100756671,
-                "top": 42.68488745980707
+                "bottom": 72.17391304347827,
+                "left": 17.850637522768668,
+                "right": 76.59380692167578,
+                "top": 24.695652173913043
               },
               "type": "text"
             },
@@ -3714,11 +3824,10 @@
               "links": [],
               "name": "Element 86",
               "placement": {
-                "bottom": 41.88102893890675,
-                "left": 85.82238152130626,
-                "right": 10.911987256073278,
-                "rotation": 0,
-                "top": 55.70739549839229
+                "bottom": 59.913043478260875,
+                "left": 13.20582877959927,
+                "right": 83.56102003642987,
+                "top": 37.73913043478261
               },
               "type": "metric-value"
             },
@@ -3757,10 +3866,10 @@
               "links": [],
               "name": "Element 87",
               "placement": {
-                "bottom": 41.88102893890675,
-                "left": 83.59219434488251,
-                "right": 14.177618478693748,
-                "top": 55.70739549839229
+                "bottom": 59.913043478260875,
+                "left": 10.974499089253188,
+                "right": 86.79417122040073,
+                "top": 37.73913043478261
               },
               "type": "text"
             },
@@ -3799,10 +3908,10 @@
               "links": [],
               "name": "Element 88",
               "placement": {
-                "bottom": 39.469453376205784,
-                "left": 83.59219434488251,
-                "right": 14.177618478693748,
-                "top": 58.11897106109325
+                "bottom": 57.47826086956521,
+                "left": 10.974499089253188,
+                "right": 86.79417122040073,
+                "top": 40.08695652173913
               },
               "type": "text"
             },
@@ -3840,11 +3949,10 @@
               "links": [],
               "name": "Element 89",
               "placement": {
-                "bottom": 39.469453376205784,
-                "left": 85.82238152130626,
-                "right": 10.911987256073278,
-                "rotation": 0,
-                "top": 58.11897106109325
+                "bottom": 57.47826086956521,
+                "left": 13.20582877959927,
+                "right": 83.56102003642987,
+                "top": 40.08695652173913
               },
               "type": "metric-value"
             },
@@ -3882,11 +3990,10 @@
               "links": [],
               "name": "Element 90",
               "placement": {
-                "bottom": 41.88102893890675,
-                "left": 92.7120669056153,
-                "right": 4.022301871764237,
-                "rotation": 0,
-                "top": 55.70739549839229
+                "bottom": 59.913043478260875,
+                "left": 20.081967213114755,
+                "right": 76.63934426229508,
+                "top": 37.73913043478261
               },
               "type": "metric-value"
             },
@@ -3925,10 +4032,10 @@
               "links": [],
               "name": "Element 91",
               "placement": {
-                "bottom": 41.88102893890675,
-                "left": 90.48187972919156,
-                "right": 7.287933094384708,
-                "top": 55.70739549839229
+                "bottom": 59.913043478260875,
+                "left": 17.850637522768668,
+                "right": 79.91803278688525,
+                "top": 37.73913043478261
               },
               "type": "text"
             },
@@ -3967,10 +4074,10 @@
               "links": [],
               "name": "Element 92",
               "placement": {
-                "bottom": 39.469453376205784,
-                "left": 90.48187972919156,
-                "right": 7.287933094384708,
-                "top": 58.11897106109325
+                "bottom": 57.47826086956521,
+                "left": 17.850637522768668,
+                "right": 79.91803278688525,
+                "top": 40.08695652173913
               },
               "type": "text"
             },
@@ -4008,11 +4115,10 @@
               "links": [],
               "name": "Element 93",
               "placement": {
-                "bottom": 39.469453376205784,
-                "left": 92.7120669056153,
-                "right": 4.022301871764237,
-                "rotation": 0,
-                "top": 58.11897106109325
+                "bottom": 57.47826086956521,
+                "left": 20.081967213114755,
+                "right": 76.63934426229508,
+                "top": 40.08695652173913
               },
               "type": "metric-value"
             },
@@ -4035,7 +4141,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "廢水+食堂+軟水"
+                  "fixed": "廢水處理+食堂+軟水"
                 },
                 "valign": "middle"
               },
@@ -4043,13 +4149,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-WASTE&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 94",
               "placement": {
-                "bottom": 44.29260450160772,
-                "left": 83.55236957387496,
-                "right": 10.911987256073278,
-                "top": 52.572347266881025
+                "bottom": 62.26086956521739,
+                "left": 10.92896174863388,
+                "right": 83.56102003642987,
+                "top": 34.608695652173914
               },
               "type": "text"
             },
@@ -4080,13 +4193,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-QAHB&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 95",
               "placement": {
-                "bottom": 44.29260450160772,
-                "left": 90.44205495818399,
-                "right": 4.022301871764237,
-                "top": 52.572347266881025
+                "bottom": 62.26086956521739,
+                "left": 17.805100182149364,
+                "right": 76.63934426229508,
+                "top": 34.608695652173914
               },
               "type": "text"
             },
@@ -4124,11 +4244,10 @@
               "links": [],
               "name": "Element 96",
               "placement": {
-                "bottom": 31.9935691318328,
-                "left": 85.78255675029868,
-                "right": 10.951812027080845,
-                "rotation": 0,
-                "top": 65.59485530546624
+                "bottom": 50,
+                "left": 13.160291438979963,
+                "right": 83.60655737704919,
+                "top": 47.56521739130435
               },
               "type": "metric-value"
             },
@@ -4167,10 +4286,10 @@
               "links": [],
               "name": "Element 97",
               "placement": {
-                "bottom": 31.9935691318328,
-                "left": 83.55236957387496,
-                "right": 14.217443249701315,
-                "top": 65.59485530546624
+                "bottom": 50,
+                "left": 10.92896174863388,
+                "right": 86.83970856102003,
+                "top": 47.56521739130435
               },
               "type": "text"
             },
@@ -4209,10 +4328,10 @@
               "links": [],
               "name": "Element 98",
               "placement": {
-                "bottom": 29.581993569131832,
-                "left": 83.55236957387496,
-                "right": 14.217443249701315,
-                "top": 68.0064308681672
+                "bottom": 47.56521739130435,
+                "left": 10.92896174863388,
+                "right": 86.83970856102003,
+                "top": 50
               },
               "type": "text"
             },
@@ -4250,11 +4369,10 @@
               "links": [],
               "name": "Element 99",
               "placement": {
-                "bottom": 29.581993569131832,
-                "left": 85.78255675029868,
-                "right": 10.951812027080845,
-                "rotation": 0,
-                "top": 68.0064308681672
+                "bottom": 47.56521739130435,
+                "left": 13.160291438979963,
+                "right": 83.60655737704919,
+                "top": 50
               },
               "type": "metric-value"
             },
@@ -4292,11 +4410,10 @@
               "links": [],
               "name": "Element 100",
               "placement": {
-                "bottom": 31.9935691318328,
-                "left": 92.67224213460773,
-                "right": 4.062126642771804,
-                "rotation": 0,
-                "top": 65.59485530546624
+                "bottom": 50,
+                "left": 20.036429872495447,
+                "right": 76.68488160291439,
+                "top": 47.56521739130435
               },
               "type": "metric-value"
             },
@@ -4335,10 +4452,10 @@
               "links": [],
               "name": "Element 101",
               "placement": {
-                "bottom": 31.9935691318328,
-                "left": 90.44205495818399,
-                "right": 7.327757865392274,
-                "top": 65.59485530546624
+                "bottom": 50,
+                "left": 17.805100182149364,
+                "right": 79.96357012750455,
+                "top": 47.56521739130435
               },
               "type": "text"
             },
@@ -4377,10 +4494,10 @@
               "links": [],
               "name": "Element 102",
               "placement": {
-                "bottom": 29.581993569131832,
-                "left": 90.44205495818399,
-                "right": 7.327757865392274,
-                "top": 68.0064308681672
+                "bottom": 47.56521739130435,
+                "left": 17.805100182149364,
+                "right": 79.96357012750455,
+                "top": 50
               },
               "type": "text"
             },
@@ -4418,11 +4535,10 @@
               "links": [],
               "name": "Element 103",
               "placement": {
-                "bottom": 29.581993569131832,
-                "left": 92.67224213460773,
-                "right": 4.062126642771804,
-                "rotation": 0,
-                "top": 68.0064308681672
+                "bottom": 47.56521739130435,
+                "left": 20.036429872495447,
+                "right": 76.68488160291439,
+                "top": 50
               },
               "type": "metric-value"
             },
@@ -4445,7 +4561,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "備用"
+                  "fixed": "預留迴路2"
                 },
                 "valign": "middle"
               },
@@ -4453,13 +4569,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-RSV2&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 104",
               "placement": {
-                "bottom": 34.40514469453376,
-                "left": 83.51254480286738,
-                "right": 10.951812027080845,
-                "top": 62.459807073954984
+                "bottom": 52.43478260869565,
+                "left": 10.883424408014571,
+                "right": 83.60655737704919,
+                "top": 44.43478260869565
               },
               "type": "text"
             },
@@ -4482,7 +4605,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "備用"
+                  "fixed": "預留迴路3"
                 },
                 "valign": "middle"
               },
@@ -4490,13 +4613,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-RSV3&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 105",
               "placement": {
-                "bottom": 34.40514469453376,
-                "left": 90.40223018717643,
-                "right": 4.062126642771804,
-                "top": 62.459807073954984
+                "bottom": 52.43478260869565,
+                "left": 17.759562841530055,
+                "right": 76.68488160291439,
+                "top": 44.43478260869565
               },
               "type": "text"
             },
@@ -4516,12 +4646,12 @@
               "config": {
                 "align": "right",
                 "color": {
-                  "field": "DYE2_kW",
+                  "field": "DYE1_kW",
                   "fixed": "#000000"
                 },
                 "size": 18,
                 "text": {
-                  "field": "DYE2_kW",
+                  "field": "DYE1_kW",
                   "fixed": "",
                   "mode": "field"
                 },
@@ -4534,11 +4664,11 @@
               "links": [],
               "name": "Element 110",
               "placement": {
-                "bottom": 51.76848874598071,
-                "left": 78.89287136598965,
-                "right": 17.841497411389884,
+                "bottom": 69.77739726027397,
+                "left": 6.25494853523357,
+                "right": 90.49881235154395,
                 "rotation": 0,
-                "top": 45.81993569131833
+                "top": 27.825342465753423
               },
               "type": "metric-value"
             },
@@ -4577,10 +4707,10 @@
               "links": [],
               "name": "Element 111",
               "placement": {
-                "bottom": 51.76848874598071,
-                "left": 76.66268418956591,
-                "right": 21.107128634010355,
-                "top": 45.81993569131833
+                "bottom": 69.73913043478261,
+                "left": 4.052823315118397,
+                "right": 93.76138433515483,
+                "top": 27.82608695652174
               },
               "type": "text"
             },
@@ -4619,10 +4749,10 @@
               "links": [],
               "name": "Element 112",
               "placement": {
-                "bottom": 49.356913183279744,
-                "left": 76.66268418956591,
-                "right": 21.107128634010355,
-                "top": 48.231511254019296
+                "bottom": 67.30434782608695,
+                "left": 4.052823315118397,
+                "right": 93.76138433515483,
+                "top": 30.26086956521739
               },
               "type": "text"
             },
@@ -4642,12 +4772,12 @@
               "config": {
                 "align": "right",
                 "color": {
-                  "field": "DYE2_PF",
+                  "field": "DYE1_PF",
                   "fixed": "#000000"
                 },
                 "size": 18,
                 "text": {
-                  "field": "DYE2_PF",
+                  "field": "DYE1_PF",
                   "fixed": "",
                   "mode": "field"
                 },
@@ -4660,11 +4790,11 @@
               "links": [],
               "name": "Element 113",
               "placement": {
-                "bottom": 49.356913183279744,
-                "left": 78.89287136598965,
-                "right": 17.841497411389884,
+                "bottom": 67.2945205479452,
+                "left": 6.25494853523357,
+                "right": 90.49881235154395,
                 "rotation": 0,
-                "top": 48.231511254019296
+                "top": 30.222602739726028
               },
               "type": "metric-value"
             },
@@ -4695,13 +4825,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-DYE1&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 115",
               "placement": {
-                "bottom": 54.18006430868167,
-                "left": 76.62285941855835,
-                "right": 17.841497411389884,
-                "top": 42.68488745980707
+                "bottom": 72.17391304347827,
+                "left": 4.007285974499089,
+                "right": 90.48269581056466,
+                "top": 24.695652173913043
               },
               "type": "text"
             },
@@ -4739,11 +4876,10 @@
               "links": [],
               "name": "Element 116",
               "placement": {
-                "bottom": 22.106109324758844,
-                "left": 85.86220629231381,
-                "right": 10.87216248506571,
-                "rotation": 0,
-                "top": 75.48231511254019
+                "bottom": 40.08695652173913,
+                "left": 13.25136612021858,
+                "right": 83.51548269581056,
+                "top": 57.47826086956521
               },
               "type": "metric-value"
             },
@@ -4782,10 +4918,10 @@
               "links": [],
               "name": "Element 117",
               "placement": {
-                "bottom": 22.106109324758844,
-                "left": 83.63201911589009,
-                "right": 14.13779370768618,
-                "top": 75.48231511254019
+                "bottom": 40.08695652173913,
+                "left": 11.020036429872496,
+                "right": 86.74863387978142,
+                "top": 57.47826086956521
               },
               "type": "text"
             },
@@ -4824,10 +4960,10 @@
               "links": [],
               "name": "Element 118",
               "placement": {
-                "bottom": 19.69453376205788,
-                "left": 83.63201911589009,
-                "right": 14.13779370768618,
-                "top": 77.89389067524117
+                "bottom": 37.65217391304348,
+                "left": 11.020036429872496,
+                "right": 86.74863387978142,
+                "top": 59.913043478260875
               },
               "type": "text"
             },
@@ -4865,11 +5001,10 @@
               "links": [],
               "name": "Element 119",
               "placement": {
-                "bottom": 19.69453376205788,
-                "left": 85.86220629231381,
-                "right": 10.87216248506571,
-                "rotation": 0,
-                "top": 77.89389067524117
+                "bottom": 37.65217391304348,
+                "left": 13.25136612021858,
+                "right": 83.51548269581056,
+                "top": 59.913043478260875
               },
               "type": "metric-value"
             },
@@ -4908,11 +5043,10 @@
               "links": [],
               "name": "Element 120",
               "placement": {
-                "bottom": 41.88102893890675,
-                "left": 78.85304659498208,
-                "right": 17.88132218239745,
-                "rotation": 0,
-                "top": 55.70739549839229
+                "bottom": 59.913043478260875,
+                "left": 6.238615664845173,
+                "right": 90.52823315118397,
+                "top": 37.73913043478261
               },
               "type": "metric-value"
             },
@@ -4951,10 +5085,10 @@
               "links": [],
               "name": "Element 121",
               "placement": {
-                "bottom": 41.88102893890675,
-                "left": 76.62285941855835,
-                "right": 21.14695340501792,
-                "top": 55.70739549839229
+                "bottom": 59.913043478260875,
+                "left": 4.007285974499089,
+                "right": 93.76138433515483,
+                "top": 37.73913043478261
               },
               "type": "text"
             },
@@ -4993,10 +5127,10 @@
               "links": [],
               "name": "Element 122",
               "placement": {
-                "bottom": 39.469453376205784,
-                "left": 76.62285941855835,
-                "right": 21.14695340501792,
-                "top": 58.11897106109325
+                "bottom": 57.47826086956521,
+                "left": 4.007285974499089,
+                "right": 93.76138433515483,
+                "top": 40.08695652173913
               },
               "type": "text"
             },
@@ -5034,11 +5168,10 @@
               "links": [],
               "name": "Element 123",
               "placement": {
-                "bottom": 39.469453376205784,
-                "left": 78.85304659498208,
-                "right": 17.88132218239745,
-                "rotation": 0,
-                "top": 58.11897106109325
+                "bottom": 57.47826086956521,
+                "left": 6.238615664845173,
+                "right": 90.52823315118397,
+                "top": 40.08695652173913
               },
               "type": "metric-value"
             },
@@ -5061,7 +5194,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "第二電站插座"
+                  "fixed": "電站2插座"
                 },
                 "valign": "middle"
               },
@@ -5069,13 +5202,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-SOC2&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 124",
               "placement": {
-                "bottom": 24.517684887459808,
-                "left": 83.59219434488251,
-                "right": 10.87216248506571,
-                "top": 72.34726688102894
+                "bottom": 42.52173913043478,
+                "left": 10.974499089253188,
+                "right": 83.51548269581056,
+                "top": 54.347826086956516
               },
               "type": "text"
             },
@@ -5098,7 +5238,7 @@
                 },
                 "size": 16,
                 "text": {
-                  "fixed": "備用"
+                  "fixed": "預留迴路1"
                 },
                 "valign": "middle"
               },
@@ -5106,13 +5246,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-RSV1&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 125",
               "placement": {
-                "bottom": 44.29260450160772,
-                "left": 76.58303464755078,
-                "right": 17.88132218239745,
-                "top": 52.572347266881025
+                "bottom": 62.26086956521739,
+                "left": 3.9617486338797816,
+                "right": 90.52823315118397,
+                "top": 34.608695652173914
               },
               "type": "text"
             },
@@ -5150,11 +5297,10 @@
               "links": [],
               "name": "Element 126",
               "placement": {
-                "bottom": 22.106109324758844,
-                "left": 92.7120669056153,
-                "right": 4.022301871764237,
-                "rotation": 0,
-                "top": 75.48231511254019
+                "bottom": 40.08695652173913,
+                "left": 20.081967213114755,
+                "right": 76.63934426229508,
+                "top": 57.47826086956521
               },
               "type": "metric-value"
             },
@@ -5193,10 +5339,10 @@
               "links": [],
               "name": "Element 127",
               "placement": {
-                "bottom": 22.106109324758844,
-                "left": 90.48187972919156,
-                "right": 7.287933094384708,
-                "top": 75.48231511254019
+                "bottom": 40.08695652173913,
+                "left": 17.850637522768668,
+                "right": 79.91803278688525,
+                "top": 57.47826086956521
               },
               "type": "text"
             },
@@ -5235,10 +5381,10 @@
               "links": [],
               "name": "Element 128",
               "placement": {
-                "bottom": 19.69453376205788,
-                "left": 90.48187972919156,
-                "right": 7.287933094384708,
-                "top": 77.89389067524117
+                "bottom": 37.65217391304348,
+                "left": 17.850637522768668,
+                "right": 79.91803278688525,
+                "top": 59.913043478260875
               },
               "type": "text"
             },
@@ -5276,11 +5422,10 @@
               "links": [],
               "name": "Element 129",
               "placement": {
-                "bottom": 19.69453376205788,
-                "left": 92.7120669056153,
-                "right": 4.022301871764237,
-                "rotation": 0,
-                "top": 77.89389067524117
+                "bottom": 37.65217391304348,
+                "left": 20.081967213114755,
+                "right": 76.63934426229508,
+                "top": 59.913043478260875
               },
               "type": "metric-value"
             },
@@ -5318,11 +5463,10 @@
               "links": [],
               "name": "Element 130",
               "placement": {
-                "bottom": 31.9935691318328,
-                "left": 78.89287136598965,
-                "right": 17.841497411389884,
-                "rotation": 0,
-                "top": 65.59485530546624
+                "bottom": 50,
+                "left": 6.238615664845173,
+                "right": 90.48269581056466,
+                "top": 47.56521739130435
               },
               "type": "metric-value"
             },
@@ -5361,10 +5505,10 @@
               "links": [],
               "name": "Element 131",
               "placement": {
-                "bottom": 31.9935691318328,
-                "left": 76.66268418956591,
-                "right": 21.107128634010355,
-                "top": 65.59485530546624
+                "bottom": 50,
+                "left": 4.052823315118397,
+                "right": 93.76138433515483,
+                "top": 47.56521739130435
               },
               "type": "text"
             },
@@ -5403,10 +5547,10 @@
               "links": [],
               "name": "Element 132",
               "placement": {
-                "bottom": 29.581993569131832,
-                "left": 76.66268418956591,
-                "right": 21.107128634010355,
-                "top": 68.0064308681672
+                "bottom": 47.56521739130435,
+                "left": 4.052823315118397,
+                "right": 93.76138433515483,
+                "top": 50
               },
               "type": "text"
             },
@@ -5444,11 +5588,10 @@
               "links": [],
               "name": "Element 133",
               "placement": {
-                "bottom": 29.581993569131832,
-                "left": 78.89287136598965,
-                "right": 17.841497411389884,
-                "rotation": 0,
-                "top": 68.0064308681672
+                "bottom": 47.56521739130435,
+                "left": 6.238615664845173,
+                "right": 90.48269581056466,
+                "top": 50
               },
               "type": "metric-value"
             },
@@ -5479,13 +5622,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-ELV3&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 134",
               "placement": {
-                "bottom": 24.517684887459808,
-                "left": 90.44205495818399,
-                "right": 4.022301871764237,
-                "top": 72.34726688102894
+                "bottom": 42.52173913043478,
+                "left": 17.805100182149364,
+                "right": 76.63934426229508,
+                "top": 54.347826086956516
               },
               "type": "text"
             },
@@ -5516,13 +5666,20 @@
                 "horizontal": "scale",
                 "vertical": "scale"
               },
-              "links": [],
+              "links": [
+                {
+                  "oneClick": true,
+                  "targetBlank": true,
+                  "title": "Show detail",
+                  "url": "/grafana/d/power-meter-detail/power-meter-detail?orgId=1&from=now-1h&to=now&timezone=browser&var-meters=E-FIRE&var-fields=$__all&refresh=10s&kiosk"
+                }
+              ],
               "name": "Element 135",
               "placement": {
-                "bottom": 34.40514469453376,
-                "left": 76.62285941855835,
-                "right": 17.841497411389884,
-                "top": 62.459807073954984
+                "bottom": 52.43478260869565,
+                "left": 4.007285974499089,
+                "right": 90.48269581056466,
+                "top": 44.43478260869565
               },
               "type": "text"
             },
@@ -5605,9 +5762,14 @@
           },
           "type": "frame"
         },
-        "showAdvancedTypes": true
+        "showAdvancedTypes": true,
+        "tooltip": {
+          "disableForOneClick": false,
+          "mode": "single"
+        },
+        "zoomToContent": false
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.4.5",
       "targets": [
         {
           "datasource": {
@@ -5644,7 +5806,7 @@
   ],
   "preload": false,
   "refresh": "10s",
-  "schemaVersion": 41,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": []
@@ -5659,5 +5821,7 @@
   "timezone": "browser",
   "title": "ECI_Layout_Electricity",
   "uid": "eci-layout-electricity",
-  "version": 37
+  "version": 12,
+  "weekStart": "",
+  "id": null
 }

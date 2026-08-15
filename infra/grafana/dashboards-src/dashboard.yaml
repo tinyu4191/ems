@@ -14,7 +14,7 @@ providers:
     type: file
     disableDeletion: false
     updateIntervalSeconds: 30
-    allowUiUpdates: false
+    allowUiUpdates: true
     options:
       path: /etc/grafana/provisioning/dashboards/custom
       foldersFromFilesStructure: true
