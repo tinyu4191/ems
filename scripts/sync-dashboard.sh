@@ -39,7 +39,7 @@ mkdir -p "$(dirname "$DEST_PATH")"
 # 注意：UI 匯出的檔案本身就是 dashboard JSON 本體（沒有像 API response 那樣
 # 多包一層 .dashboard），所以這裡直接處理最外層
 jq '.id = null' "$SRC_FILE" \
-  | sed "s#${DEV_HOST}#__GRAFANA_HOST__#g" \
+  | sed "s#http://${DEV_HOST}#__GRAFANA_HOST__#g" \
   > "$DEST_PATH"
 
 echo "==> 已寫入 $DEST_PATH"
