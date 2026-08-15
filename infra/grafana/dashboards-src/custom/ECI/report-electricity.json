@@ -1,0 +1,203 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "ems-timescaledb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "footer": {
+              "reducers": [
+                "sum"
+              ]
+            },
+            "inspect": true,
+            "wrapHeaderText": false,
+            "wrapText": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 30,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "md",
+        "enablePagination": true,
+        "frozenColumns": {
+          "left": 1
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.4.5",
+      "targets": [
+        {
+          "dataset": "ems",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "ems-timescaledb"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "WITH params AS (\r\n  SELECT\r\n    CASE '$report_period'\r\n      WHEN 'today'      THEN date_trunc('day', now())\r\n      WHEN 'this_week'  THEN date_trunc('week', now())\r\n      WHEN 'this_month' THEN date_trunc('month', now())\r\n      WHEN 'last_week'  THEN date_trunc('week', now()) - INTERVAL '7 days'\r\n      WHEN 'last_month' THEN date_trunc('month', now()) - INTERVAL '1 month'\r\n    END AS range_start,\r\n    CASE '$report_period'\r\n      WHEN 'today'      THEN date_trunc('day', now()) + INTERVAL '1 day'\r\n      WHEN 'this_week'  THEN date_trunc('week', now()) + INTERVAL '7 days'\r\n      WHEN 'this_month' THEN date_trunc('month', now()) + INTERVAL '1 month'\r\n      WHEN 'last_week'  THEN date_trunc('week', now())\r\n      WHEN 'last_month' THEN date_trunc('month', now())\r\n    END AS range_end,\r\n    CASE '$report_period'\r\n      WHEN 'today' THEN INTERVAL '1 hour'\r\n      ELSE INTERVAL '1 day'\r\n    END AS bucket_width\r\n)\r\nSELECT\r\n  time_bucket(p.bucket_width, r.time) AS time,\r\n  m.description,\r\n  MAX(r.total_kwh) - MIN(r.total_kwh) AS value\r\nFROM accumulator_electricity r\r\nJOIN meters m USING (meter_id)\r\nCROSS JOIN params p\r\nWHERE r.time >= p.range_start\r\n  AND r.time < p.range_end\r\n  AND m.is_main = FALSE\r\n  AND m.meter_type = 'electricity'\r\n  AND m.zone IN ($zone)\r\nGROUP BY time_bucket(p.bucket_width, r.time), m.meter_id, m.description, p.bucket_width\r\nORDER BY time ASC;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "[$zone]ECI用電報表_$report_period",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "value (.*)",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "today",
+          "value": "today"
+        },
+        "label": "報告範圍",
+        "name": "report_period",
+        "options": [],
+        "query": "今日 : today,本週 : this_week,本月 : this_month,上週 : last_week,上個月 : last_month",
+        "type": "custom",
+        "valuesFormat": "csv"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "ems-timescaledb"
+        },
+        "definition": "SELECT DISTINCT zone FROM meters\r\n  WHERE meter_type = 'electricity' AND is_main = FALSE\r\n  ORDER BY zone;",
+        "includeAll": true,
+        "multi": true,
+        "name": "zone",
+        "options": [],
+        "query": {
+          "dataset": "ems",
+          "editorMode": "code",
+          "format": "table",
+          "query": "SELECT DISTINCT zone FROM meters\r\n  WHERE meter_type = 'electricity' AND is_main = FALSE\r\n  ORDER BY zone;",
+          "rawQuery": true,
+          "rawSql": "SELECT DISTINCT zone FROM meters\r\n  WHERE meter_type = 'electricity' AND is_main = FALSE\r\n  ORDER BY zone;",
+          "refId": "SQLVariableQueryEditor-VariableQuery",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        },
+        "refresh": 1,
+        "regex": "",
+        "regexApplyTo": "value",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "browser",
+  "title": "Report Electricity",
+  "uid": "report-electricity",
+  "version": 4,
+  "weekStart": "",
+  "id": null
+}
