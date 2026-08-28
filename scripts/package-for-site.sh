@@ -30,6 +30,7 @@ rsync -a \
   --exclude='infra/grafana/dashboards/' \
   --exclude='.dev-host' \
   --exclude='infra/grafana/dashboards-src/' \
+  --exclude='collector/logs/' \
   "$EMS_DIR/" "$STAGING_DIR/ems/"
 
 # 從 dashboards-src 生成部署版 dashboards（給業主端用的最終資料夾名稱一樣叫 dashboards）
