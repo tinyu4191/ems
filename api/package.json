@@ -1,0 +1,15 @@
+{
+  "name": "ems-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "fastify": "^4.28.1",
+    "pg": "^8.13.1",
+    "exceljs": "^4.4.0"
+  }
+}

@@ -85,6 +85,20 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  api:
+    build: ./api
+    container_name: ems-api
+    restart: unless-stopped
+    env_file:
+      - ./api/.env
+    environment:
+      DB_HOST: timescaledb
+      DB_PORT: 5432
+    depends_on:
+      - timescaledb
+    networks:
+      - ems-net
+
 networks:
   ems-net:
     driver: bridge
