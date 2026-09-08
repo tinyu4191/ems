@@ -27,6 +27,7 @@ rsync -a \
   --exclude='.git' \
   --exclude='.env' \
   --exclude='collector/.env' \
+  --exclude='api/.env' \
   --exclude='infra/grafana/dashboards/' \
   --exclude='.dev-host' \
   --exclude='infra/grafana/dashboards-src/' \
