@@ -145,6 +145,26 @@ async function loadReportData(fastify, { energyType, from, to, categories }) {
   return { buckets, zoneOrder, metersByZone, valueMap, bucket, config, from, to };
 }
 
+// 計算 rows 陣列中某個 key 欄位的加總，只加總數字型的值，忽略 '' / undefined
+// 若該欄位完全沒有數值（例如整段區間都沒資料），回傳 ''，維持跟其他欄位一致的呈現方式
+function sumColumn(rows, key) {
+  let sum = null;
+  rows.forEach((row) => {
+    const v = row[key];
+    if (typeof v === 'number') sum = (sum ?? 0) + v;
+  });
+  return sum === null ? '' : Math.round(sum * 100) / 100;
+}
+
+// 在 rows 的最後加上一列「總計」，每個 key 都往下加總；time 欄位固定顯示「總計」
+function buildTotalRow(rows, keys) {
+  const totalRow = { time: '總計' };
+  keys.forEach((key) => {
+    totalRow[key] = sumColumn(rows, key);
+  });
+  return totalRow;
+}
+
 export function registerReportsRoute(fastify) {
   // ---- 分類清單（給前端畫勾選框用）----
   fastify.get('/api/reports/categories', async (request, reply) => {
@@ -215,7 +235,7 @@ export function registerReportsRoute(fastify) {
     ];
     overviewSheet.getRow(1).font = { bold: true };
 
-    buckets.forEach((bucketDate) => {
+    const overviewRows = buckets.map((bucketDate) => {
       const key = bucketDate.toISOString();
       const row = { time: formatBucketLabel(bucketDate, bucket.label) };
       zoneOrder.forEach((zone) => {
@@ -226,8 +246,12 @@ export function registerReportsRoute(fastify) {
         });
         row[zone] = sum === null ? '' : Math.round(sum * 100) / 100;
       });
-      overviewSheet.addRow(row);
+      return row;
     });
+    overviewRows.forEach((row) => overviewSheet.addRow(row));
+
+    const overviewTotalRow = overviewSheet.addRow(buildTotalRow(overviewRows, zoneOrder));
+    overviewTotalRow.font = { bold: true };
 
     zoneOrder.forEach((zone) => {
       const metersInZone = metersByZone[zone];
@@ -243,15 +267,20 @@ export function registerReportsRoute(fastify) {
       ];
       sheet.getRow(1).font = { bold: true };
 
-      buckets.forEach((bucketDate) => {
+      const zoneRows = buckets.map((bucketDate) => {
         const key = bucketDate.toISOString();
         const row = { time: formatBucketLabel(bucketDate, bucket.label) };
         metersInZone.forEach((m) => {
           const v = valueMap[key]?.[m.meter_id];
           row[m.meter_id] = v === undefined ? '' : Math.round(v * 100) / 100;
         });
-        sheet.addRow(row);
+        return row;
       });
+      zoneRows.forEach((row) => sheet.addRow(row));
+
+      const zoneMeterIds = metersInZone.map((m) => m.meter_id);
+      const zoneTotalRow = sheet.addRow(buildTotalRow(zoneRows, zoneMeterIds));
+      zoneTotalRow.font = { bold: true };
     });
 
     const buf = await workbook.xlsx.writeBuffer();
