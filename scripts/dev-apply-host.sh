@@ -16,8 +16,14 @@ fi
 
 DEV_HOST="$(cat "$DEV_HOST_FILE" | tr -d '[:space:]')"
 
-rm -rf "$EMS_DIR/infra/grafana/dashboards"
-cp -r "$EMS_DIR/infra/grafana/dashboards-src" "$EMS_DIR/infra/grafana/dashboards"
+command -v rsync >/dev/null || { echo "需要 rsync：sudo apt install rsync" >&2; exit 1; }
+
+# 注意：infra/grafana/dashboards 是 Grafana 容器的 bind mount 來源（docker-compose.yml）。
+# 不能整個刪掉重建 —— 容器會繼續指向被刪掉的舊資料夾（看不到新檔案），
+# 而且重啟時會報 "mounting ... no such file or directory"。
+# 這裡用 rsync 只同步「內容」，資料夾本身保持不變。
+mkdir -p "$EMS_DIR/infra/grafana/dashboards"
+rsync -a --delete "$EMS_DIR/infra/grafana/dashboards-src/" "$EMS_DIR/infra/grafana/dashboards/"
 
 DASH_DIR="$EMS_DIR/infra/grafana/dashboards/custom/ECI"
 for f in "$DASH_DIR"/*.json; do
