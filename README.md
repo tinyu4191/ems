@@ -38,7 +38,7 @@ docker compose logs -f collector   # 確認開始寫入資料
 ## 驗證新 DB schema
 
 ```bash
-docker exec -i ems-v2-timescaledb psql -U admin -d ems < infra/timescaledb/init/verify.sql.reference
+docker exec -i ems-v2-timescaledb psql -U admin -d ems < infra/timescaledb/legacy-init/verify.sql.reference
 ```
 
 ## 尚未加入這輪 compose 的東西
