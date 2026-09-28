@@ -522,7 +522,7 @@
           "format": "time_series",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT time, description, value FROM (\n  SELECT\n    time_bucket('1 day', r.time) AS time,\n    m.description,\n    AVG(r.total_m3) AS value\n  FROM accumulator_water r\n  JOIN meters m USING (meter_id)\n  WHERE  m.is_main = FALSE\n    AND '$meterType' = 'water'\n    AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 day', r.time), m.description\n\n  UNION ALL\n\n  SELECT\n    time_bucket('1 day', r.time) AS time,\n    m.description,\n    AVG(r.total_kwh) AS value\n  FROM accumulator_electricity r\n  JOIN meters m USING (meter_id)\n  WHERE m.is_main = FALSE\n    AND '$meterType' = 'electricity'\n    AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 day', r.time), m.description\n) sub\nORDER BY time ASC",
+          "rawSql": "SELECT time, description, value FROM (\n  SELECT\n    time_bucket('1 day', r.time, 'Asia/Ho_Chi_Minh') AS time,\n    m.description,\n    AVG(r.total_m3) AS value\n  FROM accumulator_water r\n  JOIN meters m USING (meter_id)\n  WHERE  m.is_main = FALSE\n    AND '$meterType' = 'water'\n    AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 day', r.time, 'Asia/Ho_Chi_Minh'), m.description\n\n  UNION ALL\n\n  SELECT\n    time_bucket('1 day', r.time, 'Asia/Ho_Chi_Minh') AS time,\n    m.description,\n    AVG(r.total_kwh) AS value\n  FROM accumulator_electricity r\n  JOIN meters m USING (meter_id)\n  WHERE m.is_main = FALSE\n    AND '$meterType' = 'electricity'\n    AND r.time >= date_trunc('year', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\n    AND r.time < NOW()\n  GROUP BY time_bucket('1 day', r.time, 'Asia/Ho_Chi_Minh'), m.description\n) sub\nORDER BY time ASC",
           "refId": "B",
           "sql": {
             "columns": [
@@ -1191,5 +1191,5 @@
   "timezone": "browser",
   "title": "Energy Overview",
   "uid": "energy-overview",
-  "version": 1
+  "version": 2
 }

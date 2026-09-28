@@ -64,3 +64,11 @@ docker compose up -d
 - 沒有並行鎖；不要同時在同一個 DB 跑兩個 `up`。
 - `retention_days` 由 `.env` 的 `RETENTION_DAYS` 傳入 baseline（預設 180）；已採用的現場 DB 不受影響，
   現場 retention 要改請寫新的 migration。
+
+## 現場狀態備註（尚未寫入 migration 的手動變更）
+
+- **2026-09-28：** ECI 現場的 5 個 raw 表 retention job（job_id 1005~1009，180 天）已手動暫停（`scheduled = false`）。
+  原因：最早資料為 2026-04-21，依 7 天 chunk 推算，最舊的 chunk 最早會在 2026-10-20 被刪除，而客戶要保留多久尚未決定。
+  最終保留期與壓縮策略決定後，用 migration 統一處理（`remove_retention_policy` + `add_retention_policy`，
+  或 `alter_job(..., scheduled => true)`），並更新此段落。
+  注意：`verify-baseline.sh` 只比對 job 的設定（不含 scheduled 旗標），不會偵測到這個暫停狀態。
