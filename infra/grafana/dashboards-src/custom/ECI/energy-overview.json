@@ -117,7 +117,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(meter_kwh), 0) AS value\r\nFROM (\r\n  SELECT\r\n    a.meter_id,\r\n    GREATEST(MAX(a.total_kwh) - MIN(a.total_kwh), 0) AS meter_kwh\r\n  FROM accumulator_electricity a\r\n  JOIN meters m ON m.meter_id = a.meter_id\r\n  WHERE m.meter_type = 'electricity'\r\n    AND m.is_main = true\r\n    AND a.time >= date_trunc('day', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\r\n  GROUP BY a.meter_id\r\n) per_meter;",
+          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(kwh), 0) AS value\r\nFROM consumption_kwh(\r\n  date_trunc('day', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh',\r\n  NOW(),\r\n  interval '1 day'\r\n) c\r\nJOIN meters m ON m.meter_id = c.meter_id\r\nWHERE m.meter_type = 'electricity'\r\n  AND m.is_main = true;",
           "refId": "today_energy",
           "sql": {
             "columns": [
@@ -146,7 +146,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(meter_kwh), 0) AS value\r\nFROM (\r\n  SELECT\r\n    a.meter_id,\r\n    GREATEST(MAX(a.total_kwh) - MIN(a.total_kwh), 0) AS meter_kwh\r\n  FROM accumulator_electricity a\r\n  JOIN meters m ON m.meter_id = a.meter_id\r\n  WHERE m.meter_type = 'electricity'\r\n    AND m.is_main = true\r\n    AND a.time >= date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh'\r\n  GROUP BY a.meter_id\r\n) per_meter;",
+          "rawSql": "SELECT\r\n  NOW() AS time,\r\n  COALESCE(SUM(kwh), 0) AS value\r\nFROM consumption_kwh(\r\n  date_trunc('month', NOW() AT TIME ZONE 'Asia/Ho_Chi_Minh') AT TIME ZONE 'Asia/Ho_Chi_Minh',\r\n  NOW(),\r\n  interval '1 month'\r\n) c\r\nJOIN meters m ON m.meter_id = c.meter_id\r\nWHERE m.meter_type = 'electricity'\r\n  AND m.is_main = true;",
           "refId": "month_energy",
           "sql": {
             "columns": [
@@ -858,7 +858,7 @@
           "format": "time_series",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT time, description, consumed FROM (\r\n  SELECT\r\n    time_bucket('15 minute', r.time) AS time,\r\n    m.description,\r\n    MAX(r.total_m3) - MIN(r.total_m3) AS consumed\r\n  FROM accumulator_water r\r\n  JOIN meters m USING (meter_id)\r\n  WHERE $__timeFilter(r.time)\r\n    AND m.is_main = FALSE\r\n    AND '$meterType' = 'water'\r\n  GROUP BY time_bucket('15 minute', r.time), m.description\r\n\r\n  UNION ALL\r\n\r\n  SELECT\r\n    time_bucket('15 minute', r.time) AS time,\r\n    m.description,\r\n    MAX(r.total_kwh) - MIN(r.total_kwh) AS consumed\r\n  FROM accumulator_electricity r\r\n  JOIN meters m USING (meter_id)\r\n  WHERE $__timeFilter(r.time)\r\n    AND m.is_main = TRUE\r\n    AND '$meterType' = 'electricity'\r\n  GROUP BY time_bucket('15 minute', r.time), m.description\r\n) sub\r\nORDER BY time ASC",
+          "rawSql": "SELECT time, description, consumed FROM (\r\n  SELECT\r\n    bucket AS time,\r\n    m.description,\r\n    m3 AS consumed\r\n  FROM consumption_m3($__timeFrom(), $__timeTo(), interval '15 minutes') c\r\n  JOIN meters m ON m.meter_id = c.meter_id\r\n  WHERE m.is_main = FALSE\r\n    AND '$meterType' = 'water'\r\n\r\n  UNION ALL\r\n\r\n  SELECT\r\n    bucket AS time,\r\n    m.description,\r\n    kwh AS consumed\r\n  FROM consumption_kwh($__timeFrom(), $__timeTo(), interval '15 minutes') c\r\n  JOIN meters m ON m.meter_id = c.meter_id\r\n  WHERE m.is_main = TRUE\r\n    AND '$meterType' = 'electricity'\r\n) sub\r\nORDER BY time ASC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1191,5 +1191,5 @@
   "timezone": "browser",
   "title": "Energy Overview",
   "uid": "energy-overview",
-  "version": 2
+  "version": 3
 }

@@ -584,7 +584,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\r\n  time_bucket('15 minutes', time) AS time,\r\n  meter_id,\r\n  MAX(total_kwh) - MIN(total_kwh) AS \"delta\"\r\nFROM accumulator_electricity\r\nWHERE $__timeFilter(time)\r\nAND meter_id IN (${meters:sqlstring})\r\nGROUP BY time_bucket('15 minutes', time), meter_id\r\nORDER BY time, meter_id;",
+          "rawSql": "SELECT\r\n  bucket AS time,\r\n  meter_id,\r\n  kwh AS \"delta\"\r\nFROM consumption_kwh($__timeFrom(), $__timeTo(), interval '15 minutes')\r\nWHERE meter_id IN (${meters:sqlstring})\r\nORDER BY time, meter_id;",
           "refId": "B",
           "sql": {
             "columns": [
@@ -772,7 +772,7 @@
   "timezone": "browser",
   "title": "Power Meter Detail",
   "uid": "power-meter-detail",
-  "version": 7,
+  "version": 8,
   "weekStart": "",
   "id": null
 }
