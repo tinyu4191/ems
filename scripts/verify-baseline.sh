@@ -12,7 +12,8 @@
 #
 # 環境變數（皆可省略）：
 #   LIVE_CONTAINER  現場 DB 容器名稱，預設 ems-timescaledb
-#   IMAGE           預設從 docker-compose.yml 讀 timescale image
+#   IMAGE           強制指定 timescale image，跳過下面的自動解析
+#   SITE_DIR        站點目錄，內含 site.env（讀取 CORE_RELEASE），預設 sites/eci
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -21,7 +22,20 @@ env_get() { { [ -f "$ROOT/.env" ] && grep -E "^$1=" "$ROOT/.env" | tail -1 | cut
 DB_USER="${DB_USER:-$(env_get DB_USER)}"
 DB_NAME="${DB_NAME:-$(env_get DB_NAME)}"
 LIVE_CONTAINER="${LIVE_CONTAINER:-ems-timescaledb}"
-IMAGE="${IMAGE:-$(grep -E '^\s*image:\s*timescale/timescaledb' "$ROOT/docker-compose.yml" | head -1 | awk '{print $2}')}"
+
+# 版本清單（跟 deploy-site.sh 讀取同一份，確保這裡驗證用的版本跟實際會部署的版本一致）
+SITE_DIR="${SITE_DIR:-sites/eci}"
+if [ -z "${IMAGE:-}" ] && [ -f "$ROOT/$SITE_DIR/site.env" ]; then
+  CORE_RELEASE="$(grep -E '^CORE_RELEASE=' "$ROOT/$SITE_DIR/site.env" | tail -1 | cut -d= -f2- | tr -d '\r"')"
+  RELEASE_FILE="${RELEASE_FILE:-$ROOT/releases/${CORE_RELEASE}.env}"
+  [ -f "$RELEASE_FILE" ] && { set -a; source "$RELEASE_FILE"; set +a; }
+fi
+# 不要用 grep/awk 土法解析 docker-compose.yml 的原始文字（裡面可能是 ${VAR:-default} 這種
+# 尚未代換的變數，直接抓出來會是一串帶 $ { } 符號的無效字串）。改讓 docker compose 自己
+# 解析、代換完變數後，我們只讀它算出來的最終結果 —— 這樣永遠跟 deploy-site.sh 實際部署
+# 的版本一致，不會分岔。
+IMAGE="${IMAGE:-$(cd "$ROOT" && docker compose config 2>/dev/null \
+  | awk '/^  timescaledb:/{f=1} f && /^    image:/{print $2; exit}')}"
 VERIFY_CONTAINER="ems-verify-db"
 WORK="$(mktemp -d)"
 
