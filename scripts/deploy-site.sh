@@ -84,6 +84,19 @@ echo "→ [2/5] 站點狀態確認完成"
 echo "→ [3/5] 重建容器（--build 讓程式碼變動生效；DB/nginx 只有設定變動也會一併套用）"
 docker compose up -d --build
 
+# 保險：nginx 的 proxy_pass 若解析到舊的容器 IP 會變成 502（2026-09-30 ECI 部署時發生過）。
+# nginx.conf 已改用 resolver 動態解析，理論上不需要這一步；仍保留這道保險，
+# 因為重建 nginx 成本極低（約 1 秒），比事後排查 502 划算。
+#
+# 注意：這裡必須用 --force-recreate，不能用 restart 或裸的 up。
+# `git apply`／`docker cp` 這類「產生新檔案覆蓋舊檔案」的動作，會讓容器原本
+# 掛載時記住的檔案參照失效；restart／裸的 up 都只是沿用既有容器、重新啟動，
+# 沿用同一個失效的掛載紀錄，會直接報錯起不來（2026-09-30 東昌驗證時踩過這個坑，
+# 錯誤訊息是 "error mounting ... no such file or directory"）。
+# --force-recreate 才會整個砍掉重建容器、建立全新的掛載參照。
+echo "→ 重建 nginx（避免沿用舊的 api/grafana 容器 IP，或掛載檔案因覆蓋而失效）"
+docker compose up -d --force-recreate nginx
+
 echo "→ 等待 timescaledb 就緒"
 for _ in $(seq 1 30); do
   docker compose ps timescaledb --format '{{.Health}}' 2>/dev/null | grep -qx healthy && break
