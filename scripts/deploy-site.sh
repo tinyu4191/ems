@@ -13,6 +13,7 @@
 # 避免腳本在沒人看過差異的情況下，把可能不一致的 baseline 直接登記為「已套用」。
 #
 # 環境變數：
+#   SITE_DIR       站點目錄，內含 site.env（讀取 CORE_RELEASE），預設 sites/eci
 #   MIGRATE_DIRS   預設 "migrations/core sites/eci/migrations"
 #   SKIP_BACKUP    設為 1 可跳過備份（不建議，僅供已經手動備份過的情況）
 set -euo pipefail
@@ -20,13 +21,28 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-MIGRATE_DIRS="${MIGRATE_DIRS:-migrations/core sites/eci/migrations}"
+SITE_DIR="${SITE_DIR:-sites/eci}"
+MIGRATE_DIRS="${MIGRATE_DIRS:-migrations/core $SITE_DIR/migrations}"
 export MIGRATE_DIRS
 
 echo "=============================================="
 echo " EMS 現場更新　$(date '+%F %T')"
 echo " 工作目錄：$ROOT"
 echo "=============================================="
+
+# ── 0. 讀取版本清單（決定各服務要用哪個版本；沒有就用 docker-compose.yml 的預設值）──
+if [ -f "$SITE_DIR/site.env" ]; then
+  CORE_RELEASE="$(grep -E '^CORE_RELEASE=' "$SITE_DIR/site.env" | tail -1 | cut -d= -f2- | tr -d '\r"')"
+  RELEASE_FILE="${RELEASE_FILE:-releases/${CORE_RELEASE}.env}"
+  if [ -f "$RELEASE_FILE" ]; then
+    echo "→ [0/5] 版本清單：$RELEASE_FILE"
+    set -a; source "$RELEASE_FILE"; set +a
+  else
+    echo "→ [0/5] $SITE_DIR/site.env 指到 $RELEASE_FILE，但檔案不存在，使用 docker-compose.yml 內建預設版本" >&2
+  fi
+else
+  echo "→ [0/5] 找不到 $SITE_DIR/site.env，使用 docker-compose.yml 內建預設版本"
+fi
 
 # ── 1. 備份（除非明確跳過）──────────────
 if [ "${SKIP_BACKUP:-0}" = "1" ]; then
@@ -84,6 +100,8 @@ echo "-- migrate.sh status（不應有 pending）--"
 scripts/migrate.sh status
 echo "-- 容器狀態 --"
 docker compose ps
+echo "-- 目前各服務版本（docker images 上實際的 tag）--"
+docker images --format '{{.Repository}}:{{.Tag}}' | grep -E '^ems-(collector|api):' || true
 echo "-- collector 最近一輪心跳（應是幾秒到幾十秒前）--"
 DB_USER="$(grep -E '^DB_USER=' .env | tail -1 | cut -d= -f2- | tr -d '\r"')"
 DB_NAME="$(grep -E '^DB_NAME=' .env | tail -1 | cut -d= -f2- | tr -d '\r"')"

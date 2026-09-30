@@ -2,7 +2,7 @@ name: ems
 
 services:
   timescaledb:
-    image: timescale/timescaledb:2.26.3-pg16
+    image: timescale/timescaledb:${TIMESCALEDB_TAG:-2.26.3-pg16}
     container_name: ems-timescaledb
     restart: unless-stopped
     environment:
@@ -23,7 +23,7 @@ services:
       - ems-net
 
   grafana:
-    image: grafana/grafana:12.4.5
+    image: grafana/grafana:${GRAFANA_TAG:-12.4.5}
     container_name: ems-grafana
     restart: unless-stopped
     environment:
@@ -50,6 +50,7 @@ services:
       - ems-net
 
   collector:
+    image: ems-collector:${COLLECTOR_VERSION:-dev}
     build: ./collector
     container_name: ems-collector
     restart: unless-stopped
@@ -69,7 +70,7 @@ services:
       - ems-net
 
   nginx:
-    image: nginx:alpine
+    image: nginx:${NGINX_TAG:-alpine}
     container_name: ems-nginx
     restart: unless-stopped
     ports:
@@ -85,6 +86,7 @@ services:
       - "host.docker.internal:host-gateway"
 
   api:
+    image: ems-api:${API_VERSION:-dev}
     build: ./api
     container_name: ems-api
     restart: unless-stopped
